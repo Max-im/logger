@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "name" SET DEFAULT 'Guest',
+ALTER COLUMN "photo" SET DEFAULT '';
