@@ -4,7 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import AdbIcon from '@mui/icons-material/Adb';
 import MainMenu from './header.mainMenu';
-import UserMenu from './header.userMenu';
 import UserLogin from '../user/user.login';
 import { useAppSelector } from '../hooks/redux';
 
@@ -17,7 +16,7 @@ function Header() {
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: 'flex', mr: 1 }} />
           <MainMenu user={user} />
-          {user ? <UserMenu user={user}/> : <UserLogin />}
+          {!user && <UserLogin />}
         </Toolbar>
       </Container>
     </AppBar>

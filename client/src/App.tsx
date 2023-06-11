@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Container from '@mui/material/Container';
+import { Container, Box, Grid } from '@mui/material';
 import Header from './header/header.component';
+import Aside from './aside/aside.component';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { pickUpUserAction } from './user/user.actions';
-import { notFounRoute, routes } from './routes';
+import { routes } from './routes';
 import { RolesMap } from './models/User';
 
 function App() {
@@ -20,14 +21,23 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
-      <Container maxWidth="lg" sx={{mt: 2}}>
-        <Routes>
-          {activeRoutes.map((route) => (
-            <Route key={route.url} path={route.url} element={<route.element />} />
-          ))}
-        </Routes>
-      </Container>
+      <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#eee'}}>
+        <Header />
+        <Container maxWidth="lg" sx={{mt: 2, flexGrow: 1, height: '100%'}} >
+          <Grid container spacing={2}>
+            <Grid item xs={9}>
+              <Routes>
+                {activeRoutes.map((route) => (
+                  <Route key={route.url} path={route.url} element={<route.element />} />
+                ))}
+              </Routes>
+            </Grid>
+            <Grid item xs={3}>
+              {user && <Aside user={user} />}
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </BrowserRouter>
   );
 }

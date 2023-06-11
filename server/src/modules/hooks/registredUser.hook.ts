@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { ErrorUnauthorized } from '../errors/error.unauthorized'; 
 
-async function attachUserHook(request: FastifyRequest, reply: FastifyReply) {
+async function registredUserHook(request: FastifyRequest, reply: FastifyReply) {
   try {
     await request.jwtVerify();
   } catch (err) {
@@ -9,4 +9,4 @@ async function attachUserHook(request: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-export default attachUserHook;
+export default registredUserHook;
