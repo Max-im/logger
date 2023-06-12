@@ -37,21 +37,6 @@ export const loginAction = (credentialResponse: CredentialResponse, errorCb: any
   }
 };
 
-export const pickUpUserAction = () => (dispatch: AppDispatch) => {
-  try {
-    const token = localStorage.getItem('auth');
-    if (token) {
-      const user = jwtDecode<IUser>(token);
-      setAuthHeader(token);
-      dispatch(userSlice.actions.login(user));
-     }
-  } catch(err) {
-    localStorage.removeItem('auth');
-    setAuthHeader(null);
-    console.error(err)
-  }
-};
-
 export const logoutAction = () => (dispatch: AppDispatch) => {
   dispatch(userSlice.actions.logout());
   localStorage.removeItem('auth');

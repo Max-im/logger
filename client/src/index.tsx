@@ -5,6 +5,7 @@ import App from './App';
 import { setupStore } from './store/store';
 
 import './styles/reset.scss'
+import './styles/common.scss'
 
 const root = ReactDOM.createRoot( document.getElementById('root') as HTMLElement);
 const store = setupStore();

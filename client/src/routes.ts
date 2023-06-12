@@ -5,75 +5,101 @@ import Logout from './user/user.logout';
 import Projects from './prjects/projects.page';
 import { RolesMap } from './models/User';
 import NotFoundPage from './notfound/notfound.page';
+import Faq from './faq/faq.page';
+import HomeIcon from '@mui/icons-material/Home';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
+import InfoIcon from '@mui/icons-material/Info';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
-export interface IRoute {
+export interface IRouteData {
   url: string;
   title: string;
-  isMainMenu: boolean;
-  isUserMenu: boolean;
+  subtitle: string;
+  isMenu: boolean;
   role: number;
-  element: () => JSX.Element;
+  icon: typeof HomeIcon;
   parrent: IRoute | null;
+  
+}
+export interface IRoute extends IRouteData {
+  element: typeof Home;
 }
 
 export const homeRoute = {
   url: '/',
   title: 'Home',
-  isMainMenu: true,
-  isUserMenu: false,
+  subtitle: `Welcome to ${process.env.REACT_APP_NAME}`,
+  isMenu: true,
   role: RolesMap.GUEST,
   element: Home,
   parrent: null,
+  icon: HomeIcon
 };
 
 export const aboutRoute = {
   url: '/about',
   title: 'About',
-  isMainMenu: true,
-  isUserMenu: false,
+  subtitle: `Information about ${process.env.REACT_APP_NAME} app`,
+  isMenu: true,
   role: RolesMap.GUEST,
   element: About,
   parrent: null,
+  icon: InfoIcon
 };
 
 export const userRoute = {
   url: '/user',
   title: 'User',
-  isMainMenu: false,
-  isUserMenu: true,
+  subtitle: 'User page',
+  isMenu: false,
   role: RolesMap.USER,
   element: UserPage,
   parrent: null,
+  icon: HomeIcon
 };
 
 export const logoutRoute = {
   url: '/logout',
   title: 'Logout',
-  isMainMenu: false,
-  isUserMenu: true,
+  subtitle: 'See you',
+  isMenu: false,
   role: RolesMap.USER,
   element: Logout,
   parrent: null,
+  icon: HomeIcon
 };
 
 export const projectsRoute = {
   url: '/projects',
   title: 'Projects',
-  isMainMenu: true,
-  isUserMenu: false,
+  subtitle: 'Information about your projects',
+  isMenu: true,
   role: RolesMap.USER,
   element: Projects,
   parrent: null,
+  icon: AccountTreeIcon
+};
+
+export const faqRoute = {
+  url: '/faq',
+  title: 'FAQ',
+  subtitle: 'Questions and Answers',
+  isMenu: true,
+  role: RolesMap.GUEST,
+  element: Faq,
+  parrent: null,
+  icon: HelpCenterIcon
 };
 
 export const notFounRoute = {
   url: '*',
   title: 'Not Found',
-  isMainMenu: false,
-  isUserMenu: false,
+  subtitle: 'Ooops, the page is not found',
+  isMenu: false,
   role: RolesMap.GUEST,
   element: NotFoundPage,
   parrent: null,
+  icon: HomeIcon
 };
 
 export const routes = [
@@ -82,8 +108,6 @@ export const routes = [
   userRoute,
   logoutRoute,
   projectsRoute,
+  faqRoute,
   notFounRoute,
 ];
-
-export const menuRoutes = routes.filter((item) => item.isMainMenu);
-export const userMenuRoutes = routes.filter((item) => item.isUserMenu);

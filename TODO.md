@@ -1,8 +1,9 @@
-[ ] protect routes
-[ ] validate input data
+[x] protect routes
+[x] validate input data
 [ ] projects
+[ ] projects access
 [ ] logs
-[ ] design
+[x] design
 [ ] content
 [ ] cicd
 [ ] deploy

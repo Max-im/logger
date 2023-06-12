@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
-import Box from '@mui/material/Box';
 import { useAppDispatch } from '../hooks/redux';
 import { loginAction } from './user.actions';
 
