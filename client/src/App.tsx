@@ -6,6 +6,7 @@ import Aside from './aside/aside.component';
 import { useAppSelector } from './hooks/redux';
 import { routes } from './routes';
 import { RolesMap } from './models/User';
+import Theme from './theme/theme.component';
 
 function App() {
   const { user } = useAppSelector(store => store.userReducer);
@@ -14,26 +15,28 @@ function App() {
   const activeRoutes = routes.filter(route => userRole >= route.role);
 
   return (
-    <BrowserRouter>
-      <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#eee'}}>
-        <Container maxWidth="lg" sx={{mt: 2, flexGrow: 1, height: '100%'}} >
-          <Grid container spacing={2}>
-            <Grid item xs={3}>
-              {/* @ts-ignore */}
-              <Aside user={user} activeRoutes={activeRoutes}/>
+    <Theme>
+      <BrowserRouter>
+        <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+          <Container maxWidth="lg" sx={{mt: 2, flexGrow: 1, height: '100%'}} >
+            <Grid container spacing={2}>
+              <Grid item xs={3}>
+                {/* @ts-ignore */}
+                <Aside user={user} activeRoutes={activeRoutes}/>
+              </Grid>
+              <Grid item xs={9}>
+                <Header />
+                <Routes>
+                  {activeRoutes.map((route) => (
+                    <Route key={route.url} path={route.url} element={<route.element />} />
+                  ))}
+                </Routes>
+              </Grid>
             </Grid>
-            <Grid item xs={9}>
-              <Header />
-              <Routes>
-                {activeRoutes.map((route) => (
-                  <Route key={route.url} path={route.url} element={<route.element />} />
-                ))}
-              </Routes>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </BrowserRouter>
+          </Container>
+        </Box>
+      </BrowserRouter>
+    </Theme>
   );
 }
 

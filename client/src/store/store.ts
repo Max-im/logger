@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from '../user/user.slice';
+import themeReducer from '../theme/theme.slice';
 
 const rootReducer = combineReducers({
     userReducer,
+    themeReducer
 });
 
 export const setupStore = () => {
