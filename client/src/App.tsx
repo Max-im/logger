@@ -5,13 +5,13 @@ import Header from './header/header.component';
 import Aside from './aside/aside.component';
 import { useAppSelector } from './hooks/redux';
 import { routes } from './routes';
-import { RolesMap } from './models/User';
+import { RoleTypes } from './models/User';
 import Theme from './theme/theme.component';
 
 function App() {
   const { user } = useAppSelector(store => store.userReducer);
 
-  const userRole = user ? RolesMap[user.role] : RolesMap.GUEST; 
+  const userRole = user ? user.role : RoleTypes.GUEST; 
   const activeRoutes = routes.filter(route => userRole >= route.role);
 
   return (

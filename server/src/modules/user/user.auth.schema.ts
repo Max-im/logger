@@ -20,11 +20,11 @@ const authResponseSchema = z.object({
   user: z.object({
     id: z.string(),
     ...core,
-    role: z.string()
+    roleId: z.number()
   }),
   token: z.string(),
 });
 
 export type CreateUserInput = z.infer<typeof authSchema>;
 
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({ authSchema, authResponseSchema });
+export const { schemas: userSchemas, $ref } = buildJsonSchemas({ authSchema, authResponseSchema }, { $id: 'UserSchema' });

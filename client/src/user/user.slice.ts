@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../models/User';
+import { IUser, RoleTypes } from '../models/User';
 import { setAuthHeader } from '../services/http';
 import jwtDecode from 'jwt-decode';
+import { AUTH_LOCAL_VAR } from '../constants';
 
 const defaultUser: IUser = {
     id: '',
     name: 'Guest',
     photo: '',
     email: '',
-    role: 'GUEST'
+    role: RoleTypes.GUEST
 }
 interface UserState {
     user: IUser;
@@ -21,7 +22,7 @@ const initialState: UserState = {
 }
 
 try {
-    const token = localStorage.getItem('auth');
+    const token = localStorage.getItem(AUTH_LOCAL_VAR);
     if (token) {
         const user = jwtDecode<IUser>(token);
         initialState.user = user;
@@ -29,7 +30,7 @@ try {
         setAuthHeader(token);
     }
 } catch(err) {
-    localStorage.removeItem('auth');
+    localStorage.removeItem(AUTH_LOCAL_VAR);
     setAuthHeader(null);
     console.error(err);
 }

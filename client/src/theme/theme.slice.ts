@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { THEME_LOCAL_VAR } from '../constants';
 
+export const defaultLightTheme = true;
 
 interface ThemeState {
     light: boolean;
 }
 
 const initialState: ThemeState = {
-    light: true,
+    light: defaultLightTheme,
 }
 
 try {

@@ -1,17 +1,15 @@
-export const RolesMap = {
-  GUEST: 0,
-  USER: 1,
-  ADMIN: 2
+export enum RoleTypes {
+  GUEST = 0,
+  USER = 1,
+  ADMIN = 2
 };
-
-type RoleNames = 'GUEST' | 'USER' | 'ADMIN';
 
 export interface IUser {
   id: string;
   name: string;
   email: string;
   photo: string;
-  role: RoleNames;
+  role: RoleTypes;
 };
 
 export interface IUserAuth {

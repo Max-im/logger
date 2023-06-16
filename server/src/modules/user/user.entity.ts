@@ -1,31 +1,30 @@
-import { Role } from '@prisma/client';
+import { User } from '@prisma/client';
 import { UserRepo } from './user.repo';
-import { AuthCode, IAuth, IAuthData, IUser } from './user.types';
+import { AuthCode, IAuth } from './user.types';
 
-export class UserEntity implements IUser {
-  id: number;
+export class UserEntity implements User {
+  id: string;
   email: string;
   name: string;
   photo: string;
-  role: Role;
-  projects: any[];
+  roleId: number;
 
-  constructor(user: IUser) {
+
+  constructor(user: User) {
     this.id = user.id;
     this.email = user.email;
     this.name = user.name;
     this.photo = user.photo;
-    this.role = user.role;
-    this.projects = user.projects || [];
+    this.roleId = user.roleId;
   }
 
-  static async findById(id: number) {
+  static async findById(id: string) {
     const user = await UserRepo.findById(id);
     return new UserEntity(user);
   }
 
-  static async auth(userData: IAuth): Promise<IAuthData> {
-    let userItem: null | IUser = await UserRepo.findByEmail(userData.email);
+  static async auth(userData: IAuth): Promise<{statusCode: AuthCode, user: UserEntity}> {
+    let userItem: null | User = await UserRepo.findByEmail(userData.email);
     const statusCode: AuthCode = userItem ? 200 : 201;
 
     if (!userItem) {

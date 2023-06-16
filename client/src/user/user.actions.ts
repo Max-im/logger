@@ -1,10 +1,12 @@
 import jwtDecode from 'jwt-decode';
 import { CredentialResponse } from '@react-oauth/google';
 import { AppDispatch } from '../store/store';
-import { IUser, IUserAuth } from '../models/User';
+import { IUserAuth } from '../models/User';
 import { userSlice } from './user.slice';
 import api, { setAuthHeader } from '../services/http';
-import { DEFAULT_ERROR_TEXT, USER_LOGIN_URL } from '../constants';
+import { AUTH_LOCAL_VAR, DEFAULT_ERROR_TEXT, THEME_LOCAL_VAR, USER_LOGIN_URL } from '../constants';
+import { changeTheme } from '../theme/theme.actions';
+import { defaultLightTheme } from '../theme/theme.slice';
 
 interface ICredentials {
   name: string;
@@ -21,14 +23,14 @@ export const loginAction = (credentialResponse: CredentialResponse, errorCb: any
     const response = await api.post<IUserAuth>(USER_LOGIN_URL, payload);
     const {user, token} = response.data;
 
+    setAuthHeader(token);
+    dispatch(userSlice.actions.login(user));
+
     try {
-      localStorage.setItem('auth', token);
+      localStorage.setItem(AUTH_LOCAL_VAR, token);
     } catch(err) {
       console.error(err);
     }
-    
-    setAuthHeader(token);
-    dispatch(userSlice.actions.login(user));
   } catch (err) {
     console.log({ err: err.message })
     const message = err.message || DEFAULT_ERROR_TEXT;
@@ -39,10 +41,6 @@ export const loginAction = (credentialResponse: CredentialResponse, errorCb: any
 
 export const logoutAction = () => (dispatch: AppDispatch) => {
   dispatch(userSlice.actions.logout());
-  localStorage.removeItem('auth');
+  localStorage.removeItem(AUTH_LOCAL_VAR);
+  localStorage.removeItem(THEME_LOCAL_VAR);
 };
-
-export const getData = () => async (dispatch: AppDispatch) => {
-
-};
-
