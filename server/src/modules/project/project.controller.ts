@@ -24,6 +24,7 @@ class ProjectController {
       const project = await ProjectEntity.create(request.user.id, title, description);
       return reply.code(201).send({ project });
     } catch(err) {
+      console.log(err.message);
       const code = err.code || 500;
       return reply.code(code).send(err);
     }

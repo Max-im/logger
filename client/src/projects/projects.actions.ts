@@ -7,7 +7,6 @@ import {projectSlice} from './projects.slice'
 export const createProjectAction = (onCreateProjectData: IProjectInput, cb: Function) => async (dispatch: AppDispatch) => {
   try {
     const response = await api.post<ICreateProjectResponse>(CREATE_PROJECT_URL, onCreateProjectData);
-    console.log(response.data)
     dispatch(projectSlice.actions.add([response.data.project]));
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;
