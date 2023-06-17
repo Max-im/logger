@@ -17,6 +17,12 @@ export class ProjectEntity implements Project {
     const projects = await ProjectRepo.findUserProjects(userId);
     return projects;
   }
+  
+  static async findUserProjectById(userId: string, projectId: string) {
+    const project = await ProjectRepo.findOne(userId, projectId);
+    if (!project) throw new ErrorNotFound('Project not found');
+    return new ProjectEntity(project);
+  }
 
   static async delete(userId: string, id: string) {
     const project = await ProjectRepo.findOne(userId, id);

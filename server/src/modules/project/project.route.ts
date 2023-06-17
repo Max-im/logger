@@ -9,7 +9,7 @@ async function projectRoutes(server: FastifyInstance) {
 
   server.post('/', {...schema, ...onRequest}, projectController.create);
   server.get('/', onRequest, projectController.getUserProjects);
-  server.get('/:id', onRequest, projectController.getUserProjects);
+  server.get('/:id', onRequest, projectController.getUserProject);
   server.put('/:id', onRequest, projectController.getUserProjects);
   server.delete('/:id', onRequest, projectController.delete);
 }

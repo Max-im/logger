@@ -9,7 +9,7 @@ export class ProjectRepo {
       throw new ErrorDatabase(err);
     }
   }
-
+  
   static async findOne(userId: string, id: string) {
     try {
       return await prisma.project.findFirst({where: { id, users: {some: { userId }} } });

@@ -16,7 +16,7 @@ export default function Projects() {
     console.log(msg);
   }
 
-  const onDelete = (id: number, e: any) => {
+  const onDelete = (id: string, e: any) => {
     e.preventDefault();
     dispatch(deleteProjectAction(id, onError));
   }

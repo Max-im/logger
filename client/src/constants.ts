@@ -8,7 +8,7 @@ export const AUTH_LOCAL_VAR = 'auth';
 export const USER_LOGIN_URL = '/api/v1/user/auth';
 export const USER_DATA = '/api/v1/user';
 export const GET_PROJECT_URL = '/api/v1/project';
-export const CREATE_PROJECT_URL = '/api/v1/project';
+export const PROJECT_URL = '/api/v1/project';
 
 export const GET_PRICE_URL = '/price';
 export const MESSAGE_URL = '/message';

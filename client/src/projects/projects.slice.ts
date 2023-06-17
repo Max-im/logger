@@ -1,18 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../models/User';
-import { setAuthHeader } from '../services/http';
-import jwtDecode from 'jwt-decode';
-import { AUTH_LOCAL_VAR } from '../constants';
 import { IProject } from './projects.model';
 
 interface ProjectState {
     projects: IProject[];
-    ids: {[key: number]: true};
+    ids: {[key: string]: true};
+    currentProject: IProject | null;
 }
 
 const initialState: ProjectState = {
     projects: [],
-    ids: {}
+    ids: {},
+    currentProject: null
 }
 
 export const projectSlice = createSlice({
@@ -30,9 +28,12 @@ export const projectSlice = createSlice({
         create(state, action: PayloadAction<IProject>) {
             state.projects.push(action.payload);
         },
-        delete(state, action: PayloadAction<number>) {
+        delete(state, action: PayloadAction<string>) {
             state.projects = state.projects.filter(project => project.id !== action.payload);
         },
+        setCurrent(state, action: PayloadAction<IProject>) {
+            state.currentProject = action.payload;
+        },    
     }
 })
 

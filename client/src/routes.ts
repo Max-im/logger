@@ -3,14 +3,14 @@ import About from './about/about.page';
 import Home from './home/home.page';
 import Logout from './user/user.logout';
 import Projects from './projects/projects.page';
-import { RoleTypes } from './models/User';
 import NotFoundPage from './notfound/notfound.page';
-import Faq from './faq/faq.page';
+import Documentation from './documentation/documentation.page';
 import HomeIcon from '@mui/icons-material/Home';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import InfoIcon from '@mui/icons-material/Info';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import ProjectItem from './projects/project-item.page';
+import ProjectPage from './projects/project.page';
+import { RoleTypes } from './models/User';
 
 export interface IRouteData {
   url: string;
@@ -82,23 +82,23 @@ export const projectsRoute = {
 };
 
 export const projectItemRoute = {
-  url: '/projects/:key',
+  url: '/projects/:projectId',
   title: 'Project',
   subtitle: 'Project Information',
   isMenu: false,
   role: RoleTypes.USER,
-  element: ProjectItem,
+  element: ProjectPage,
   parrent: null,
   icon: AccountTreeIcon
 };
 
-export const faqRoute = {
-  url: '/faq',
-  title: 'FAQ',
-  subtitle: 'Questions and Answers',
+export const docsRoute = {
+  url: '/docs',
+  title: 'Documentation',
+  subtitle: 'Start in just a few clicks',
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: Faq,
+  element: Documentation,
   parrent: null,
   icon: HelpCenterIcon
 };
@@ -121,6 +121,6 @@ export const routes = [
   logoutRoute,
   projectsRoute,
   projectItemRoute,
-  faqRoute,
+  docsRoute,
   notFounRoute,
 ];

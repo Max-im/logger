@@ -4,12 +4,24 @@ import { ProjectEntity } from './project.entity';
 import { CreateProjectInput } from './project.schema';
 
 class ProjectController {
-  async getUserProjects(request: FastifyRequest, reply: FastifyReply): Promise<{projects: IProject[]}> {
+  async getUserProjects(request: FastifyRequest, reply: FastifyReply): Promise<{projects: Project[]}> {
     try {
       // @ts-ignore
       const projects = await ProjectEntity.findUserProjects(request.user.id);
 
       return { projects };
+    } catch(err) {
+      const code = err.code || 500;
+      return reply.code(code).send(err);
+    }
+  }
+  
+  async getUserProject(request: FastifyRequest<{Params: {id: string};}>, reply: FastifyReply): Promise<{project: Project}> {
+    try {
+      // @ts-ignore
+      const project = await ProjectEntity.findUserProjectById(request.user.id, request.params.id);
+
+      return { project };
     } catch(err) {
       const code = err.code || 500;
       return reply.code(code).send(err);
