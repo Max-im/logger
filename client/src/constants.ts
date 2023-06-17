@@ -10,6 +10,7 @@ export const USER_DATA = '/api/v1/user';
 export const GET_PROJECT_URL = '/api/v1/project';
 export const PROJECT_URL = '/api/v1/project';
 export const STATUS_URL = '/api/v1/status/stat';
+export const GET_LOGS_URL = '/api/v1/log';
 
 export const GET_PRICE_URL = '/price';
 export const MESSAGE_URL = '/message';

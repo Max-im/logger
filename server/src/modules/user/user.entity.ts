@@ -8,7 +8,7 @@ export class UserEntity implements User {
   name: string;
   photo: string;
   roleId: number;
-
+  registred: Date;
 
   constructor(user: User) {
     this.id = user.id;
@@ -16,6 +16,7 @@ export class UserEntity implements User {
     this.name = user.name;
     this.photo = user.photo;
     this.roleId = user.roleId;
+    this.registred = user.registred;
   }
 
   static async findById(id: string) {

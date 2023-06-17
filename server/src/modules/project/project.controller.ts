@@ -6,9 +6,7 @@ import { CreateProjectInput } from './project.schema';
 class ProjectController {
   async getUserProjects(request: FastifyRequest, reply: FastifyReply): Promise<{projects: Project[]}> {
     try {
-      // @ts-ignore
       const projects = await ProjectEntity.findUserProjects(request.user.id);
-
       return { projects };
     } catch(err) {
       const code = err.code || 500;
@@ -18,7 +16,6 @@ class ProjectController {
   
   async getUserProject(request: FastifyRequest<{Params: {id: string};}>, reply: FastifyReply): Promise<{project: Project}> {
     try {
-      // @ts-ignore
       const project = await ProjectEntity.findUserProjectById(request.user.id, request.params.id);
 
       return { project };
@@ -30,10 +27,9 @@ class ProjectController {
 
   async create(request: FastifyRequest<{Body: CreateProjectInput;}>, reply: FastifyReply): Promise<{project: Project}> {
     try {
-      const { title, description } = request.body;
+      const { title } = request.body;
 
-      // @ts-ignore
-      const project = await ProjectEntity.create(request.user.id, title, description);
+      const project = await ProjectEntity.create(request.user.id, title);
       return reply.code(201).send({ project });
     } catch(err) {
       const code = err.code || 500;
@@ -43,10 +39,7 @@ class ProjectController {
 
   async delete(request: FastifyRequest<{Params: {id: string};}>, reply: FastifyReply): Promise<{project: Project}> {
     try {
-      const { id } = request.params;
-      
-      // @ts-ignore
-      await ProjectEntity.delete(request.user.id, id);
+      await ProjectEntity.delete(request.user.id, request.params.id);
       return reply.code(200).send();
     } catch(err) {
       const code = err.code || 500;

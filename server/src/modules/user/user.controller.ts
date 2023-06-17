@@ -1,12 +1,11 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import {User} from '@prisma/client';
+import { User } from '@prisma/client';
 import { UserEntity } from './user.entity';
 import { IAuth, IAuthResponse } from './user.types';
 
 class UserController {
   async getData(request: FastifyRequest, reply: FastifyReply): Promise<{user: User}> {
     try {
-      // @ts-ignore
       const user = await UserEntity.findById(request.user.id);
 
       return { user };

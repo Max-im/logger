@@ -20,15 +20,11 @@ export default function CreateProject() {
   const dispatch = useAppDispatch()
   const [open, setOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
-  }
-  const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDescription(e.target.value);
   }
 
   const onError = (errMsg: string) => {
@@ -37,9 +33,8 @@ export default function CreateProject() {
 
   const onCreateProject = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createProjectAction({title, description}, onError))
+    dispatch(createProjectAction(title, onError))
     setTitle('');
-    setDescription('');
     handleClose();
   }
 
@@ -52,9 +47,6 @@ export default function CreateProject() {
             <Typography variant="h6" component="h2">Create Project</Typography>
             <Box sx={{mt: 1, mb: 1}}>
               <TextField label="Title" onChange={onChangeTitle} size='small' variant="filled" />
-            </Box>
-            <Box sx={{ mb: 1}}>
-              <TextField label="Description" onChange={onChangeDescription} size='small' variant="filled" />
             </Box>
             <Button type="submit" variant='contained'>Create Project</Button>
           </form>

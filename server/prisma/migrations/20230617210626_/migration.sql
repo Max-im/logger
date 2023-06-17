@@ -20,7 +20,6 @@ CREATE TABLE "User" (
 CREATE TABLE "Project" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
@@ -28,7 +27,7 @@ CREATE TABLE "Project" (
 
 -- CreateTable
 CREATE TABLE "UserProject" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
     "projectId" TEXT NOT NULL,
 
@@ -37,9 +36,10 @@ CREATE TABLE "UserProject" (
 
 -- CreateTable
 CREATE TABLE "Log" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "value" TEXT NOT NULL,
     "level" "LogLevel" NOT NULL,
+    "opened" BOOLEAN NOT NULL DEFAULT false,
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "projectId" TEXT NOT NULL,
 

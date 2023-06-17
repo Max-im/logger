@@ -3,6 +3,9 @@ import { createId } from '@paralleldrive/cuid2';
 
 const prisma = new PrismaClient()
 
+const projectId = createId();
+const userId = createId();
+
 async function seedUsers() {
   console.log('User start seeding');
 
@@ -15,13 +18,13 @@ async function seedUsers() {
     },
   });
 
-  await prisma.user.upsert({
+  const user = await prisma.user.upsert({
     where: { email: 'pogidaevmo@gmail.com' },
     update: {},
     create: {
-      id: 'cliz2cqo6000208kuc4sq8wtb',
+      id: userId,
       email: 'pogidaevmo@gmail.com',
-      name: 'Maksym',
+      name: 'Maksym Pozhydaiev',
       photo: 'https://lh3.googleusercontent.com/a/AAcHTtdj_AWOYAEx553u4dChujkQmN3WJzlUVESqQ4we5g=s96-c',
       role: {
         connectOrCreate: {where: {
@@ -34,6 +37,19 @@ async function seedUsers() {
       }
     },
   });
+
+  await prisma.project.create({
+    data: {
+      id: projectId,
+      title: 'title',
+      users: {
+        create: [
+          { userId: user.id }
+        ]
+      }
+    },
+  });
+
 
   console.log('User seed');
 }
@@ -56,9 +72,8 @@ async function seedLogs() {
     const arr = new Array(logsMap[level]).fill('lorem ipsum');
     for (const i of arr) {
       data.push({
-        id: createId(),
         value: i,
-        projectId: 'clj07c8dy0000vl7opegkmsps',
+        projectId,
         // @ts-ignore
         level
       });

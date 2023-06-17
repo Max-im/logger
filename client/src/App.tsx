@@ -21,7 +21,6 @@ function App() {
           <Container maxWidth="lg" sx={{mt: 2, flexGrow: 1, height: '100%'}} >
             <Grid container spacing={2}>
               <Grid item xs={3}>
-                {/* @ts-ignore */}
                 <Aside user={user} activeRoutes={activeRoutes}/>
               </Grid>
               <Grid item xs={9}>

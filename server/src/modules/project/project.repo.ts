@@ -26,12 +26,11 @@ export class ProjectRepo {
     }
   }
 
-  static async create(userId: string, title: string, description: string) {
+  static async create(userId: string, title: string) {
     try {
       return await prisma.project.create({
         data: {
           title,
-          description,
           users: { 
             create: [{ userId }]
           }

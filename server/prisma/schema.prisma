@@ -24,14 +24,13 @@ model User {
 model Project {
   id          String        @id @default(cuid())
   title       String
-  description String
   created     DateTime      @default(now())
   logs        Log[]
   users       UserProject[]
 }
 
 model UserProject {
-  id          String        @id @default(cuid())
+  id          Int        @id @default(autoincrement())
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
@@ -39,11 +38,12 @@ model UserProject {
 }
 
 model Log {
-  id          String      @id @default(cuid())
+  id          Int      @id @default(autoincrement())
   value       String
   level       LogLevel
-  created     DateTime @default(now())
-  project     Project  @relation(fields: [projectId], references: [id])
+  opened      Boolean     @default(false)
+  created     DateTime    @default(now())
+  project     Project     @relation(fields: [projectId], references: [id])
   projectId   String
 }
 

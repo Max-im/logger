@@ -5,14 +5,12 @@ import { ProjectRepo } from './project.repo';
 export class ProjectEntity implements Project {
   id: string;
   title: string;
-  description: string;
   created: Date;
 
   constructor(project: Project) {
     this.id = project.id;
     this.created = project.created;
     this.title = project.title;
-    this.description = project.description;
   }
 
   static async findUserProjects(userId: string) {
@@ -33,8 +31,8 @@ export class ProjectEntity implements Project {
     return;
   }
 
-  static async create(userId: string, title: string, description: string) {
-    const projects = await ProjectRepo.create(userId, title, description);
+  static async create(userId: string, title: string) {
+    const projects = await ProjectRepo.create(userId, title);
     return projects;
   }
 }

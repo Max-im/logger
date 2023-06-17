@@ -34,7 +34,7 @@ export default function Projects() {
               <Link to={`${projectsRoute.url}/${project.id}`} key={project.id}>
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemText primary={project.title} secondary={project.description}/>
+                    <ListItemText primary={project.title} />
                     <IconButton>
                       {/* @ts-ignore */}
                       <DeleteIcon onClick={onDelete.bind(this, project.id)} />
