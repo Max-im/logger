@@ -1,12 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import homeReducer from '../home/home.slice';
 import userReducer from '../user/user.slice';
 import themeReducer from '../theme/theme.slice';
 import projectReducer from '../projects/projects.slice';
+import logReducer from '../log/log.slice';
 
 const rootReducer = combineReducers({
+    homeReducer,
     userReducer,
     themeReducer,
-    projectReducer
+    projectReducer,
+    logReducer
 });
 
 export const setupStore = () => {

@@ -5,7 +5,7 @@ import Header from './header/header.component';
 import Aside from './aside/aside.component';
 import { useAppSelector } from './hooks/redux';
 import { routes } from './routes';
-import { RoleTypes } from './models/User';
+import { RoleTypes } from './user/user.model';
 import Theme from './theme/theme.component';
 
 function App() {

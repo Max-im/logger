@@ -3,11 +3,10 @@ import api from '../services/http';
 import { PROJECT_URL, DEFAULT_ERROR_TEXT } from '../constants';
 import { ICreateProjectResponse, IProject, IProjectInput } from './projects.model';
 import {projectSlice} from './projects.slice'
-import {useAppSelector} from '../hooks/redux';
-import { StateFromReducersMapObject } from '@reduxjs/toolkit';
+import { ILog } from '../log/log.model';
+import {logSlice} from '../log/log.slice';
 
 type cb = (msg: string) => void;
-
 
 export const createProjectAction = (onCreateProjectData: IProjectInput, cb: cb) => async (dispatch: AppDispatch) => {
   try {
@@ -40,16 +39,12 @@ export const deleteProjectAction = (id: string, cb: cb) => async (dispatch: AppD
   }
 };
 
-export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dispatch: AppDispatch, getState: () => any) => {
+export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dispatch: AppDispatch) => {
   try {
-    const state = getState();
-    const activeProject = state.projectReducer.projects.find((project: IProject) => project.id === projectId)
-    if (activeProject) {
-      dispatch(projectSlice.actions.setCurrent(activeProject));
-    } else {
-      const response = await api.get<{project: IProject}>(`${PROJECT_URL}/${projectId}`);
-      dispatch(projectSlice.actions.setCurrent(response.data.project));
-    }
+    const response = await api.get<{project: IProject, logs: ILog[]}>(`${PROJECT_URL}/${projectId}`);
+    console.log(response.data)
+    dispatch(projectSlice.actions.setCurrent(response.data.project));
+    dispatch(logSlice.actions.get(response.data.logs));
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;
     cb(message);

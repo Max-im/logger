@@ -15,6 +15,7 @@ model User {
   email       String        @unique
   name        String        @default("Guest")
   photo       String        @default("")
+  registred   DateTime      @default(now())
   projects    UserProject[]
   role        Role          @relation(fields: [roleId], references: [id])
   roleId      Int
@@ -24,23 +25,23 @@ model Project {
   id          String        @id @default(cuid())
   title       String
   description String
+  created     DateTime      @default(now())
   logs        Log[]
   users       UserProject[]
 }
 
 model UserProject {
   id          String        @id @default(cuid())
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
-  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId   String
-  created     DateTime @default(now())
 }
 
 model Log {
   id          String      @id @default(cuid())
-  title       String
-  description String
+  value       String
+  level       LogLevel
   created     DateTime @default(now())
   project     Project  @relation(fields: [projectId], references: [id])
   projectId   String

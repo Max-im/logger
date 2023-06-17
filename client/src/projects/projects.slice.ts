@@ -10,7 +10,7 @@ interface ProjectState {
 const initialState: ProjectState = {
     projects: [],
     ids: {},
-    currentProject: null
+    currentProject: null,
 }
 
 export const projectSlice = createSlice({

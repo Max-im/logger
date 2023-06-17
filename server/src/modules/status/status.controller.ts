@@ -1,5 +1,6 @@
 import os from 'node:os';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { StatusRepo } from './status.repo';
 
 class StatusController {
   getStatus(request: FastifyRequest, reply: FastifyReply) {
@@ -25,6 +26,17 @@ class StatusController {
         hostname: os.hostname()
       };
       return data;
+    } catch(err) {
+      return reply.code(500).send(err);
+    }
+  }
+
+  async getStat(request: FastifyRequest, reply: FastifyReply) {
+    try {
+      const projects = await StatusRepo.getProjectCount();
+      const users = await StatusRepo.getUsersCount();
+
+      return { projects, users };
     } catch(err) {
       return reply.code(500).send(err);
     }

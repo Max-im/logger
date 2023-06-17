@@ -10,7 +10,7 @@ import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import InfoIcon from '@mui/icons-material/Info';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ProjectPage from './projects/project.page';
-import { RoleTypes } from './models/User';
+import { RoleTypes } from './user/user.model';
 
 export interface IRouteData {
   url: string;

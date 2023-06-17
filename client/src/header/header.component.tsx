@@ -19,14 +19,14 @@ function Header() {
   }
 
   return (
-    <Box position="static">
+    <Box position="static" sx={{minHeight: '60px'}}>
       <Toolbar variant="dense">
         {route &&
           <Box>
             <Typography variant="h1" component="h1">
               {route.title}
             </Typography>
-            <Typography variant="body1" color="secondary" component="p" sx={{position: 'relative', top: -7, textShadow: '1px 1px 1px rgba(255,255,255,.7);'}}>
+            <Typography variant="body1" component="p" sx={{position: 'relative', top: -4, opacity: 0.5}}>
               {route.subtitle}
             </Typography>
           </Box> 

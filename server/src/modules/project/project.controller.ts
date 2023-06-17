@@ -36,18 +36,16 @@ class ProjectController {
       const project = await ProjectEntity.create(request.user.id, title, description);
       return reply.code(201).send({ project });
     } catch(err) {
-      console.log(err.message);
       const code = err.code || 500;
       return reply.code(code).send(err);
     }
   }
 
-  
-
   async delete(request: FastifyRequest<{Params: {id: string};}>, reply: FastifyReply): Promise<{project: Project}> {
     try {
       const { id } = request.params;
       
+      // @ts-ignore
       await ProjectEntity.delete(request.user.id, id);
       return reply.code(200).send();
     } catch(err) {

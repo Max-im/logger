@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Avatar, Paper, Typography, Divider, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText }  from '@mui/material';
-import { IUser } from '../models/User'
+import { IUser } from '../user/user.model'
 import { IRouteData, logoutRoute } from '../routes';
 import { useAppSelector } from '../hooks/redux';
 import UserLogin from '../user/user.login';
@@ -40,7 +40,7 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
             {menu && menu.map((item: IRouteData) => (
               <ListItem disablePadding key={item.url} sx={{m: 0}} onClick={() => onNavigate(item.url)}>
                 <ListItemButton dense>
-                  <ListItemIcon sx={{minWidth: 40, opacity: 0.7}}>
+                  <ListItemIcon sx={{minWidth: 40, opacity: 0.3}}>
                     <item.icon />
                   </ListItemIcon>
                   <ListItemText primary={item.title} />

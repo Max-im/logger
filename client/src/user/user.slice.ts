@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser, RoleTypes } from '../models/User';
+import { IUser, RoleTypes } from '../user/user.model';
 import { setAuthHeader } from '../services/http';
 import jwtDecode from 'jwt-decode';
 import { AUTH_LOCAL_VAR } from '../constants';

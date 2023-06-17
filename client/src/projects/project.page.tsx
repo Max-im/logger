@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, Grid, Typography, Divider, Chip, Tooltip, Snackbar, Alert } from '@mui/material';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { projectsRoute } from '../routes';
 import { getCurrentProjectAction } from './projects.actions';
+import LogList from '../log/log.component';
 
 export default function ProjectPage() {
   const [showMsg, setShowMsg] = useState<boolean>(false);
@@ -33,24 +34,25 @@ export default function ProjectPage() {
   return (
     <>{currentProject && (
       <>
-      <Grid container spacing={2} sx={{minHeight: 'calc(90vh - 48px)'}}>
+      <Grid container spacing={2} sx={{minHeight: 'calc(90vh - 60px)'}}>
         <Grid item xs={8}>
           <Paper className="container" sx={{height: '100%'}}>
             <Typography variant="subtitle1">{currentProject.title.toUpperCase()}</Typography>
             <Divider sx={{mb: 2}}/>
-            <Typography variant="body1">{currentProject.description}</Typography>
+            <LogList />
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper className="container" sx={{height: '100%'}}>
             <Typography variant="subtitle1">Project Info</Typography>
             <Divider sx={{mb: 2}} />
-            <Typography variant="body1">
-              To access your project programmatically, please make use of the ID property. 
+            <Typography variant="body1" sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Tooltip title="Access key">
+                <VpnKeyIcon color="primary"/>
+              </Tooltip>
               <Tooltip title="Click to Copy">
                 <Chip label={currentProject.id} sx={{m: 1}} size="small" variant="outlined" onClick={onKeyClick} />
               </Tooltip>
-              You can find more information about app usage by referring to the provided resources.
             </Typography>
           </Paper>
         </Grid>
