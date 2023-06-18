@@ -3,10 +3,12 @@ import { ILog } from './log.model';
 
 interface LogState {
     logs: {[id: string]: ILog};
+    selected: {[id: string]: boolean}
 }
 
 const initialState: LogState = {
     logs: {},
+    selected: {}
 }
 
 export const logSlice = createSlice({
@@ -20,7 +22,10 @@ export const logSlice = createSlice({
                     state.logs[log.id] = log;
                 }
             }
-        }    
+        },
+        select(state, action: PayloadAction<{id: string, val: boolean}>) {
+            state.selected[action.payload.id] = action.payload.val;
+        }   
     }
 })
 

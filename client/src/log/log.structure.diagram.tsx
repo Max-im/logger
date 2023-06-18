@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend } from 'chart.js';
+import { Box } from '@mui/material';
 import { useAppSelector } from '../hooks/redux';
 
 ChartJS.register(ArcElement, ChartTooltip, Legend);
@@ -49,9 +50,9 @@ const LogStructure = () => {
     }, [logs]);
 
     return (
-        <>
+        <Box sx={{width: '100%'}}>
             {Boolean(Object.keys(logs).length) && <Doughnut data={data} />}
-        </>
+        </Box>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Container, Box, Grid } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import Header from './header/header.component';
 import Aside from './aside/aside.component';
 import { useAppSelector } from './hooks/redux';
@@ -17,21 +17,19 @@ function App() {
   return (
     <Theme>
       <BrowserRouter>
-        <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
-          <Container maxWidth="lg" sx={{mt: 2, flexGrow: 1, height: '100%'}} >
-            <Grid container spacing={2}>
-              <Grid item xs={3}>
-                <Aside user={user} activeRoutes={activeRoutes}/>
-              </Grid>
-              <Grid item xs={9}>
-                <Header />
+        <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh', p: 2}}>
+          <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex'}} >
+            <Aside user={user} activeRoutes={activeRoutes}/>
+            <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
+              <Header />
+              <Box sx={{ flexGrow: 1}}>
                 <Routes>
                   {activeRoutes.map((route) => (
                     <Route key={route.url} path={route.url} element={<route.element />} />
-                  ))}
+                    ))}
                 </Routes>
-              </Grid>
-            </Grid>
+              </Box>
+            </Container>
           </Container>
         </Box>
       </BrowserRouter>

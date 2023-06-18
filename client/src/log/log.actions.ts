@@ -15,3 +15,7 @@ export const getLogsAction = (projectId: string, cb: cb) => async (dispatch: App
     cb(message);
   }
 };
+
+export const selectAction = (id: string, val: boolean) => (dispatch: AppDispatch) => {
+  dispatch(logSlice.actions.select({ id, val }));
+};

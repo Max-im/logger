@@ -26,8 +26,8 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
   const menu = activeRoutes.filter(route => route.isMenu);
 
   return (
-    <Paper>
-      <Box className="container" sx={{  display: 'flex', flexDirection: 'column' }} height="90vh">
+    <Paper sx={{height: '100%', flex: '0 0 22%'}}>
+      <Box className="container" sx={{display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Box>
           <Avatar alt={user.name} src={user.photo}  sx={{ width: 48, height: 48, m: '10px auto' }}  />
           <Typography variant='subtitle1' sx={{ textAlign: 'center' }}>{user.name}</Typography>
@@ -49,10 +49,8 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
             ))}
             </List>
           </Box>
-          <Box sx={{mt: 1}}>
-            <Typography variant='subtitle2'>Settings</Typography>
-          </Box>
         </Box>
+        <Box flexGrow={'100%'}></Box>
         <Box sx={{mt: 1, m: 'auto'}}>
           { authorized ? 
             <Button variant='contained' size='small' onClick={onLogout}>Logout</Button> :

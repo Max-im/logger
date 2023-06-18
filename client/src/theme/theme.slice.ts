@@ -13,7 +13,7 @@ const initialState: ThemeState = {
 
 try {
     const isLight = localStorage.getItem(THEME_LOCAL_VAR);
-    initialState.light = isLight !== 'false';
+    initialState.light = Boolean(isLight && isLight !== 'false');
 } catch(err) {
     localStorage.removeItem(THEME_LOCAL_VAR);
     console.error(err);

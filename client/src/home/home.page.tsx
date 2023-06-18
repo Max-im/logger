@@ -49,7 +49,7 @@ function Home() {
   }, []);
   
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', minHeight: 'calc(90vh - 60px)'}}>
+    <Box sx={{display: 'flex', flexDirection: 'column', height: '100%'}}>
       <HomePros />
       <HomeMain />
 
