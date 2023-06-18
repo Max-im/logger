@@ -1,24 +1,16 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Paper, Grid, List, ListItem, ListItemButton, ListItemText, Divider, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Paper, Grid, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import CreateProject from './projects.create';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getProjectsAction, deleteProjectAction } from './projects.actions';
-import { projectsRoute } from '../routes';
+import { getProjectsAction } from './projects.actions';
+import ProjectRow from './project.row';
 
-export default function Projects() {
+const Projects = () => {
   const dispatch = useAppDispatch();
-
   const { projects } = useAppSelector(state => state.projectReducer)
 
   const onError = (msg: string) => {
     console.log(msg);
-  }
-
-  const onDelete = (id: string, e: any) => {
-    e.preventDefault();
-    dispatch(deleteProjectAction(id, onError));
   }
 
   useEffect(() => {
@@ -29,29 +21,26 @@ export default function Projects() {
     <Grid container spacing={2} sx={{minHeight: 'calc(90vh - 48px)'}}>
       <Grid item xs={8}>
         <Paper className="container" sx={{height: '100%'}}>
-          <List>
-            {projects.map(project => (
-              <Link to={`${projectsRoute.url}/${project.id}`} key={project.id}>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary={project.title} />
-                    <IconButton>
-                      {/* @ts-ignore */}
-                      <DeleteIcon onClick={onDelete.bind(this, project.id)} />
-                    </IconButton>
-                  </ListItemButton>
-                </ListItem>
-                <Divider/>
-              </Link>
-            ))}
-          </List>
-        </Paper>
-      </Grid>
-      <Grid item xs={4}>
-        <Paper className="container" sx={{height: '100%'}}>
-          <CreateProject />
-        </Paper>
-      </Grid>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Project</TableCell>
+              <TableCell align="right">Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {projects.map(project => <ProjectRow key={project.id} project={project} />)}
+          </TableBody>
+        </Table>
+      </Paper>
     </Grid>
+    <Grid item xs={4}>
+      <Paper className="container" sx={{height: '100%'}}>
+        <CreateProject />
+      </Paper>
+    </Grid>
+  </Grid>
   )
 }
+
+export default Projects;

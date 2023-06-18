@@ -20,6 +20,7 @@ export interface IRouteData {
   role: number;
   icon: typeof HomeIcon;
   parrent: IRoute | null;
+  rule: RegExp
   
 }
 export interface IRoute extends IRouteData {
@@ -34,7 +35,8 @@ export const homeRoute = {
   role: RoleTypes.GUEST,
   element: Home,
   parrent: null,
-  icon: HomeIcon
+  rule: /^\/$/,
+  icon: HomeIcon,
 };
 
 export const aboutRoute = {
@@ -45,7 +47,8 @@ export const aboutRoute = {
   role: RoleTypes.GUEST,
   element: About,
   parrent: null,
-  icon: InfoIcon
+  rule: /^\/about$/,
+  icon: InfoIcon,
 };
 
 export const userRoute = {
@@ -56,7 +59,8 @@ export const userRoute = {
   role: RoleTypes.USER,
   element: UserPage,
   parrent: null,
-  icon: HomeIcon
+  rule: /^\/user$/,
+  icon: HomeIcon,
 };
 
 export const logoutRoute = {
@@ -67,29 +71,32 @@ export const logoutRoute = {
   role: RoleTypes.USER,
   element: Logout,
   parrent: null,
-  icon: HomeIcon
+  rule: /^\/logout$/,
+  icon: HomeIcon,
 };
 
 export const projectsRoute = {
-  url: '/projects',
+  url: '/project',
   title: 'Projects',
   subtitle: 'Information about your projects',
   isMenu: true,
   role: RoleTypes.USER,
   element: Projects,
   parrent: null,
-  icon: AccountTreeIcon
+  rule: /^\/project$/,
+  icon: AccountTreeIcon,
 };
 
 export const projectItemRoute = {
-  url: '/projects/:projectId',
+  url: '/project/:projectId',
   title: 'Project',
   subtitle: 'Project Information',
   isMenu: false,
   role: RoleTypes.USER,
   element: ProjectPage,
   parrent: null,
-  icon: AccountTreeIcon
+  rule: /^\/project\/.+$/,
+  icon: AccountTreeIcon,
 };
 
 export const docsRoute = {
@@ -100,7 +107,8 @@ export const docsRoute = {
   role: RoleTypes.GUEST,
   element: Documentation,
   parrent: null,
-  icon: HelpCenterIcon
+  rule: /^\/docs$/,
+  icon: HelpCenterIcon,
 };
 
 export const notFounRoute = {
@@ -111,7 +119,9 @@ export const notFounRoute = {
   role: RoleTypes.GUEST,
   element: NotFoundPage,
   parrent: null,
-  icon: HomeIcon
+  rule: /^\/.*$/,
+  icon: HomeIcon,
+
 };
 
 export const routes = [

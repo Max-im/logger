@@ -28,17 +28,17 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
 
   return (
     <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Status</TableCell>
-            <TableCell align="right">Data</TableCell>
-            <TableCell align="right">Created</TableCell>
-          </TableRow>
-        </TableHead>
+      <TableHead>
+        <TableRow>
+          <TableCell>Status</TableCell>
+          <TableCell align="right">Data</TableCell>
+          <TableCell align="right">Created</TableCell>
+        </TableRow>
+      </TableHead>
         <TableBody>
         {Boolean(logIds.length) && logIds.map((id) => <LogRow key={id} log={logs[id]} />)}
-        </TableBody>
-        </Table>
+      </TableBody>
+    </Table>
   )
 }
 

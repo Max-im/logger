@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Grid, Box, Paper } from '@mui/material';
+import { Grid, Box, Paper, Typography } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { initAction } from './home.actions';
 import HomePros from './home.pros.component';
@@ -39,7 +39,6 @@ const data = {
 function Home() {
   const dispatch = useAppDispatch();
   const stat = useAppSelector(state => state.homeReducer);
-  console.log({stat})
 
   const onError = (msg: string) => {
     console.log(msg)
@@ -57,12 +56,13 @@ function Home() {
       <Grid container spacing={2} sx={{flex: '0 0 200px'}}>
         <Grid item xs={4}>
           <Paper className="container" sx={{height: '100%'}}>
-          {stat.loaded && <Doughnut data={data} />}
+            <Typography variant='h3' sx={{fontSize: 18, fontWeight: 'bold'}} color="secondary">Plans</Typography>
+            
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper className="container" sx={{height: '100%'}}>
-            {stat.loaded && stat.projects}
+          {stat.loaded && <Doughnut data={data} />}
           </Paper>
         </Grid>
         <Grid item xs={4}>

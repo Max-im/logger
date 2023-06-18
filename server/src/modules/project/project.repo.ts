@@ -19,6 +19,7 @@ export class ProjectRepo {
   }
   
   static async delete(id: string) {
+    console.log(id, 'iiiiiiii')
     try {
       return await prisma.project.delete({ where: { id } });
     } catch (err) {
