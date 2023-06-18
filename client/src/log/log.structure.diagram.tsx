@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend } from 'chart.js';
 import { Box } from '@mui/material';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
+import { getLogsInfoAction } from './log.actions';
+import { ILevels } from './log.model';
 
 ChartJS.register(ArcElement, ChartTooltip, Legend);
 
@@ -32,9 +35,11 @@ const data = {
   };
   
 const LogStructure = () => {
-    const { logs } = useAppSelector(state => state.logReducer);
+    const { projectId } = useParams();
+    const dispatch = useAppDispatch();
+    const { info } = useAppSelector(state => state.logReducer);
 
-    const logMap = {
+    const logMap: {[key in ILevels]: number} = {
         FATAL: 0,
         ERROR: 1,
         WARN: 2,
@@ -42,16 +47,24 @@ const LogStructure = () => {
         INFO: 4,
     }
 
+    const onError = (msg: string) => {
+        console.log(msg)
+    }
+
     useEffect(() => {
-        for (const id in logs) {
-            const log = logs[id];
-            data.datasets[0].data[logMap[log.level]]++;
+        dispatch(getLogsInfoAction(projectId!, onError));
+    }, []);
+
+    useEffect(() => {
+        for(const level in info) {
+            // @ts-ignore
+            data.datasets[0].data[logMap[level]] = info[level];
         }
-    }, [logs]);
+    }, [info]);
 
     return (
         <Box sx={{width: '100%'}}>
-            {Boolean(Object.keys(logs).length) && <Doughnut data={data} />}
+            {Boolean(Object.keys(info).length) && <Doughnut data={data} />}
         </Box>
     )
 }

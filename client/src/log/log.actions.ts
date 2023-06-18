@@ -1,7 +1,7 @@
 import { AppDispatch } from '../store/store';
 import api from '../services/http';
 import { DEFAULT_ERROR_TEXT, GET_LOGS_URL } from '../constants';
-import { ILog } from '../log/log.model';
+import { ILevels, ILog } from '../log/log.model';
 import { logSlice } from '../log/log.slice';
 
 type cb = (msg: string) => void;
@@ -15,6 +15,30 @@ export const getLogsAction = (projectId: string, cb: cb) => async (dispatch: App
     cb(message);
   }
 };
+
+interface IInfoItem {
+  level: ILevels;
+  _count: {
+    level: number
+  }
+}
+
+export const getLogsInfoAction = (projectId: string, cb: cb) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await api.get<{info: IInfoItem[]}>(`${GET_LOGS_URL}/${projectId}/info`);
+    const info: {[key in ILevels]?: number} = {};
+
+    response.data.info.forEach(item => {
+      info[item.level] = Number(item._count.level);
+    });
+
+    dispatch(logSlice.actions.addInfo({ info }));
+  } catch (err) {
+    const message = err.message || DEFAULT_ERROR_TEXT;
+    cb(message);
+  }
+};
+
 
 export const readLogAction = (projectId: string, logId: string) => async (dispatch: AppDispatch) => {
   try {

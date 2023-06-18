@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ILog } from './log.model';
+import { ILevels, ILog } from './log.model';
 
 interface LogState {
     logs: {[id: string]: ILog};
-    selected: {[id: string]: boolean}
+    selected: {[id: string]: boolean};
+    info: {[level in ILevels]?: number}
 }
 
 const initialState: LogState = {
     logs: {},
-    selected: {}
-}
+    selected: {},
+    info: {}
+};
 
 export const logSlice = createSlice({
     name: 'log',
@@ -22,6 +24,9 @@ export const logSlice = createSlice({
                     state.logs[log.id] = log;
                 }
             }
+        },
+        addInfo(state, action: PayloadAction<{info: {[key in ILevels]?: number}}>) {
+            state.info = action.payload.info;
         },
         select(state, action: PayloadAction<{id: string, val: boolean}>) {
             state.selected[action.payload.id] = action.payload.val;

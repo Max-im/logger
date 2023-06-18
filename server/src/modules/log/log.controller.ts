@@ -19,6 +19,19 @@ class LogController {
     }
   }
   
+  async getInfo(request: FastifyRequest<{Params: {projectId: string};}>, reply: FastifyReply): Promise<{info: any}> {
+    try {
+      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
+      if (!userHasAcces) throw new ErrorForbiden();
+      const info = await LogRepo.getProjectLogsInfo(request.params.projectId);
+      
+      return { info };
+    } catch(err) {
+      const code = err.code || 500;
+      return reply.code(code).send(err);
+    }
+  }
+  
   async readLog(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply) {
     try {
       const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);

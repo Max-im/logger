@@ -10,6 +10,20 @@ export class LogRepo {
     }
   }
   
+  static async getProjectLogsInfo(projectId: string) {
+    try {
+      return await prisma.log.groupBy({
+        by: ['level'],
+        where: { projectId },
+        _count: {
+          level: true
+        }
+      });
+    } catch (err) {
+      throw new ErrorDatabase(err);
+    }
+  }
+  
   static async markRead(id: number) {
     try {
       return await prisma.log.update({
