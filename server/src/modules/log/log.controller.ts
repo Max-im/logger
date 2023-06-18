@@ -32,6 +32,21 @@ class LogController {
       return reply.code(code).send(err);
     }
   }
+  
+  async deleteLogs(request: FastifyRequest<{Params: {projectId: string, logIds: string};}>, reply: FastifyReply) {
+    try {
+      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
+      if (!userHasAcces) throw new ErrorForbiden();
+
+      const logIds = request.params.logIds.split(',').map(id => Number(id));
+      await LogRepo.deleteLogs(logIds);
+
+      return;
+    } catch(err) {
+      const code = err.code || 500;
+      return reply.code(code).send(err);
+    }
+  }
 
   async create(request: FastifyRequest<{Body: CreateProjectInput;}>, reply: FastifyReply): Promise<{project: Project}> {
     try {

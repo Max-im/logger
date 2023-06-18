@@ -16,7 +16,18 @@ export class LogRepo {
         where: { id },
         data: { opened: true }
       });
-      // findMany({where: { projectId }, take: 15, orderBy: {id: 'desc'}});
+    } catch (err) {
+      throw new ErrorDatabase(err);
+    }
+  }
+  
+  static async deleteLogs(ids: number[]) {
+    try {
+      return await prisma.log.deleteMany({
+        where: {
+          id: { in: ids }
+        }
+      });
     } catch (err) {
       throw new ErrorDatabase(err);
     }

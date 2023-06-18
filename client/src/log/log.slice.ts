@@ -26,9 +26,14 @@ export const logSlice = createSlice({
         select(state, action: PayloadAction<{id: string, val: boolean}>) {
             state.selected[action.payload.id] = action.payload.val;
         },   
-        read(state, action: PayloadAction<{id: string}>) {
+        markRead(state, action: PayloadAction<{id: string}>) {
             state.logs[action.payload.id].opened = true;
-        },   
+        },
+        delete(state, action: PayloadAction<{logIds: string[]}>) {
+            action.payload.logIds.forEach(id => {
+                delete state.logs[id];
+            });
+        },
     }
 })
 

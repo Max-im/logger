@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Paper, Typography, Divider, Chip, Tooltip, Snackbar, Alert, Box } from '@mui/material';
+import { Paper, Typography, Divider, Chip, Tooltip, Snackbar, Alert, Box, Button } from '@mui/material';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getCurrentProjectAction } from './projects.actions';
 import LogList from '../log/log.table';
 import LogStructure from '../log/log.structure.diagram';
+import { deleteLogsAction } from '../log/log.actions';
 
 export default function ProjectPage() {
   const [showMsg, setShowMsg] = useState<boolean>(false);
+  const { selected } = useAppSelector(state => state.logReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { projectId } = useParams();
 
   const { currentProject } = useAppSelector(state => state.projectReducer); 
+
+  const selectedIds = Object.keys(selected).filter(id => selected[id]);
+  const disabledDeleteBtn = selectedIds.length > 0 ? {} : {disabled: true};
+
+  const onDeleteLogs = () => {
+    dispatch(deleteLogsAction(projectId!, selectedIds));
+  }
 
   const onCloseMsg = () => {
     setShowMsg(false);
@@ -56,6 +65,7 @@ export default function ProjectPage() {
                   <Chip label={currentProject.id} sx={{m: 1}} size="small" variant="outlined" onClick={onKeyClick} />
                 </Tooltip>
               </Box>
+              <Button variant="outlined" color="error" fullWidth size="small" {...disabledDeleteBtn} onClick={onDeleteLogs}>Delete Selected</Button>
             </Box>
           </Box>
         </Paper>

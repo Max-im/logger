@@ -13,6 +13,12 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   const { logs } = useAppSelector(store => store.logReducer);
 
   const logIds = Object.keys(logs);
+  const arr = [];
+
+  for (const key in logs) {
+    arr.push(logs[key]);
+  }
+  arr.sort((a, b) => Number(b.id) - Number(a.id));
 
   const onError = (msg: string) => {
     console.log(msg);
@@ -25,7 +31,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   return (
     <Table>
       <TableBody>
-        {Boolean(logIds.length) && logIds.map((id, i) => <LogRow key={id} i={i} log={logs[id]} />)}
+        {Boolean(arr.length) && arr.map((log, i) => <LogRow key={log.id} i={i} log={log} />)}
       </TableBody>
     </Table>
   )
