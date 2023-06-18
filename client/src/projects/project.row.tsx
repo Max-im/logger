@@ -18,8 +18,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
         console.log(msg)
     }
 
-    const onDelete = (id: string, e: any) => {
-        e.preventDefault();
+    const onDelete = (id: string) => {
         dispatch(deleteProjectAction(id, onError));
     }
 
@@ -33,9 +32,8 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
                 </Link>
             </TableCell>
             <TableCell align="right">
-                <IconButton>
-                    {/* @ts-ignore */}
-                    <DeleteIcon onClick={onDelete.bind(this, project.id)} />
+                <IconButton onClick={() => onDelete(project.id)}>
+                    <DeleteIcon />
                 </IconButton>
             </TableCell>
         </TableRow>

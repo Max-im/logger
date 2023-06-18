@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Paper, Grid, Typography, Divider, Chip, Tooltip, Snackbar, Alert } from '@mui/material';
+import { Paper, Grid, Typography, Divider, Chip, Tooltip, Snackbar, Alert, Box } from '@mui/material';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getCurrentProjectAction } from './projects.actions';
@@ -49,14 +49,14 @@ export default function ProjectPage() {
             <Divider sx={{mb: 2}} />
             <LogStructure />
 
-            <Typography variant="body1" sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
               <Tooltip title="Access key">
                 <VpnKeyIcon color="primary"/>
               </Tooltip>
               <Tooltip title="Click to Copy">
                 <Chip label={currentProject.id} sx={{m: 1}} size="small" variant="outlined" onClick={onKeyClick} />
               </Tooltip>
-            </Typography>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
