@@ -8,6 +8,7 @@ async function logRoutes(server: FastifyInstance) {
   const onRequest = { onRequest: [server.registredUser]};
 
   server.get('/:projectId', onRequest, logController.getLogs);
+  server.get('/:projectId/:logId', onRequest, logController.readLog);
   // server.post('/', logController.getUserProjects);
 }
 

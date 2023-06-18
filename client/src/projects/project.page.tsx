@@ -4,7 +4,7 @@ import { Paper, Typography, Divider, Chip, Tooltip, Snackbar, Alert, Box } from 
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getCurrentProjectAction } from './projects.actions';
-import LogList from '../log/log.component';
+import LogList from '../log/log.table';
 import LogStructure from '../log/log.structure.diagram';
 
 export default function ProjectPage() {
@@ -35,18 +35,18 @@ export default function ProjectPage() {
   return (
     <>{currentProject && (
       <Box sx={{height: 'calc(100vh - 92px)', display: 'flex'}}>
-        <Paper className="container" sx={{height: '100%', flexGrow: 1, display: 'flex', flexDirection: 'column', overflowY: 'scroll'}}>
+        <Paper className="container" sx={{flexGrow: 1, display: 'flex', flexDirection: 'column', overflowY: 'scroll'}}>
           <LogList projectId={projectId!} />
         </Paper>
         <Box sx={{mr:2}}></Box>
-        <Paper className="container" sx={{height: '100%', flex: '0 0 30%', display: 'flex', flexDirection: 'column'}}>
+        <Paper className="container" sx={{flex: '0 0 30%', display: 'flex', flexDirection: 'column'}}>
           <Box>
             <Typography variant="subtitle1">Project Info</Typography>
             <Divider sx={{mb: 2}} />
           </Box>
 
-          <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', boxSizing: 'border-box'}}>
-            {/* <LogStructure /> */}
+          <Box sx={{maxWidth: '240px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
+            <LogStructure />
             <Box>
               <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Tooltip title="Access key">

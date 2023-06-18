@@ -9,7 +9,6 @@ interface ILogListProps {
 }
 
 const LogList: FC<ILogListProps> = ({ projectId }) => {
-
   const dispatch = useAppDispatch();
   const { logs } = useAppSelector(store => store.logReducer);
 

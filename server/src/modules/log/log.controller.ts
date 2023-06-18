@@ -10,9 +10,23 @@ class LogController {
     try {
       const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
       if (!userHasAcces) throw new ErrorForbiden();
-      const logs = await LogRepo.getProjectLogs(request.user.id, request.params.projectId);
+      const logs = await LogRepo.getProjectLogs(request.params.projectId);
 
       return { logs };
+    } catch(err) {
+      const code = err.code || 500;
+      return reply.code(code).send(err);
+    }
+  }
+  
+  async readLog(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply) {
+    try {
+      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
+      if (!userHasAcces) throw new ErrorForbiden();
+
+      await LogRepo.markRead(Number(request.params.logId));
+
+      return;
     } catch(err) {
       const code = err.code || 500;
       return reply.code(code).send(err);

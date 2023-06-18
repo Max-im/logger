@@ -10,5 +10,6 @@ export interface ILog {
     id: string;
     value: string;
     level: ILevels;
-    created: Date
+    created: Date;
+    opened: boolean;
 }

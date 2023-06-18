@@ -16,6 +16,16 @@ export const getLogsAction = (projectId: string, cb: cb) => async (dispatch: App
   }
 };
 
+export const readLogAction = (projectId: string, logId: string) => async (dispatch: AppDispatch) => {
+  try {
+    await api.get(`${GET_LOGS_URL}/${projectId}/${logId}`);
+    dispatch(logSlice.actions.read({id: logId}));
+  } catch (err) {
+    const message = err.message || DEFAULT_ERROR_TEXT;
+    console.log(message);
+  }
+};
+
 export const selectAction = (id: string, val: boolean) => (dispatch: AppDispatch) => {
   dispatch(logSlice.actions.select({ id, val }));
 };

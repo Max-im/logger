@@ -25,7 +25,10 @@ export const logSlice = createSlice({
         },
         select(state, action: PayloadAction<{id: string, val: boolean}>) {
             state.selected[action.payload.id] = action.payload.val;
-        }   
+        },   
+        read(state, action: PayloadAction<{id: string}>) {
+            state.logs[action.payload.id].opened = true;
+        },   
     }
 })
 
