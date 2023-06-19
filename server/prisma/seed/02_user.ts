@@ -1,12 +1,12 @@
 import { PrismaClient, RoleTypes, Log, LogLevel } from '@prisma/client';
 import { createId } from '@paralleldrive/cuid2';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const projectId = createId();
 const userId = createId();
 
-async function seedUsers() {
+export async function seedUsers() {
   console.log('User start seeding');
 
   await prisma.role.upsert({
@@ -54,7 +54,7 @@ async function seedUsers() {
   console.log('User seed');
 }
 
-async function seedLogs() {
+export async function seedLogs() {
   console.log('Logs start seeding');
 
 
