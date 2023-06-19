@@ -36,8 +36,12 @@ export const logSlice = createSlice({
         },
         delete(state, action: PayloadAction<{logIds: string[]}>) {
             action.payload.logIds.forEach(id => {
+                const log = state.logs[id];
+                state.info[log.level]! -= 1;
                 delete state.logs[id];
             });
+            state.selected = {};
+
         },
     }
 })
