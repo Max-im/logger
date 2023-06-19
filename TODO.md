@@ -7,3 +7,4 @@
 [ ] content
 [ ] cicd
 [ ] deploy
+[ ] filter logs
