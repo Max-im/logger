@@ -34,6 +34,11 @@ export const logSlice = createSlice({
         markRead(state, action: PayloadAction<{id: string}>) {
             state.logs[action.payload.id].opened = true;
         },
+        deleteProject(state) {
+            state.logs = {};
+            state.info = {};
+            state.selected = {};
+        },
         delete(state, action: PayloadAction<{logIds: string[]}>) {
             action.payload.logIds.forEach(id => {
                 const log = state.logs[id];

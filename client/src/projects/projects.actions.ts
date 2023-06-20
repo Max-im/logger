@@ -2,7 +2,8 @@ import { AppDispatch } from '../store/store';
 import api from '../services/http';
 import { PROJECT_URL, DEFAULT_ERROR_TEXT } from '../constants';
 import { ICreateProjectResponse, IProject } from './projects.model';
-import {projectSlice} from './projects.slice'
+import { projectSlice } from './projects.slice'
+import { logSlice } from '../log/log.slice';
 
 type cb = (msg: string) => void;
 
@@ -31,6 +32,7 @@ export const deleteProjectAction = (id: string, cb: cb) => async (dispatch: AppD
   try {
     await api.delete(`${PROJECT_URL}/${id}`);
     dispatch(projectSlice.actions.delete(id));
+    dispatch(logSlice.actions.deleteProject());
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;
     cb(message);

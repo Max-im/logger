@@ -25,7 +25,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     return (
         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
             <TableCell scope="row">
-                <Link to={`${projectsRoute.url}/${project.id}`} key={project.id}>
+                <Link to={`${projectsRoute.url}/${project.id}`} key={project.id} style={{textDecoration: 'none'}}>
                     <Typography variant='subtitle1' color="text.primary">
                         {project.title}
                     </Typography>
