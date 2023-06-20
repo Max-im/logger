@@ -4,13 +4,15 @@ import userReducer from '../user/user.slice';
 import themeReducer from '../theme/theme.slice';
 import projectReducer from '../projects/projects.slice';
 import logReducer from '../log/log.slice';
+import planReducer from '../plan/plan.slice';
 
 const rootReducer = combineReducers({
     homeReducer,
     userReducer,
     themeReducer,
     projectReducer,
-    logReducer
+    logReducer,
+    planReducer
 });
 
 export const setupStore = () => {

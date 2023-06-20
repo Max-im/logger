@@ -1,4 +1,4 @@
-import { Log, Project } from '@prisma/client';
+import { Project } from '@prisma/client';
 import { ErrorNotFound } from '../errors/error.notfound';
 import { ProjectRepo } from './project.repo';
 

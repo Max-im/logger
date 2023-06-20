@@ -71,6 +71,8 @@ model Role {
 enum PlanTypes {
   FREE
   BASIC
+  STANDART
+  VIP
 }
 
 enum RoleTypes {

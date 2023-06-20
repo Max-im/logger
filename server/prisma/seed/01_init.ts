@@ -34,6 +34,18 @@ export async function seedPlans() {
     update: {},
     create: {name: PlanTypes.BASIC, projectsNum: 10, cost: 2, storingDays: 14},
   });
+  
+  await prisma.plan.upsert({ 
+    where: {name: PlanTypes.STANDART},
+    update: {},
+    create: {name: PlanTypes.STANDART, projectsNum: 15, cost: 5, storingDays: 30},
+  });
+
+  await prisma.plan.upsert({ 
+    where: {name: PlanTypes.VIP},
+    update: {},
+    create: {name: PlanTypes.VIP, projectsNum: 50, cost: 20, storingDays: 365},
+  });
 
   console.log('Plans seed');
 }

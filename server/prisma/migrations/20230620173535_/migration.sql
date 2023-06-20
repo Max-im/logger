@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "PlanTypes" AS ENUM ('FREE', 'BASIC');
+CREATE TYPE "PlanTypes" AS ENUM ('FREE', 'BASIC', 'STANDART', 'VIP');
 
 -- CreateEnum
 CREATE TYPE "RoleTypes" AS ENUM ('USER', 'ADMIN');

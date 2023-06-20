@@ -8,7 +8,8 @@ import registredUserHook from './modules/hooks/registredUser.hook';
 import logRoutes from './modules/log/log.route';
 import { userSchemas } from './modules/user/user.auth.schema';
 import { projectSchemas } from './modules/project/project.schema';
-import { LOG_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
+import { LOG_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
+import planRoutes from './modules/plan/plan.route';
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -38,6 +39,7 @@ function serverBuilder() {
   server.register(userRoutes, { prefix: USER_URL });
   server.register(projectRoutes, { prefix: PROJECT_URL });
   server.register(logRoutes, { prefix: LOG_URL });
+  server.register(planRoutes, { prefix: PLAN_URL });
 
   return server;
 }

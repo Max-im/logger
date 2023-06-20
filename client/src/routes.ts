@@ -6,11 +6,13 @@ import Projects from './projects/projects.page';
 import NotFoundPage from './notfound/notfound.page';
 import Documentation from './documentation/documentation.page';
 import HomeIcon from '@mui/icons-material/Home';
-import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import InfoIcon from '@mui/icons-material/Info';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import ProjectPage from './projects/project.page';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { RoleTypes } from './user/user.model';
+import PlanPage from './plan/plan.page';
 
 export interface IRouteData {
   url: string;
@@ -108,7 +110,19 @@ export const docsRoute = {
   element: Documentation,
   parrent: null,
   rule: /^\/docs$/,
-  icon: HelpCenterIcon,
+  icon: ImportContactsIcon,
+};
+
+export const planRoute = {
+  url: '/plan',
+  title: 'Plans',
+  subtitle: 'Please check a plan for you',
+  isMenu: true,
+  role: RoleTypes.GUEST,
+  element: PlanPage,
+  parrent: null,
+  rule: /^\/plan$/,
+  icon: AttachMoneyIcon,
 };
 
 export const notFounRoute = {
@@ -132,5 +146,6 @@ export const routes = [
   projectsRoute,
   projectItemRoute,
   docsRoute,
+  planRoute,
   notFounRoute,
 ];
