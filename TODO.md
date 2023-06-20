@@ -8,7 +8,7 @@
 [ ] cicd
 [ ] deploy
 [ ] filter logs
-[ ] plans
+[x] plans
 [ ] update on login
 [ ] log scroll
 [ ] payment
