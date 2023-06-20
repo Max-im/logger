@@ -33,7 +33,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
             </TableCell>
             <TableCell align="right">
                 <IconButton onClick={() => onDelete(project.id)}>
-                    <DeleteIcon />
+                    <DeleteIcon color='error' sx={{ opacity: 0.7 }} />
                 </IconButton>
             </TableCell>
         </TableRow>
