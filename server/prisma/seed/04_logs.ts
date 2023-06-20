@@ -8,25 +8,49 @@ const email = <string>process.env.SEED_ADMIN_EMAIL
 export async function seedLogs() {
   console.log('Logs start seeding');
 
+  const user = await prisma.user.findUnique({where: { email }, include: {projects: true, plan: true}});
 
-  const logsMap = {
-    [LogLevel.FATAL]: 10,
-    [LogLevel.ERROR]: 20,
-    [LogLevel.WARN]: 20,
-    [LogLevel.DEBUG]: 10,
-    [LogLevel.INFO]: 30,
+  if (!user) {
+    throw new Error('User NOT FOUND');
+  }
+  
+  if (user.projects.length === 0) {
+    throw new Error('User has no projects');
+  }
+
+  const days = user.plan.storingDays;
+  const projectId = user.projects[0].projectId;
+  
+  const logsMap: {[key in LogLevel]: {num: number, value: any}} = {
+    [LogLevel.FATAL]: {num: 10, value: new Error('fatal error')},
+    [LogLevel.ERROR]: {num: 20, value: new Error('error text')},
+    [LogLevel.WARN]: {num: 10, value: new Error('warning text')},
+    [LogLevel.DEBUG]: {num: 15, value: {info: 'develop info'}},
+    [LogLevel.INFO]: {num: 30, value: 'some info'},
   }
 
   const data: Log[] = [];
+  const date = new Date();
 
   for(const level in logsMap) {
-    const arr = new Array(logsMap[level]).fill('lorem ipsum');
-    for (const i of arr) {
+    const logType = logsMap[level];
+    const arr = new Array(logType.num).fill(logType.value);
+    for (const item of arr) {
+      let value;
+      if (item instanceof Error) {
+        value = item.toString();
+      } else if (typeof item === 'string') {
+        value = item;
+      } else {
+        value = JSON.stringify(item);
+      }
+
       data.push({
-        value: i,
+        value,
         projectId,
         // @ts-ignore
-        level
+        level,
+        deleteDate: new Date(date.setDate(date.getDate() + user.plan.storingDays))
       });
     }
   }
