@@ -2,22 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, List, ListItem, ListItemText, Typography, ListItemIcon } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { getPlansAction } from './plan.actions';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { planRoute } from '../routes';
+import { useAppSelector } from '../hooks/redux';
 
 const  PlansList = () => {
-    const dispatch = useAppDispatch();
     const { plans } = useAppSelector(state => state.planReducer);
 
-    const onError = (msg: string) => {
-        console.log(msg)
-    }
-
-    useEffect(() => {
-        dispatch(getPlansAction(onError));
-    }, []);
-  
     return (
         <>
             <Typography variant='h3' sx={{fontSize: 18, fontWeight: 'bold'}} color="secondary">Check out Plans</Typography>

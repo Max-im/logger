@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react'
+import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
 import { darkTheme } from './theme.dark';
 import { lightTheme } from './theme.light';
 import { useAppSelector } from '../hooks/redux';

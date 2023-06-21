@@ -1,23 +1,11 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import React from 'react';
 import { Paper, List, Box, Typography } from '@mui/material';
-import { getPlansAction } from './plan.actions';
 import PlanItem from './plan.item';
+import { useAppSelector } from '../hooks/redux';
 
 const PlanPage = () => {
-  const dispatch = useAppDispatch();
   const { plans } = useAppSelector(state => state.planReducer);
   const { user } = useAppSelector(state => state.userReducer);
-
-  const onError = (msg: string) => {
-    console.log(msg);
-  }
-
-  useEffect(() => {
-    if (!plans.length) {
-      dispatch(getPlansAction(onError));
-    }
-  }, []);
 
   return (
     <Paper sx={{height: 'calc(100vh - 92px)', display: 'flex', flexDirection: 'column'}}>

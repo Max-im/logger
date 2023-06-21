@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
 import Header from './header/header.component';
 import Aside from './aside/aside.component';
-import { useAppSelector } from './hooks/redux';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { routes } from './routes';
 import { RoleTypes } from './user/user.model';
 import Theme from './theme/theme.component';
+import { getPlansAction } from './plan/plan.actions';
 
 function App() {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector(store => store.userReducer);
 
   const userRole = user ? user.role : RoleTypes.GUEST; 
   const activeRoutes = routes.filter(route => userRole >= route.role);
+
+  useEffect(() => {
+    dispatch(getPlansAction());
+  }, []);
 
   return (
     <Theme>
