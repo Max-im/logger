@@ -4,11 +4,11 @@
 [x] projects access
 [x] logs
 [x] design
+[x] plans
+[ ] log scroll
+[ ] filter logs
+[ ] update on login
+[ ] payment
 [ ] content
 [ ] cicd
 [ ] deploy
-[ ] filter logs
-[x] plans
-[ ] update on login
-[ ] log scroll
-[ ] payment
