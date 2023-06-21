@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Grid, Box, Paper, Typography } from '@mui/material';
+import { Grid, Box, Paper } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { initAction } from './home.actions';
 import HomePros from './home.pros.component';

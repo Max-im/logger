@@ -41,7 +41,7 @@ const LogStructure = () => {
     }, [info]);
 
     const data = {
-        labels: ['Fatal', 'Error', 'Warning', 'Debug', 'Info'],
+        // labels: ['Fatal', 'Error', 'Warning', 'Debug', 'Info'],
         datasets: [
           {
             // label: '# of Votes',

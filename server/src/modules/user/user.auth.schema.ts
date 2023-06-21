@@ -20,7 +20,8 @@ const authResponseSchema = z.object({
   user: z.object({
     id: z.string(),
     ...core,
-    roleId: z.number()
+    roleId: z.number(),
+    planId: z.number()
   }),
   token: z.string(),
 });

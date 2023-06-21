@@ -9,7 +9,8 @@ const defaultUser: IUser = {
     name: 'Guest',
     photo: '',
     email: '',
-    role: RoleTypes.GUEST
+    role: RoleTypes.GUEST,
+    planId: 1
 }
 interface UserState {
     user: IUser;

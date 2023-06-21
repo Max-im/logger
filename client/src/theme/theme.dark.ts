@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { deepOrange, lightBlue } from '@mui/material/colors';
+import { deepOrange, lightBlue, blueGrey } from '@mui/material/colors';
 
 const fontFamily = ['Source Sans Pro', 'Roboto', 'sans-serif'].join(',');
 
@@ -29,6 +29,9 @@ export const darkTheme = createTheme({
       contrastText: '#fff'
     },
     secondary: lightBlue,
+    info: {
+      main: '#4e7283'
+    },
     error: deepOrange
   },
   typography: {

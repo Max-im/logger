@@ -18,7 +18,7 @@ function App() {
     <Theme>
       <BrowserRouter>
         <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh', p: 2}}>
-          <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex'}} >
+          <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex', position: 'relative'}} >
             <Aside user={user} activeRoutes={activeRoutes}/>
             <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
               <Header />

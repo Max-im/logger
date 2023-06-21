@@ -6,6 +6,7 @@ import { getCurrentProjectAction } from './projects.actions';
 import LogStructure from '../log/log.structure.diagram';
 import ProjectKey from './project-key.component';
 import LogList from '../log/log.table';
+import ProjectFilter from './project.filter';
 
 export default function ProjectPage() {
   const dispatch = useAppDispatch();
@@ -24,7 +25,7 @@ export default function ProjectPage() {
   return (
     <>{currentProject && (
       <Box sx={{height: 'calc(100vh - 92px)', display: 'flex'}}>
-        <Paper className="container" sx={{flexGrow: 1, display: 'flex', flexDirection: 'column', overflowY: 'scroll'}}>
+        <Paper className="container" sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
           <LogList projectId={projectId!} />
         </Paper>
         <Box sx={{mr:2}}></Box>
@@ -34,8 +35,9 @@ export default function ProjectPage() {
             <Divider sx={{mb: 2}} />
           </Box>
 
-          <Box sx={{maxWidth: '240px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
+          <Box sx={{maxWidth: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
             <LogStructure />
+            <ProjectFilter />
             <ProjectKey />
           </Box>
         </Paper>

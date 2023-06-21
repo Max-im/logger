@@ -22,11 +22,11 @@ export async function seedLogs() {
   const projectId = user.projects[0].projectId;
   
   const logsMap: {[key in LogLevel]: {num: number, value: any}} = {
-    [LogLevel.FATAL]: {num: 10, value: new Error('fatal error')},
-    [LogLevel.ERROR]: {num: 20, value: new Error('error text')},
-    [LogLevel.WARN]: {num: 10, value: new Error('warning text')},
-    [LogLevel.DEBUG]: {num: 15, value: {info: 'develop info'}},
-    [LogLevel.INFO]: {num: 30, value: 'some info'},
+    [LogLevel.FATAL]: {num: 2, value: new Error('fatal error')},
+    [LogLevel.ERROR]: {num: 2, value: new Error('error text')},
+    [LogLevel.WARN]: {num: 2, value: new Error('warning text')},
+    [LogLevel.DEBUG]: {num: 2, value: {info: 'develop info'}},
+    [LogLevel.INFO]: {num: 2, value: 'some info'},
   }
 
   const data: Log[] = [];

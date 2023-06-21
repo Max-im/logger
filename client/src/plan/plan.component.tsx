@@ -8,7 +8,7 @@ import { planRoute } from '../routes';
 
 const  PlansList = () => {
     const dispatch = useAppDispatch();
-    const {plans } = useAppSelector(state => state.planReducer);
+    const { plans } = useAppSelector(state => state.planReducer);
 
     const onError = (msg: string) => {
         console.log(msg)
@@ -25,7 +25,7 @@ const  PlansList = () => {
             {Boolean(plans.length) &&
             <Link to={planRoute.url} style={{textDecoration: 'none'}}>
                 <List sx={{ width: '100%' }}>
-                    {plans.map(plan => <ListItem sx={{p: 0, m: 0}}>
+                    {plans.map(plan => <ListItem sx={{p: 0, m: 0}} key={plan.id}>
                         <ListItemIcon key={plan.id}>
                             <Avatar sx={{ width: 30, height: 30, bgcolor: 'primary.main' }}>
                                 <AttachMoneyIcon sx={{fontSize: 11}}/>

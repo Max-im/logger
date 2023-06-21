@@ -24,27 +24,27 @@ export async function seedPlans() {
   console.log('Plans start seeding');
 
   await prisma.plan.upsert({ 
-    where: {name: PlanTypes.FREE},
+    where: {id: 1},
     update: {},
-    create: {name: PlanTypes.FREE, projectsNum: 3, cost: 0, storingDays: 3}
+    create: {id: 1, name: PlanTypes.FREE, projectsNum: 3, cost: 0, storingDays: 3}
   });
   
   await prisma.plan.upsert({ 
-    where: {name: PlanTypes.BASIC},
+    where: {id: 2},
     update: {},
-    create: {name: PlanTypes.BASIC, projectsNum: 10, cost: 2, storingDays: 14},
+    create: {id: 2, name: PlanTypes.BASIC, projectsNum: 10, cost: 2, storingDays: 14},
   });
   
   await prisma.plan.upsert({ 
-    where: {name: PlanTypes.STANDART},
+    where: {id: 3},
     update: {},
-    create: {name: PlanTypes.STANDART, projectsNum: 15, cost: 5, storingDays: 30},
+    create: {id: 3, name: PlanTypes.STANDART, projectsNum: 15, cost: 5, storingDays: 30},
   });
 
   await prisma.plan.upsert({ 
-    where: {name: PlanTypes.VIP},
+    where: {id: 4},
     update: {},
-    create: {name: PlanTypes.VIP, projectsNum: 50, cost: 20, storingDays: 365},
+    create: {id: 4, name: PlanTypes.VIP, projectsNum: 50, cost: 20, storingDays: 365},
   });
 
   console.log('Plans seed');

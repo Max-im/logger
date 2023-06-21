@@ -10,6 +10,7 @@ export interface IUser {
   email: string;
   photo: string;
   role: RoleTypes;
+  planId: number;
 };
 
 export interface IUserAuth {

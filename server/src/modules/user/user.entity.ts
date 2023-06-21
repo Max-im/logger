@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { PlanTypes, User } from '@prisma/client';
 import { UserRepo } from './user.repo';
 import { AuthCode, IAuth } from './user.types';
 
@@ -8,6 +8,7 @@ export class UserEntity implements User {
   name: string;
   photo: string;
   roleId: number;
+  planId: number;
   registred: Date;
 
   constructor(user: User) {
@@ -17,6 +18,7 @@ export class UserEntity implements User {
     this.photo = user.photo;
     this.roleId = user.roleId;
     this.registred = user.registred;
+    this.planId = user.planId;
   }
 
   static async findById(id: string) {

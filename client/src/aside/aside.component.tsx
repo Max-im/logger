@@ -26,7 +26,7 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
   const menu = activeRoutes.filter(route => route.isMenu);
 
   return (
-    <Paper sx={{height: '100%', flex: '0 0 22%'}}>
+    <Paper sx={{ height: '100%', flex: '0 0 22%', position: 'sticky', top: 20}}>
       <Box className="container" sx={{display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Box>
           <Avatar alt={user.name} src={user.photo}  sx={{ width: 48, height: 48, m: '10px auto' }}  />
