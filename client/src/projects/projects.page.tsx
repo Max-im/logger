@@ -4,6 +4,8 @@ import CreateProject from './projects.create';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getProjectsAction } from './projects.actions';
 import ProjectRow from './project.row';
+import { Link } from 'react-router-dom';
+import { planRoute } from '../routes';
 
 const Projects = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +53,9 @@ const Projects = () => {
         {
           projects.length >= projectsThreshold ?
             <Typography variant='body1'>
-              You currently have a limit of {<Chip label={projectsThreshold} size="small" component="span" color="secondary" />} projects under your current plan. To create additional projects, please consider upgrading your plan.
+              You currently have a limit of {<Chip label={projectsThreshold} size="small" component="span" color="secondary" />} 
+              projects under your current plan. To create additional projects, please consider upgrading your 
+              <Link to={planRoute.url}><Typography color="primary">plan</Typography></Link>
             </Typography>
           : 
             <>
