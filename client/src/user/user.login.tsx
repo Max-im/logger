@@ -7,11 +7,18 @@ function UserLogin() {
   const dispatch = useAppDispatch();
 
   const onLogin = (credentialResponse: CredentialResponse) => {
-    dispatch(loginAction(credentialResponse, onError));
+    dispatch(loginAction(credentialResponse, onCallback));
   }
 
-  const onError = (data: any) => {
-    console.log('Error', data);
+  const onCallback = (msg?: string) => {
+    if (msg) onError(msg);
+    else {
+      window.location.reload();
+    }
+  }
+  
+  const onError = (msg: string) => {
+    console.log(msg);
   }
 
   return (
