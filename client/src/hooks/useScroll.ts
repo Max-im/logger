@@ -22,9 +22,11 @@ export default function useScroll(parentRef, childRef, callback) {
         observer.current.observe(childRef.current)
 
         return function () {
-          // @ts-ignore
-            observer.current.unobserve(childRef.current)
+            if (childRef.current) {
+              // @ts-ignore
+              observer.current.unobserve(childRef.current)
+            }
         };
-    }, [callback])
+    }, [callback, childRef])
 };
 

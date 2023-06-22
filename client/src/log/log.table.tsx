@@ -13,7 +13,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   const dispatch = useAppDispatch();
   const { logs } = useAppSelector(store => store.logReducer);
   const childRef = useRef();
-  const intersected = useScroll(document.querySelector('.app'), childRef, getLogs)
+  const intersected = useScroll(document, childRef, getLogs)
 
   const arr = [];
 
@@ -31,14 +31,12 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   }
 
   return (
-    <Box>
-      <Table>
-        <TableBody>
-          {Boolean(arr.length) && arr.map((log, i) => <LogRow key={log.id} i={i} log={log} />)}
-          <Box component='tr' ref={childRef} sx={{height: 1}}></Box>
-        </TableBody>
-      </Table>
-    </Box>
+    <Table>
+      <TableBody>
+        {Boolean(arr.length) && arr.map((log, i) => <LogRow key={log.id} i={i} log={log} />)}
+        <Box component='tr' ref={childRef} sx={{height: 1}}></Box>
+      </TableBody>
+    </Table>
   )
 }
 

@@ -27,12 +27,11 @@ export const getProjectsAction = (cb: cb) => async (dispatch: AppDispatch) => {
   }
 };
 
-
 export const deleteProjectAction = (id: string, cb: cb) => async (dispatch: AppDispatch) => {
   try {
     await api.delete(`${PROJECT_URL}/${id}`);
     dispatch(projectSlice.actions.delete(id));
-    dispatch(logSlice.actions.deleteProject());
+    dispatch(logSlice.actions.clearLogs());
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;
     cb(message);
@@ -47,4 +46,8 @@ export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dis
     const message = err.message || DEFAULT_ERROR_TEXT;
     cb(message);
   }
+};
+
+export const clearCurrentObject = () => (dispatch: AppDispatch) => {
+  dispatch(logSlice.actions.clearLogs());
 };

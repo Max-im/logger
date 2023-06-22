@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Paper, Typography, Divider, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getCurrentProjectAction } from './projects.actions';
+import { getCurrentProjectAction, clearCurrentObject } from './projects.actions';
 import LogStructure from '../log/log.structure.diagram';
 import ProjectKey from './project-key.component';
 import LogList from '../log/log.table';
@@ -20,6 +20,9 @@ export default function ProjectPage() {
 
   useEffect(() => {
     dispatch(getCurrentProjectAction(projectId!, onError));
+    return function() {
+      dispatch(clearCurrentObject());
+    }
   }, []);
 
   return (

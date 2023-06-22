@@ -34,7 +34,7 @@ export const logSlice = createSlice({
         markRead(state, action: PayloadAction<{id: string}>) {
             state.logs[action.payload.id].opened = true;
         },
-        deleteProject(state) {
+        clearLogs(state) {
             state.logs = {};
             state.info = {};
             state.selected = {};

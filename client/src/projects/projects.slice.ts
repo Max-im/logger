@@ -33,7 +33,10 @@ export const projectSlice = createSlice({
         },
         setCurrent(state, action: PayloadAction<IProject>) {
             state.currentProject = action.payload;
-        },    
+        },
+        clearCurrent(state) {
+            state.currentProject = null;
+        },
     }
 })
 
