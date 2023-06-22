@@ -30,7 +30,7 @@ export const darkTheme = createTheme({
     },
     secondary: lightBlue,
     info: {
-      main: '#4e7283'
+      main: 'rgba(41,182,246,.2)'
     },
     error: deepOrange
   },

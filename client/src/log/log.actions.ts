@@ -6,9 +6,10 @@ import { logSlice } from '../log/log.slice';
 
 type cb = (msg: string) => void;
 
-export const getLogsAction = (projectId: string, cb: cb) => async (dispatch: AppDispatch) => {
+export const getLogsAction = (projectId: string, skip: number, cb: cb) => async (dispatch: AppDispatch) => {
+  const step = 20;
   try {
-    const response = await api.get<{logs: ILog[]}>(`${GET_LOGS_URL}/${projectId}`);
+    const response = await api.get<{logs: ILog[]}>(`${GET_LOGS_URL}/${projectId}?take=${step}&skip=${skip}`);
     dispatch(logSlice.actions.get(response.data.logs));
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;

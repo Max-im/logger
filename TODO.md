@@ -5,7 +5,9 @@
 [x] logs
 [x] design
 [x] plans
-[ ] log scroll
+[x] log scroll
+[ ] notification
+[ ] jobs (clean logs)
 [ ] filter logs
 [ ] update on login
 [ ] payment

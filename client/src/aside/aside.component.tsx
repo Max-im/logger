@@ -56,21 +56,24 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
           <Divider sx={{mt:1, mb: 1}} />
           <Typography variant='subtitle2' sx={{opacity: 0.3}}>User Data</Typography>
           <List>
-            <ListItem sx={{m: 0}}>
-                <ListItemIcon sx={{minWidth: 40, opacity: 0.3}}>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText secondary="Role" /> 
-                <Chip label={RoleTypes[user.role]} size='small'/>
-            </ListItem>
+            {
+              Boolean(RoleTypes[user.role]) &&
+                <ListItem sx={{m: 0}}>
+                  <ListItemIcon sx={{minWidth: 40, opacity: 0.3}}>
+                    <AccountBoxIcon />
+                  </ListItemIcon>
+                  <ListItemText secondary="Role" /> 
+                  <Chip label={RoleTypes[user.role]} size='small'/>
+              </ListItem>
+            }
             {plan && 
-            <ListItem sx={{m: 0}}>
-                <ListItemIcon sx={{minWidth: 40, opacity: 0.3}}>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText secondary="Plan" /> 
-                <Chip label={plan.name} size='small'/>
-            </ListItem>
+              <ListItem sx={{m: 0}}>
+                  <ListItemIcon sx={{minWidth: 40, opacity: 0.3}}>
+                    <AccountBoxIcon />
+                  </ListItemIcon>
+                  <ListItemText secondary="Plan" /> 
+                  <Chip label={plan.name} size='small'/>
+              </ListItem>
             }
           </List>
         </Box>

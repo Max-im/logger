@@ -42,5 +42,5 @@ export const loginAction = (credentialResponse: CredentialResponse, cb: cb) => a
 export const logoutAction = () => (dispatch: AppDispatch) => {
   dispatch(userSlice.actions.logout());
   localStorage.removeItem(AUTH_LOCAL_VAR);
-  // setAuthHeader(null);
+  setAuthHeader(null);
 };

@@ -28,8 +28,8 @@ export default function ProjectPage() {
         <Paper className="container" sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
           <LogList projectId={projectId!} />
         </Paper>
-        <Box sx={{mr:2}}></Box>
-        <Paper className="container" sx={{flex: '0 0 30%', display: 'flex', flexDirection: 'column'}}>
+        <Box sx={{mr: 2}}></Box>
+        <Paper className="container" sx={{flex: '0 0 30%', display: 'flex', flexDirection: 'column', position: 'sticky', height: 'calc(95vh - 60px)', top: '16px'}}>
           <Box>
             <Typography variant="subtitle1">Project Info</Typography>
             <Divider sx={{mb: 2}} />

@@ -6,11 +6,14 @@ import { ProjectRepo } from '../project/project.repo';
 import { ErrorForbiden } from '../errors/error.unauthorized copy';
 
 class LogController {
-  async getLogs(request: FastifyRequest<{Params: {projectId: string};}>, reply: FastifyReply): Promise<{logs: Log[]}> {
+  async getLogs(request: FastifyRequest<{Params: {projectId: string}; Querystring: {skip: number, take: number}}>, reply: FastifyReply): Promise<{logs: Log[]}> {
     try {
+      const skip = Number(request.query.skip) || 0;
+      const take = Number(request.query.take) || 20;
+
       const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
       if (!userHasAcces) throw new ErrorForbiden();
-      const logs = await LogRepo.getProjectLogs(request.params.projectId);
+      const logs = await LogRepo.getProjectLogs(request.params.projectId, skip, take);
 
       return { logs };
     } catch(err) {
@@ -61,7 +64,7 @@ class LogController {
     }
   }
 
-  async create(request: FastifyRequest<{Body: CreateProjectInput;}>, reply: FastifyReply): Promise<{project: Project}> {
+  async create(request: FastifyRequest<{Body: CreateProjectInput;}>, reply: FastifyReply) {
     try {
       // const { title } = request.body;
 

@@ -1,8 +1,9 @@
-import React, { useEffect, FC } from 'react';
-import { Table, TableBody } from '@mui/material';
+import React, { FC, useRef } from 'react';
+import { Table, TableBody, Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { getLogsAction } from './log.actions';
 import LogRow from './log.row.component';
+import useScroll from '../hooks/useScroll';
 
 interface ILogListProps {
   projectId: string
@@ -11,8 +12,9 @@ interface ILogListProps {
 const LogList: FC<ILogListProps> = ({ projectId }) => {
   const dispatch = useAppDispatch();
   const { logs } = useAppSelector(store => store.logReducer);
+  const childRef = useRef();
+  const intersected = useScroll(document.querySelector('.app'), childRef, getLogs)
 
-  const logIds = Object.keys(logs);
   const arr = [];
 
   for (const key in logs) {
@@ -24,16 +26,19 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
     console.log(msg);
   }
 
-  useEffect(() => {
-    dispatch(getLogsAction(projectId, onError));
-  }, []);
+  function getLogs() {
+      dispatch(getLogsAction(projectId, Object.keys(logs).length, onError));
+  }
 
   return (
-    <Table>
-      <TableBody>
-        {Boolean(arr.length) && arr.map((log, i) => <LogRow key={log.id} i={i} log={log} />)}
-      </TableBody>
-    </Table>
+    <Box>
+      <Table>
+        <TableBody>
+          {Boolean(arr.length) && arr.map((log, i) => <LogRow key={log.id} i={i} log={log} />)}
+          <Box component='tr' ref={childRef} sx={{height: 1}}></Box>
+        </TableBody>
+      </Table>
+    </Box>
   )
 }
 

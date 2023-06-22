@@ -11,7 +11,6 @@ async function logRoutes(server: FastifyInstance) {
   server.get('/:projectId/info', onRequest, logController.getInfo);
   server.get('/:projectId/:logId', onRequest, logController.readLog);
   server.delete('/:projectId/:logIds', onRequest, logController.deleteLogs);
-  // server.post('/', logController.getUserProjects);
 }
 
 export default logRoutes;
