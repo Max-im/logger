@@ -29,6 +29,8 @@ export default function ProjectPage() {
     <>{currentProject && (
       <Box sx={{minHeight: 'calc(100vh - 92px)', display: 'flex'}}>
         <Paper className="container" sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
+          <Typography variant="subtitle1">{currentProject.title}</Typography>
+          <Divider sx={{mb: 2}} />
           <LogList projectId={projectId!} />
         </Paper>
         <Box sx={{mr: 2}}></Box>
