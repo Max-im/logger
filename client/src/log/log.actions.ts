@@ -64,3 +64,7 @@ export const deleteLogsAction = (projectId: string, logIds: string[]) => async (
 export const selectAction = (id: string, val: boolean) => (dispatch: AppDispatch) => {
   dispatch(logSlice.actions.select({ id, val }));
 };
+
+export const selectAllAction = (val: boolean) => (dispatch: AppDispatch) => {
+  dispatch(logSlice.actions.selectAll(val));
+};

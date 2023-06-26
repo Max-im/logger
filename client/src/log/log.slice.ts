@@ -4,13 +4,15 @@ import { ILevels, ILog } from './log.model';
 interface LogState {
     logs: {[id: string]: ILog};
     selected: {[id: string]: boolean};
-    info: {[level in ILevels]?: number}
+    info: {[level in ILevels]?: number};
+    selectAll: boolean;
 }
 
 const initialState: LogState = {
     logs: {},
     selected: {},
-    info: {}
+    info: {},
+    selectAll: false
 };
 
 export const logSlice = createSlice({
@@ -30,7 +32,17 @@ export const logSlice = createSlice({
         },
         select(state, action: PayloadAction<{id: string, val: boolean}>) {
             state.selected[action.payload.id] = action.payload.val;
-        },   
+        },  
+        selectAll(state, action: PayloadAction<boolean>) {
+            state.selectAll = action.payload;
+            if (action.payload) {
+                for (const id in state.logs) {
+                    state.selected[id] = true;
+                }
+            } else {
+                state.selected = {};
+            }
+        },  
         markRead(state, action: PayloadAction<{id: string}>) {
             state.logs[action.payload.id].opened = true;
         },
