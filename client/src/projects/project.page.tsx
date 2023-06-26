@@ -4,9 +4,9 @@ import { Paper, Typography, Divider, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getCurrentProjectAction, clearCurrentObject } from './projects.actions';
 import LogStructure from '../log/log.structure.diagram';
+import ProjectFilter from './project.filter';
 import ProjectKey from './project-key.component';
 import LogList from '../log/log.table';
-import ProjectFilter from './project.filter';
 
 export default function ProjectPage() {
   const dispatch = useAppDispatch();
@@ -41,8 +41,10 @@ export default function ProjectPage() {
           </Box>
 
           <Box sx={{maxWidth: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
-            <LogStructure />
-            <ProjectFilter />
+            <Box>
+              <LogStructure />
+              <ProjectFilter />
+            </Box>
             <ProjectKey />
           </Box>
         </Paper>

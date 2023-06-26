@@ -1,9 +1,10 @@
 import React, {FC, useState} from 'react';
 import { useParams } from 'react-router-dom';
-import { TableRow, TableCell, Checkbox, Typography, Modal, Box } from '@mui/material';
+import { TableRow, TableCell, Checkbox, Typography, Modal, Box, Chip } from '@mui/material';
 import { ILog } from './log.model';
 import { readLogAction, selectAction } from './log.actions';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { LevelColors } from './log.model';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -53,14 +54,16 @@ const LogRow: FC<ILogProps> = ({ log, i }) => {
           <Typography variant='body1' component="span" color="primary" sx={{ position: 'relative', left: -20, top: 1}}>{i + 1}</Typography>
           <Checkbox size='small' sx={{p: 0}} checked={isSelected} onChange={handleChange}/>
         </TableCell>
-        <TableCell onClick={onOpen} scope="row">{log.level}</TableCell>
+        <TableCell onClick={onOpen} scope="row">
+          {/* @ts-ignore */}
+          <Chip label={log.level} size='small' sx={{background: LevelColors[log.level].bg, border: `1px solid ${LevelColors[log.level].color}`, textShadow: '1px 1px 1px black'}} />
+        </TableCell>
         <TableCell onClick={onOpen} align="right">{log.value}</TableCell>
         <TableCell onClick={onOpen} align="right">{log.created.toDateString().replace(/^.\w+\s/, '')}</TableCell>
       </TableRow>
       <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2">Log</Typography>
-
       </Box>
     </Modal>
   </>

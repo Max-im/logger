@@ -5,7 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend } from 'c
 import { Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { getLogsInfoAction } from './log.actions';
-import { ILevels } from './log.model';
+import { ILevels, LevelColors } from './log.model';
 
 ChartJS.register(ArcElement, ChartTooltip, Legend);
  
@@ -47,18 +47,18 @@ const LogStructure = () => {
             // label: '# of Votes',
             data: levels,
             backgroundColor: [
-                'rgba(255, 18, 0, 0.6)',
-                'rgba(235, 64, 52, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(76, 132, 230, 0.6)',
+                LevelColors.FATAL.bg,
+                LevelColors.ERROR.bg,
+                LevelColors.WARN.bg,
+                LevelColors.DEBUG.bg,
+                LevelColors.INFO.bg,
             ],
             borderColor: [
-                'rgb(255, 18, 0)',
-                'rgb(235, 64, 52)',
-                'rgb(255, 206, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(76, 132, 230)',
+                LevelColors.FATAL.color,
+                LevelColors.ERROR.color,
+                LevelColors.WARN.color,
+                LevelColors.DEBUG.color,
+                LevelColors.INFO.color,
             ],
             borderWidth: 1,
           },

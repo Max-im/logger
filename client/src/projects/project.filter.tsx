@@ -1,42 +1,27 @@
 import React from 'react';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import { ToggleButtonGroup, ToggleButton, Box, Tooltip } from '@mui/material';
+import { LevelColors } from '../log/log.model'; 
 
 const ProjectFilter = () => {
-    const [alignment, setAlignment] = React.useState<string | null>('left');
+    const [formats, setFormats] = React.useState(() => Object.keys(LevelColors));
 
-  const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
-    setAlignment(newAlignment);
-  };
+    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
+      setFormats(newFormats);
+    };
 
   return (
-    <ToggleButtonGroup
-      value={alignment}
-      exclusive
-      onChange={handleAlignment}
-      aria-label="text alignment"
-    >
-      <ToggleButton value="left" aria-label="left aligned">
-        <FormatAlignLeftIcon />
-      </ToggleButton>
-      <ToggleButton value="center" aria-label="centered">
-        <FormatAlignCenterIcon />
-      </ToggleButton>
-      <ToggleButton value="right" aria-label="right aligned">
-        <FormatAlignRightIcon />
-      </ToggleButton>
-      <ToggleButton value="right" aria-label="right aligned">
-        <FormatAlignRightIcon />
-      </ToggleButton>
-      <ToggleButton value="right" aria-label="right aligned">
-        <FormatAlignRightIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+    <Box sx={{mt:2}}>
+      <ToggleButtonGroup value={formats} onChange={handleAlignment}>
+        {Object.keys(LevelColors) && Object.keys(LevelColors).map(key => 
+          <ToggleButton value={key} key={key}>
+            <Tooltip title={key}>
+              {/* @ts-ignore */}
+              <Box sx={{width: 20, height: 20, bgcolor: LevelColors[key].bg, border: `1px solid ${LevelColors[key].color}`}}></Box>
+            </Tooltip>
+          </ToggleButton>
+        )}
+      </ToggleButtonGroup>
+    </Box>
   );
 }
 
