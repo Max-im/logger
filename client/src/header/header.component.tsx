@@ -10,10 +10,11 @@ import { changeTheme } from '../theme/theme.actions';
 function Header() {
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const { projectId } = useParams();
+  const param = useParams();
   const { light } = useAppSelector(state => state.themeReducer);
 
   const route = routes.find(route => location.pathname.match(route.rule));
+  console.log(param )
   
 
   const onChangeTheme = (val: boolean) => {

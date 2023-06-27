@@ -11,8 +11,10 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import ProjectPage from './projects/project.page';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import { RoleTypes } from './user/user.model';
 import PlanPage from './plan/plan.page';
+import LogPage from './log/log.page';
 
 export interface IRouteData {
   url: string;
@@ -89,6 +91,18 @@ export const projectsRoute = {
   icon: AccountTreeIcon,
 };
 
+export const logPageRoute = {
+  url: '/project/:projectId/log/:logId',
+  title: 'Log',
+  subtitle: 'The log information',
+  isMenu: false,
+  role: RoleTypes.USER,
+  element: LogPage,
+  parrent: null,
+  rule: /^\/project\/.{25}\/log\/.+$/,
+  icon: TroubleshootIcon,
+};
+
 export const projectItemRoute = {
   url: '/project/:projectId',
   title: 'Project',
@@ -97,7 +111,7 @@ export const projectItemRoute = {
   role: RoleTypes.USER,
   element: ProjectPage,
   parrent: null,
-  rule: /^\/project\/.+$/,
+  rule: /^\/project\/.{25}$/,
   icon: AccountTreeIcon,
 };
 
@@ -147,5 +161,6 @@ export const routes = [
   projectItemRoute,
   docsRoute,
   planRoute,
+  logPageRoute,
   notFounRoute,
 ];

@@ -27,7 +27,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   }
 
   function getLogs() {
-      dispatch(getLogsAction(projectId, Object.keys(logs).length, onError));
+      dispatch(getLogsAction(projectId, Object.keys(logs).length, '', onError));
   }
 
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
