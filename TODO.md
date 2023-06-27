@@ -7,6 +7,7 @@
 [x] plans
 [x] log scroll
 [ ] filter logs
+[ ] log page
 [ ] notification
 [ ] jobs (clean logs)
 [ ] update on login

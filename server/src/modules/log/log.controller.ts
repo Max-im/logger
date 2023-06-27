@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { Log, LogLevel } from '@prisma/client';
-import { LogRepo } from './log.repo';
 import { CreateProjectInput } from './project.schema';
 import { ProjectEntity } from '../project/project.entity';
 import { LogEntity } from './log.entity';
@@ -14,7 +13,6 @@ class LogController {
 
       await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
       const logs = await LogEntity.getLogs(request.params.projectId, skip, take, filter);
-      // const logs = await LogRepo.getProjectLogs(request.params.projectId, skip, take, filter);
 
       return { logs };
     } catch(err) {

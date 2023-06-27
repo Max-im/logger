@@ -1,16 +1,26 @@
 import React, { FC, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Table, TableBody, Box, TableHead, TableRow, TableCell, Checkbox } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { getLogsAction, selectAllAction } from './log.actions';
 import LogRow from './log.row.component';
 import useScroll from '../hooks/useScroll';
 
+
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 interface ILogListProps {
   projectId: string
 }
 
 const LogList: FC<ILogListProps> = ({ projectId }) => {
+  const { search } = useLocation();
   const dispatch = useAppDispatch();
+  const query = useQuery();
   const { logs, selectAll } = useAppSelector(store => store.logReducer);
   const childRef = useRef();
   const intersected = useScroll(document, childRef, getLogs)
@@ -27,7 +37,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   }
 
   function getLogs() {
-      dispatch(getLogsAction(projectId, Object.keys(logs).length, '', onError));
+      dispatch(getLogsAction(projectId, Object.keys(logs).length, query.get('filter'), onError));
   }
 
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {

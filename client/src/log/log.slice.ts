@@ -42,6 +42,9 @@ export const logSlice = createSlice({
             } else {
                 state.selected = {};
             }
+        },
+        resetLogs(state) {
+            state.logs = {};
         },  
         markRead(state, action: PayloadAction<{id: string}>) {
             state.logs[action.payload.id].opened = true;

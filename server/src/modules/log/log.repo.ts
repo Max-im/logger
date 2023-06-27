@@ -16,6 +16,20 @@ export class LogRepo {
     }
   }
   
+  static async getProjectFiltredLogs(projectId: string, skip: number, take: number, filter: LogLevel[]) {
+    try {
+      return await prisma.log.findMany({
+        // @ts-ignore
+        where: { projectId, level: { notIn: filter } }, 
+        take, 
+        skip, 
+        orderBy: {id: 'desc'}
+      });
+    } catch (err) {
+      throw new ErrorDatabase(err);
+    }
+  }
+  
   static async getProjectLogsInfo(projectId: string) {
     try {
       return await prisma.log.groupBy({

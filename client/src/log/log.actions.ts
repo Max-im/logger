@@ -1,14 +1,15 @@
 import { AppDispatch } from '../store/store';
 import api from '../services/http';
 import { DEFAULT_ERROR_TEXT, GET_LOGS_URL } from '../constants';
-import { ILevels, ILog, LevelColors } from '../log/log.model';
+import { ILevels, ILog } from '../log/log.model';
 import { logSlice } from '../log/log.slice';
 
 type cb = (msg: string) => void;
 
-export const getLogsAction = (projectId: string, skip: number, filter: string, cb: cb) => async (dispatch: AppDispatch, getState: any) => {
+export const getLogsAction = (projectId: string, skip: number, filterVal: string | null, cb: cb) => async (dispatch: AppDispatch, getState: any) => {
   const step = 20;
-  
+  const filter = filterVal ? `&filter=${filterVal}` : '';
+
   try {
     const response = await api.get<{logs: ILog[]}>(`${GET_LOGS_URL}/${projectId}?take=${step}&skip=${skip}${filter}`);
     dispatch(logSlice.actions.get(response.data.logs));
@@ -16,6 +17,10 @@ export const getLogsAction = (projectId: string, skip: number, filter: string, c
     const message = err.message || DEFAULT_ERROR_TEXT;
     cb(message);
   }
+};
+
+export const resetLogsAction = () => async (dispatch: AppDispatch) => {
+  setTimeout(() => dispatch(logSlice.actions.resetLogs()), 500)
 };
 
 interface IInfoItem {
@@ -40,7 +45,6 @@ export const getLogsInfoAction = (projectId: string, cb: cb) => async (dispatch:
     cb(message);
   }
 };
-
 
 export const readLogAction = (projectId: string, logId: string) => async (dispatch: AppDispatch) => {
   try {

@@ -20,7 +20,10 @@ export class LogEntity implements Log {
     this.created = log.created;
   }
 
-  static async getLogs(projectId: string, skip: number, take: number, filter: any) {
+  static async getLogs(projectId: string, skip: number, take: number, filter: string[] | null) {
+    if (filter) {
+      return LogRepo.getProjectFiltredLogs(projectId, skip, take, filter);
+    }
     return LogRepo.getProjectLogs(projectId, skip, take);
   }
 
