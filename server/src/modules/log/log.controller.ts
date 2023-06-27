@@ -1,19 +1,20 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { Log } from '@prisma/client';
+import { Log, LogLevel } from '@prisma/client';
 import { LogRepo } from './log.repo';
 import { CreateProjectInput } from './project.schema';
-import { ProjectRepo } from '../project/project.repo';
-import { ErrorForbiden } from '../errors/error.unauthorized copy';
+import { ProjectEntity } from '../project/project.entity';
+import { LogEntity } from './log.entity';
 
 class LogController {
-  async getLogs(request: FastifyRequest<{Params: {projectId: string}; Querystring: {skip: number, take: number}}>, reply: FastifyReply): Promise<{logs: Log[]}> {
+  async getLogs(request: FastifyRequest<{Params: {projectId: string}; Querystring: {skip: number, take: number, filter?: string}}>, reply: FastifyReply): Promise<{logs: Log[]}> {
     try {
       const skip = Number(request.query.skip) || 0;
       const take = Number(request.query.take) || 20;
+      const filter = request.query.filter ? request.query.filter.split(',') as LogLevel[] : null;
 
-      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
-      if (!userHasAcces) throw new ErrorForbiden();
-      const logs = await LogRepo.getProjectLogs(request.params.projectId, skip, take);
+      await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
+      const logs = await LogEntity.getLogs(request.params.projectId, skip, take, filter);
+      // const logs = await LogRepo.getProjectLogs(request.params.projectId, skip, take, filter);
 
       return { logs };
     } catch(err) {
@@ -24,9 +25,8 @@ class LogController {
   
   async getInfo(request: FastifyRequest<{Params: {projectId: string};}>, reply: FastifyReply): Promise<{info: any}> {
     try {
-      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
-      if (!userHasAcces) throw new ErrorForbiden();
-      const info = await LogRepo.getProjectLogsInfo(request.params.projectId);
+      await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
+      const info = await LogEntity.getInfo(request.params.projectId);
       
       return { info };
     } catch(err) {
@@ -37,10 +37,8 @@ class LogController {
   
   async readLog(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply) {
     try {
-      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
-      if (!userHasAcces) throw new ErrorForbiden();
-
-      await LogRepo.markRead(Number(request.params.logId));
+      await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
+      await LogEntity.markRead(Number(request.params.logId));
 
       return;
     } catch(err) {
@@ -51,11 +49,8 @@ class LogController {
   
   async deleteLogs(request: FastifyRequest<{Params: {projectId: string, logIds: string};}>, reply: FastifyReply) {
     try {
-      const userHasAcces = ProjectRepo.findOne(request.user.id, request.params.projectId);
-      if (!userHasAcces) throw new ErrorForbiden();
-
-      const logIds = request.params.logIds.split(',').map(id => Number(id));
-      await LogRepo.deleteLogs(logIds);
+      await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
+      await LogEntity.deleteLogs(request.params.logIds);
 
       return;
     } catch(err) {

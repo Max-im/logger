@@ -6,7 +6,7 @@ export enum ILevels {
     INFO = 'INFO'
 }
 
-export const LevelColors = {
+export const LevelColors: {[key in ILevels]: {bg: string, color: string}} = {
     FATAL: {bg: 'rgba(255, 18, 0, 0.6)', color: 'rgb(255, 18, 0)'},
     ERROR: {bg: 'rgba(235, 64, 52, 0.6)', color: 'rgb(235, 64, 52)'},
     WARN: {bg: 'rgba(255, 206, 86, 0.6)', color: 'rgb(255, 206, 86)'},

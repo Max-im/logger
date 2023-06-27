@@ -50,4 +50,5 @@ export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dis
 
 export const clearCurrentObject = () => (dispatch: AppDispatch) => {
   dispatch(logSlice.actions.clearLogs());
+  dispatch(logSlice.actions.selectAll(false));
 };

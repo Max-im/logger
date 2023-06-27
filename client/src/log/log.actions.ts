@@ -1,15 +1,16 @@
 import { AppDispatch } from '../store/store';
 import api from '../services/http';
 import { DEFAULT_ERROR_TEXT, GET_LOGS_URL } from '../constants';
-import { ILevels, ILog } from '../log/log.model';
+import { ILevels, ILog, LevelColors } from '../log/log.model';
 import { logSlice } from '../log/log.slice';
 
 type cb = (msg: string) => void;
 
-export const getLogsAction = (projectId: string, skip: number, cb: cb) => async (dispatch: AppDispatch) => {
+export const getLogsAction = (projectId: string, skip: number, filter: string, cb: cb) => async (dispatch: AppDispatch, getState: any) => {
   const step = 20;
+  
   try {
-    const response = await api.get<{logs: ILog[]}>(`${GET_LOGS_URL}/${projectId}?take=${step}&skip=${skip}`);
+    const response = await api.get<{logs: ILog[]}>(`${GET_LOGS_URL}/${projectId}?take=${step}&skip=${skip}${filter}`);
     dispatch(logSlice.actions.get(response.data.logs));
   } catch (err) {
     const message = err.message || DEFAULT_ERROR_TEXT;

@@ -1,10 +1,16 @@
+import { LogLevel } from '@prisma/client';
 import { prisma } from '../../util/db';
 import { ErrorDatabase } from '../errors/error.database';
 
 export class LogRepo {
   static async getProjectLogs(projectId: string, skip: number, take: number) {
     try {
-      return await prisma.log.findMany({where: { projectId }, take, skip, orderBy: {id: 'desc'}});
+      return await prisma.log.findMany({
+        where: { projectId }, 
+        take, 
+        skip, 
+        orderBy: {id: 'desc'}
+      });
     } catch (err) {
       throw new ErrorDatabase(err);
     }
