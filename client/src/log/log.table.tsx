@@ -5,20 +5,13 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { getLogsAction, selectAllAction } from './log.actions';
 import LogRow from './log.row.component';
 import useScroll from '../hooks/useScroll';
-
-
-function useQuery() {
-  const { search } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+import useQuery from '../hooks/useQuery';
 
 interface ILogListProps {
   projectId: string
 }
 
 const LogList: FC<ILogListProps> = ({ projectId }) => {
-  const { search } = useLocation();
   const dispatch = useAppDispatch();
   const query = useQuery();
   const { logs, selectAll } = useAppSelector(store => store.logReducer);

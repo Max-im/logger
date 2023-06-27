@@ -20,9 +20,13 @@ export class LogEntity implements Log {
     this.created = log.created;
   }
 
-  static async getLogs(projectId: string, skip: number, take: number, filter: string[] | null) {
-    if (filter) {
-      return LogRepo.getProjectFiltredLogs(projectId, skip, take, filter);
+  static async getLogs(projectId: string, skip: number, take: number, filterArr: LogLevel[] | null) {
+    const checkedFilter = filterArr && filterArr
+      .map(level => level.toUpperCase())
+      .filter(level => level in LogLevel) as LogLevel[];
+
+    if (checkedFilter) {
+      return LogRepo.getProjectFiltredLogs(projectId, skip, take, checkedFilter);
     }
     return LogRepo.getProjectLogs(projectId, skip, take);
   }

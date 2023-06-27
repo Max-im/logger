@@ -6,7 +6,7 @@
 [x] design
 [x] plans
 [x] log scroll
-[ ] filter logs
+[x] filter logs
 [ ] log page
 [ ] notification
 [ ] jobs (clean logs)

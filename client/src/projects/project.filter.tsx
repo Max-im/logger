@@ -4,12 +4,18 @@ import { ToggleButtonGroup, ToggleButton, Box, Tooltip } from '@mui/material';
 import { LevelColors } from '../log/log.model'; 
 import { useAppDispatch } from '../hooks/redux';
 import { resetLogsAction } from '../log/log.actions';
+import useQuery from '../hooks/useQuery';
 
 const ProjectFilter = () => {
     const navigate = useNavigate();
+    const query = useQuery();
     const {pathname} = useLocation();
     const dispatch = useAppDispatch();
-    const [formats, setFormats] = React.useState(() => Object.keys(LevelColors));
+    const filterQuery = query.get('filter');
+    const splitFilter = filterQuery ? filterQuery.split(',') : [];
+    const filter = Object.keys(LevelColors).filter(level => !splitFilter.includes(level))
+    const [formats, setFormats] = React.useState(() => filter);
+
 
     const handleAlignment = (e: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
       setFormats(newFormats);
