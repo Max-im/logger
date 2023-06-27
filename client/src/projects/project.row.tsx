@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {Link} from 'react-router-dom';
-import { IconButton, TableRow, TableCell, Typography, Button } from '@mui/material';
+import { IconButton, TableRow, TableCell, Typography, Button, Chip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IProject } from './projects.model';
 import { projectsRoute } from '../routes';
@@ -25,12 +25,10 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     return (
         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
             <TableCell scope="row">
-                <Link to={`${projectsRoute.url}/${project.id}`} key={project.id} style={{textDecoration: 'none'}}>
-                    <Button fullWidth>
-                        <Typography variant='subtitle1' color="text.primary">
-                            {project.title}
-                        </Typography>
-                    </Button>
+                <Link to={`${projectsRoute.url}/${project.id}`} key={project.id} style={{textDecoration: 'none', cursor: 'pointer'}}>
+                    <Typography variant='subtitle1' color="text.primary">
+                        {project.title}
+                    </Typography>
                 </Link>
             </TableCell>
             <TableCell align="right">
