@@ -43,5 +43,9 @@ export class LogEntity implements Log {
     const logIds = logIdStr.split(',').map(id => Number(id));
     await LogRepo.deleteLogs(logIds);
   }
+  
+  static async getLogItem(logIdStr: number) {
+    return LogRepo.getLogItem(logIdStr);
+  }
 
 }

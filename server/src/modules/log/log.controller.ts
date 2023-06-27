@@ -3,6 +3,7 @@ import { Log, LogLevel } from '@prisma/client';
 import { CreateProjectInput } from './project.schema';
 import { ProjectEntity } from '../project/project.entity';
 import { LogEntity } from './log.entity';
+import { ErrorNotFound } from '../errors/error.notfound';
 
 class LogController {
   async getLogs(request: FastifyRequest<{Params: {projectId: string}; Querystring: {skip: number, take: number, filter?: string}}>, reply: FastifyReply): Promise<{logs: Log[]}> {
@@ -33,7 +34,7 @@ class LogController {
     }
   }
   
-  async readLog(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply) {
+  async markReadLog(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply) {
     try {
       await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
       await LogEntity.markRead(Number(request.params.logId));
@@ -51,6 +52,19 @@ class LogController {
       await LogEntity.deleteLogs(request.params.logIds);
 
       return;
+    } catch(err) {
+      const code = err.code || 500;
+      return reply.code(code).send(err);
+    }
+  }
+  
+  async logItem(request: FastifyRequest<{Params: {projectId: string, logId: number};}>, reply: FastifyReply): Promise<{log: Log}> {
+    try {
+      await ProjectEntity.hasAccess(request.user.id, request.params.projectId);
+      const log = await LogEntity.getLogItem(Number(request.params.logId));
+      if (!log) throw new ErrorNotFound('Log not found');
+
+      return { log };
     } catch(err) {
       const code = err.code || 500;
       return reply.code(code).send(err);

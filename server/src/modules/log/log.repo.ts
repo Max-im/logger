@@ -44,6 +44,14 @@ export class LogRepo {
     }
   }
   
+  static async getLogItem(id: number) {
+    try {
+      return await prisma.log.findUnique({ where: { id }});
+    } catch (err) {
+      throw new ErrorDatabase(err);
+    }
+  }
+  
   static async markRead(id: number) {
     try {
       return await prisma.log.update({

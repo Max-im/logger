@@ -41,7 +41,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell><Checkbox checked={selectAll} onChange={onSelectAll} /></TableCell>
+          <TableCell align='left'><Checkbox sx={{p:0}} checked={selectAll} onChange={onSelectAll} /></TableCell>
           <TableCell>Label</TableCell>
           <TableCell align="right">Info</TableCell>
           <TableCell align="right">Date</TableCell>

@@ -27,23 +27,23 @@ const LogRow: FC<ILogProps> = ({ log, i }) => {
   }
 
   const isSelected = Boolean(selected[log.id]);
-  const rowSyle = log.opened ? {opacity: 0.7} : {};
-  const selectStyle = isSelected ? {background: 'rgba(78, 205, 172, .3)', opacity: 1} : {};
+  const selectStyle = isSelected ? {background: 'rgba(255, 255, 255, .24)', border: '2px solid rgba(255, 255, 255, .12)'} : {border: '2px solid transparent'};
+  const labelBg = log.opened ? {} : {background: LevelColors[log.level].bg}
 
   return (
-    <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, ...rowSyle, ...selectStyle, cursor: 'pointer', '&:hover': {bgcolor: 'info.main'} }}>
-      <TableCell align="center">
+    <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, ...selectStyle, cursor: 'pointer', '&:hover': {bgcolor: 'info.main'} }}>
+      <TableCell align="left">
         <Checkbox size='small' sx={{p: 0}} checked={isSelected} onChange={handleChange}/>
       </TableCell>
       <TableCell onClick={onOpen} scope="row" sx={{p: 0}}>
         {/* @ts-ignore */}
-        <Chip label={log.level} size='small' sx={{background: LevelColors[log.level].bg, border: `1px solid ${LevelColors[log.level].color}`, textShadow: '1px 1px 1px black'}} />
+        <Chip variant='outlined' label={log.level} size='small' sx={{...labelBg, border: `1px solid ${LevelColors[log.level].color}`}} />
       </TableCell>
       <TableCell onClick={onOpen} align="right">
-        <Typography sx={log.opened ? {} : {fontWeight: 'bold'}}>{log.value}</Typography>
+        <Typography sx={log.opened ? {color: 'gray'} : {fontWeight: 'bold'}}>{log.value}</Typography>
       </TableCell>
       <TableCell onClick={onOpen} align="right">
-        <Typography sx={log.opened ? {} : {fontWeight: 'bold'}}>{log.created.toDateString().replace(/^.\w+\s/, '')}</Typography>
+        <Typography sx={log.opened ? {color: 'gray'} : {fontWeight: 'bold'}}>{log.created.toDateString().replace(/^.\w+\s/, '')}</Typography>
       </TableCell>
     </TableRow>
   )
