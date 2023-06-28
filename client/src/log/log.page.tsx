@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Paper, Button, Box, Typography, Chip } from '@mui/material';
+import { Paper, Button, Box, Typography, Chip, Divider } from '@mui/material';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import SendIcon from '@mui/icons-material/Send';
 import { useAppDispatch } from '../hooks/redux';
@@ -33,13 +33,18 @@ const LogPage: FC = () => {
 
   return (
     <Box sx={{display: 'flex'}}>
-      <Paper className="container" sx={{height: 'calc(100vh - 92px)', flex: '1 1 70%', display: 'flex'}}>
+      <Paper className="container" sx={{height: 'calc(100vh - 92px)', flex: '1 1 70%', display: 'flex', flexDirection: 'column'}}>
+        <Typography variant='subtitle1'>Log Info</Typography>
+        <Divider sx={{mb:2, mt: 2}} />
+
         {log && 
           <Typography component='p'>{log.value}</Typography>
         }
       </Paper>
       <Box sx={{mr: 2}}></Box>
       <Paper className="container" sx={{flex: '0 0 30%', display: 'flex', flexDirection: 'column'}}>
+        <Typography variant='subtitle1'>Log Control</Typography>
+        <Divider sx={{mb:2, mt: 2}} />
         {log && 
           <>
             <Chip variant='outlined' label={log.level} sx={{background: LevelColors[log.level].bg, border: `1px solid ${LevelColors[log.level].color}`}} />
@@ -49,7 +54,6 @@ const LogPage: FC = () => {
               <Button startIcon={<DownloadForOfflineIcon />} variant='outlined' size="small">Download</Button>
               <Button startIcon={<SendIcon />} variant='outlined' size="small">Send</Button>
             </Box>
-
           </>
         }
       </Paper>

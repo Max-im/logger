@@ -27,11 +27,11 @@ const LogRow: FC<ILogProps> = ({ log, i }) => {
   }
 
   const isSelected = Boolean(selected[log.id]);
-  const selectStyle = isSelected ? {background: 'rgba(255, 255, 255, .24)', border: '2px solid rgba(255, 255, 255, .12)'} : {border: '2px solid transparent'};
+  const selectStyle = isSelected ? {background: 'rgba(255, 255, 255, .24)'} : {};
   const labelBg = log.opened ? {} : {background: LevelColors[log.level].bg}
 
   return (
-    <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, ...selectStyle, cursor: 'pointer', '&:hover': {bgcolor: 'info.main'} }}>
+    <TableRow sx={{ '&:last-child tr, &:last-child th': { border: 0 }, ...selectStyle, cursor: 'pointer', '&:hover': {bgcolor: 'info.main'} }}>
       <TableCell align="left">
         <Checkbox size='small' sx={{p: 0}} checked={isSelected} onChange={handleChange}/>
       </TableCell>
@@ -40,7 +40,7 @@ const LogRow: FC<ILogProps> = ({ log, i }) => {
         <Chip variant='outlined' label={log.level} size='small' sx={{...labelBg, border: `1px solid ${LevelColors[log.level].color}`}} />
       </TableCell>
       <TableCell onClick={onOpen} align="right">
-        <Typography sx={log.opened ? {color: 'gray'} : {fontWeight: 'bold'}}>{log.value}</Typography>
+        <Typography sx={log.opened ? {color: 'gray', textOverflow: 'ellipsis'} : {fontWeight: 'bold', textOverflow: 'ellipsis'}}>{log.value}</Typography>
       </TableCell>
       <TableCell onClick={onOpen} align="right">
         <Typography sx={log.opened ? {color: 'gray'} : {fontWeight: 'bold'}}>{log.created.toDateString().replace(/^.\w+\s/, '')}</Typography>
