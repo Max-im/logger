@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Grid, Box, Paper } from '@mui/material';
+import { Grid, Box, Paper, Button, Typography } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { initAction } from './home.actions';
 import HomePros from './home.pros.component';
@@ -66,7 +66,31 @@ function Home() {
           </Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className="container" sx={{height: '100%'}}>a</Paper>
+          <Paper className="container" sx={{height: '100%'}}>
+            <Typography variant='h3' sx={{fontSize: 18, fontWeight: 'bold'}} color="secondary">Like what we do? Support us!</Typography>
+
+            <Typography sx={{mt: 2, mb: 3}}>
+              Your contribution helps us continue delivering quality services.
+            </Typography>
+
+            <a
+              href="https://github.com/sponsors/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant='outlined' sx={{width: '100%'}}>
+                <span role="img" aria-label="folded hands">
+                  🙏
+                </span>
+                Donate
+              </Button>
+            </a>
+
+            <Typography sx={{mt: 2}}>
+              Join us on this amazing journey. Thank you!
+            </Typography>
+
+        </Paper>
         </Grid>
       </Grid>
     </Box>

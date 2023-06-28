@@ -38,7 +38,7 @@ const LogList: FC<ILogListProps> = ({ projectId }) => {
   }
 
   return (
-    <Table aria-label="simple table">
+    <Table>
       <TableHead>
         <TableRow>
           <TableCell align='left'><Checkbox sx={{p:0}} checked={selectAll} onChange={onSelectAll} /></TableCell>

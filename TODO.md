@@ -7,11 +7,10 @@
 [x] plans
 [x] log scroll
 [x] filter logs
-[ ] log page
+[x] log page
+[ ] content
 [ ] notification
 [ ] jobs (clean logs)
-[ ] update on login
 [ ] payment
-[ ] content
 [ ] cicd
 [ ] deploy
