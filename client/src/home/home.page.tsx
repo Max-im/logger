@@ -74,7 +74,7 @@ function Home() {
             </Typography>
 
             <a
-              href="https://github.com/sponsors/"
+              href="https://www.patreon.com/max_im"
               target="_blank"
               rel="noreferrer"
             >
