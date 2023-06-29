@@ -10,6 +10,7 @@ import { userSchemas } from './modules/user/user.auth.schema';
 import { projectSchemas } from './modules/project/project.schema';
 import { LOG_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
 import planRoutes from './modules/plan/plan.route';
+import './jobs';
 
 declare module 'fastify' {
   export interface FastifyInstance {

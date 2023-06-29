@@ -8,9 +8,9 @@
 [x] log scroll
 [x] filter logs
 [x] log page
+[x] jobs (clean logs)
 [ ] content
 [ ] notification
-[ ] jobs (clean logs)
 [ ] payment
 [ ] cicd
 [ ] deploy

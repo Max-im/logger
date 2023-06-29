@@ -74,4 +74,16 @@ export class LogRepo {
       throw new ErrorDatabase(err);
     }
   }
+
+  static async deleteExpired() {
+    try {
+      return await prisma.log.deleteMany({
+        where: {
+          deleteDate: { lte: new Date() }
+        }
+      });
+    } catch (err) {
+      throw new ErrorDatabase(err);
+    }
+  }
 }
