@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Grid, Paper, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Grid, Paper, Typography, List, ListItem, ListItemIcon, ListItemText, Box } from '@mui/material';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
@@ -10,7 +10,10 @@ export default function HomeMain() {
   return (
     <Grid container spacing={2} sx={{flexGrow: 1, mb: 2}}>
       <Grid item xs={8} >
-        <Paper className="container" sx={{height: '100%', p: 3}}>
+        <Paper className="container" sx={{height: '100%', p: 3, position: 'relative' }}>
+          <Box sx={{position: 'absolute', width: '40%', height: '80%', bottom: 10, right: 0 ,background: `
+          radial-gradient(circle, rgba(255,255,255,.3), rgba(255,255,255,.3) 1px, transparent 0, transparent) 0 0/25px 25px`}}>
+          </Box>
           <Typography variant='h2'>{process.env.REACT_APP_NAME}</Typography>
           <Typography variant='h3' sx={{fontSize: 18, fontWeight: 'bold'}} color="secondary">Keep your project on track</Typography>
         </Paper>

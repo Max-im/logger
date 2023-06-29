@@ -29,7 +29,7 @@ export default function HomePros() {
         <Grid item xs={3}>
           <Paper className="container" sx={{height: '100%'}}>
             <NotificationsActiveIcon sx={{fontSize: 24, mb: 1}} color="primary" />
-            <Typography variant='body2'>Errors notifications</Typography>
+            <Typography variant='body2'>Notifications</Typography>
           </Paper>
         </Grid>
       </Grid>
