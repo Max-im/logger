@@ -1,11 +1,11 @@
 import { FastifyInstance } from 'fastify';
-import {logController} from './log.controller';
+import { logController } from './log.controller';
 import { $ref } from './project.schema';
 
-const schema = {schema: {body: $ref('createProjectSchema'), response: {200: $ref('createProjectResponseSchema')}}};
+const schema = { schema: { body: $ref('createProjectSchema'), response: { 200: $ref('createProjectResponseSchema') } } };
 
 async function logRoutes(server: FastifyInstance) {
-  const onRequest = { onRequest: [server.registredUser]};
+  const onRequest = { onRequest: [server.registredUser] };
 
   server.get('/:projectId', onRequest, logController.getLogs);
   server.get('/:projectId/log/:logId', onRequest, logController.logItem);

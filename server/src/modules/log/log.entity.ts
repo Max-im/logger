@@ -34,16 +34,16 @@ export class LogEntity implements Log {
   static async getInfo(projectId: string) {
     return LogRepo.getProjectLogsInfo(projectId);
   }
-  
+
   static async markRead(logId: number) {
     return LogRepo.markRead(logId);
   }
-  
+
   static async deleteLogs(logIdStr: string) {
     const logIds = logIdStr.split(',').map(id => Number(id));
     await LogRepo.deleteLogs(logIds);
   }
-  
+
   static async getLogItem(logIdStr: number) {
     return LogRepo.getLogItem(logIdStr);
   }

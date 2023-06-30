@@ -26,7 +26,7 @@ class StatusController {
         hostname: os.hostname()
       };
       return data;
-    } catch(err) {
+    } catch (err) {
       return reply.code(500).send(err);
     }
   }
@@ -37,7 +37,7 @@ class StatusController {
       const users = await StatusRepo.getUsersCount();
 
       return { projects, users };
-    } catch(err) {
+    } catch (err) {
       return reply.code(500).send(err);
     }
   }

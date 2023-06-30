@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { ErrorUnauthorized } from '../errors/error.unauthorized'; 
+import { ErrorUnauthorized } from '../errors/error.unauthorized';
 
 async function registredUserHook(request: FastifyRequest, reply: FastifyReply) {
   try {

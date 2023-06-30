@@ -26,14 +26,14 @@ export class UserEntity implements User {
     return new UserEntity(user);
   }
 
-  static async auth(userData: IAuth): Promise<{statusCode: AuthCode, user: UserEntity}> {
+  static async auth(userData: IAuth): Promise<{ statusCode: AuthCode, user: UserEntity }> {
     let userItem: null | User = await UserRepo.findByEmail(userData.email);
     const statusCode: AuthCode = userItem ? 200 : 201;
 
     if (!userItem) {
       userItem = await UserRepo.create(userData);
     }
-    
+
     const user = new UserEntity(userItem);
 
     return { statusCode, user };

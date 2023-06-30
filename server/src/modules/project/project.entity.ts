@@ -1,7 +1,7 @@
 import { Project } from '@prisma/client';
 import { ErrorNotFound } from '../errors/error.notfound';
 import { ProjectRepo } from './project.repo';
-import { ErrorForbiden } from '../errors/error.unauthorized copy';
+import { ErrorForbiden } from '../errors/error.forbidden';
 
 export class ProjectEntity implements Project {
   id: string;
@@ -18,7 +18,7 @@ export class ProjectEntity implements Project {
     const projects = await ProjectRepo.findUserProjects(userId);
     return projects;
   }
-  
+
   static async findUserProjectById(userId: string, projectId: string) {
     const project = await ProjectRepo.findOne(userId, projectId);
     if (!project) throw new ErrorNotFound('Project not found');
@@ -39,6 +39,6 @@ export class ProjectEntity implements Project {
 
   static async hasAccess(userId: string, projectId: string) {
     const userHasAcces = ProjectRepo.findOne(userId, projectId);
-    if (!userHasAcces) throw new ErrorForbiden(); 
+    if (!userHasAcces) throw new ErrorForbiden();
   }
 }

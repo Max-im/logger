@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import {planController} from './plan.controller';
+import { planController } from './plan.controller';
 
 
 async function planRoutes(server: FastifyInstance) {

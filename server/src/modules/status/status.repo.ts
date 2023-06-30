@@ -9,7 +9,7 @@ export class StatusRepo {
       throw new ErrorDatabase(err);
     }
   }
-  
+
   static async getProjectCount() {
     try {
       return await prisma.project.count();
@@ -17,5 +17,5 @@ export class StatusRepo {
       throw new ErrorDatabase(err);
     }
   }
-  
+
 }

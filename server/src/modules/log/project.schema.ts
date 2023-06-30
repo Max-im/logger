@@ -15,7 +15,7 @@ const createProjectResponseSchema = z.object({
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;
 
-export const { schemas: projectSchemas, $ref } = buildJsonSchemas({ 
+export const { schemas: projectSchemas, $ref } = buildJsonSchemas({
   createProjectSchema,
   createProjectResponseSchema,
 }, { $id: 'ProjectSchema' });
