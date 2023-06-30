@@ -9,6 +9,7 @@
 [x] filter logs
 [x] log page
 [x] jobs (clean logs)
+lazy load
 [ ] content
 [ ] notification
 [ ] payment
