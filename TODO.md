@@ -10,6 +10,9 @@
 [x] log page
 [x] jobs (clean logs)
 [x] lazy load
+[ ] error boundary
+[ ] linter
+[ ] tests
 [ ] clean up css
 [ ] client modules
 [ ] content
