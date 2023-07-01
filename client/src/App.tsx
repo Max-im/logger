@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
 import Header from './header/header.component';
@@ -29,11 +29,13 @@ function App() {
             <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
               <Header />
               <Box sx={{ flexGrow: 1}}>
-                <Routes>
-                  {activeRoutes.map((route) => (
-                    <Route key={route.url} path={route.url} element={<route.element />} />
-                    ))}
-                </Routes>
+                <Suspense fallback={'loading'}>
+                  <Routes>
+                    {activeRoutes.map((route) => (
+                      <Route key={route.url} path={route.url} element={<route.element />} />
+                      ))}
+                  </Routes>
+                </Suspense>
               </Box>
             </Container>
           </Container>

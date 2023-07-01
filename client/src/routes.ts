@@ -1,20 +1,21 @@
 import UserPage from './user/user.page';
-import About from './about/about.page';
 import Home from './home/home.page';
 import Logout from './user/user.logout';
-import Projects from './projects/projects.page';
-import NotFoundPage from './notfound/notfound.page';
-import Documentation from './documentation/documentation.page';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
-import ProjectPage from './projects/project.page';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import { RoleTypes } from './user/user.model';
-import PlanPage from './plan/plan.page';
 import LogPage from './log/log.page';
+import HomeLazy from './home/home.lazy';
+import AboutLazy from './about/about.lazy';
+import NotFoundLazy from './notfound/notFound.lazy';
+import PlanLazy from './plan/plan.lazy';
+import DocsLazy from './documentation/documentation.lazy';
+import ProjectLazy from './projects/project.lazy';
+import ProjectsLazy from './projects/projects.lazy';
 
 export interface IRouteData {
   url: string;
@@ -24,8 +25,7 @@ export interface IRouteData {
   role: number;
   icon: typeof HomeIcon;
   parrent: IRoute | null;
-  rule: RegExp
-  
+  rule: RegExp;
 }
 export interface IRoute extends IRouteData {
   element: typeof Home;
@@ -37,7 +37,7 @@ export const homeRoute = {
   subtitle: `Welcome to ${process.env.REACT_APP_NAME}`,
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: Home,
+  element: HomeLazy,
   parrent: null,
   rule: /^\/$/,
   icon: HomeIcon,
@@ -49,7 +49,7 @@ export const aboutRoute = {
   subtitle: `Information about ${process.env.REACT_APP_NAME} app`,
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: About,
+  element: AboutLazy,
   parrent: null,
   rule: /^\/about$/,
   icon: InfoIcon,
@@ -85,7 +85,7 @@ export const projectsRoute = {
   subtitle: 'Information about your projects',
   isMenu: true,
   role: RoleTypes.USER,
-  element: Projects,
+  element: ProjectsLazy,
   parrent: null,
   rule: /^\/project$/,
   icon: AccountTreeIcon,
@@ -109,7 +109,7 @@ export const projectItemRoute = {
   subtitle: 'Project Information',
   isMenu: false,
   role: RoleTypes.USER,
-  element: ProjectPage,
+  element: ProjectLazy,
   parrent: null,
   rule: /^\/project\/.{25}$/,
   icon: AccountTreeIcon,
@@ -121,7 +121,7 @@ export const docsRoute = {
   subtitle: 'Start in just a few clicks',
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: Documentation,
+  element: DocsLazy,
   parrent: null,
   rule: /^\/docs$/,
   icon: ImportContactsIcon,
@@ -133,7 +133,7 @@ export const planRoute = {
   subtitle: 'Please check a plan for you',
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: PlanPage,
+  element: PlanLazy,
   parrent: null,
   rule: /^\/plan$/,
   icon: AttachMoneyIcon,
@@ -145,11 +145,10 @@ export const notFounRoute = {
   subtitle: 'Ooops, the page is not found',
   isMenu: false,
   role: RoleTypes.GUEST,
-  element: NotFoundPage,
+  element: NotFoundLazy,
   parrent: null,
   rule: /^\/.*$/,
   icon: HomeIcon,
-
 };
 
 export const routes = [
