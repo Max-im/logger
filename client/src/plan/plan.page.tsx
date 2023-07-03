@@ -12,7 +12,7 @@ const PlanPage = () => {
       <Typography sx={{fontSize: 18, pt: 2, textAlign: 'center'}} variant='subtitle2'>
         Welcome to our Plans section!
       </Typography>
-      <Typography sx={{fontSize: 16, p: 2}} variant='subtitle2'>
+      <Typography sx={{fontSize: 16, p: 2, fontWeight: 400}} variant='subtitle2'>
         Choose from a range of options to tailor your service exactly the way you want it. We offer flexible plans designed to meet your unique needs. Select one of our plans today and take control of your experience.
       </Typography>
       <Box sx={{display: 'flex', flexGrow: 1}}>

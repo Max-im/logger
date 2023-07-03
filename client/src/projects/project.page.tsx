@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Paper, Typography, Divider, Box } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
+import { Paper, Typography, Divider, Box, Button } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getCurrentProjectAction, clearCurrentObject } from './projects.actions';
 import LogStructure from '../log/log.structure.diagram';
 import ProjectFilter from './project.filter';
 import ProjectKey from './project-key.component';
 import LogList from '../log/log.table';
+import { projectsRoute } from '../routes';
 
 export default function ProjectPage() {
   const dispatch = useAppDispatch();
@@ -45,7 +47,15 @@ export default function ProjectPage() {
               <LogStructure />
               <ProjectFilter />
             </Box>
-            <ProjectKey />
+            <Box flexGrow={1}></Box>
+            <Box>
+              <Link to={`${projectsRoute.url}/settings/${currentProject.id}`}>
+                <Button sx={{ mt: 2 }} startIcon={<SettingsIcon />}>
+                  <Typography color='text.primary'>Project Settings</Typography>
+                </Button>
+              </Link>
+              <ProjectKey />
+            </Box>
           </Box>
         </Paper>
       </Box>

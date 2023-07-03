@@ -16,6 +16,7 @@ import PlanLazy from './plan/plan.lazy';
 import DocsLazy from './documentation/documentation.lazy';
 import ProjectLazy from './projects/project.lazy';
 import ProjectsLazy from './projects/projects.lazy';
+import ProjectSettingsLazy from './project-settings/project-settings.lazy';
 
 export interface IRouteData {
   url: string;
@@ -115,6 +116,18 @@ export const projectItemRoute = {
   icon: AccountTreeIcon,
 };
 
+export const projectSettingsRoute = {
+  url: '/project/settings/:projectId',
+  title: 'Project Settings',
+  subtitle: 'Adjust your project',
+  isMenu: false,
+  role: RoleTypes.USER,
+  element: ProjectSettingsLazy,
+  parrent: null,
+  rule: /^\/project\/settings\/.{25}$/,
+  icon: AccountTreeIcon,
+};
+
 export const docsRoute = {
   url: '/docs',
   title: 'Documentation',
@@ -161,5 +174,6 @@ export const routes = [
   docsRoute,
   planRoute,
   logPageRoute,
+  projectSettingsRoute,
   notFounRoute,
 ];

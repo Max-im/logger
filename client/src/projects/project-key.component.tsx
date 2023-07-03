@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Alert, Box, Button, Chip, Snackbar, Tooltip } from '@mui/material';
+import { Alert, Box, Button, Snackbar, Tooltip, Typography } from '@mui/material';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { deleteLogsAction } from '../log/log.actions';
@@ -34,15 +34,12 @@ const ProjectKey: FC = () => {
         <>
         {currentProject &&
             <Box>
-                <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Tooltip title="Access key">
-                    <VpnKeyIcon color="primary"/>
-                </Tooltip>
                 <Tooltip title="Click to Copy">
-                    <Chip label={currentProject.id} sx={{m: 1}} size="small" variant="outlined" onClick={onKeyClick} />
+                    <Button startIcon={<VpnKeyIcon />} onClick={onKeyClick}>
+                        <Typography color='text.primary'>{currentProject.id}</Typography>
+                    </Button>
                 </Tooltip>
-                </Box>
-                <Button variant="outlined" color="error" fullWidth size="small" {...disabledDeleteBtn} onClick={onDeleteLogs}>Delete Selected</Button>
+                <Button sx={{ mt: 1 }} variant="outlined" color="error" fullWidth size="small" {...disabledDeleteBtn} onClick={onDeleteLogs}>Delete Selected</Button>
             </Box>
             }
             <Snackbar open={showMsg} autoHideDuration={3000} onClose={onCloseMsg} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>

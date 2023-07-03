@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Typography, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -14,6 +14,7 @@ interface IProjectRowProps {
 
 const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const onError = (msg: string) => {
         console.log(msg)
@@ -26,7 +27,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     
     const onSettings = (e: React.MouseEvent<HTMLElement>, id: string) => {
         e.preventDefault();
-        console.log('//TODO: settings')
+        navigate(projectsRoute.url + '/settings/' + id);
     }
 
     return (
