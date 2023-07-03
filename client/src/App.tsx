@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { routes } from './routes';
 import { RoleTypes } from './user/user.model';
 import Theme from './theme/theme.component';
-import { getPlansAction } from './plan/plan.actions';
+import { getPlansAction } from './plan';
 
 function App() {
   const dispatch = useAppDispatch();

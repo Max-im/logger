@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { initAction } from './home.actions';
 import HomePros from './home.pros.component';
 import HomeMain from './home.main.component';
-import PlansList from '../plan/plan.component';
+import { PlanWidget } from '../plan';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -57,7 +57,7 @@ function Home() {
       <Grid container spacing={2} sx={{flex: '0 0 200px'}}>
         <Grid item xs={4}>
           <Paper className="container" sx={{height: '100%'}}>
-            <PlansList />
+            <PlanWidget />
           </Paper>
         </Grid>
         <Grid item xs={4}>

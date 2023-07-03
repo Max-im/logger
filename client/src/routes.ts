@@ -7,16 +7,17 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
-import { RoleTypes } from './user/user.model';
-import LogPage from './log/log.page';
+import LogPage from './log';
+import PlanPage from './plan';
+import DocsPage from './documentation';
+import ProjectsPage from './projects';
+import ProjectPage from './project';
+import ProjectSettingsPage from './project-settings';
+
 import HomeLazy from './home/home.lazy';
 import AboutLazy from './about/about.lazy';
 import NotFoundLazy from './notfound/notFound.lazy';
-import PlanLazy from './plan/plan.lazy';
-import DocsLazy from './documentation/documentation.lazy';
-import ProjectLazy from './projects/project.lazy';
-import ProjectsLazy from './projects/projects.lazy';
-import ProjectSettingsLazy from './project-settings/project-settings.lazy';
+import { RoleTypes } from './user/user.model';
 
 export interface IRouteData {
   url: string;
@@ -86,7 +87,7 @@ export const projectsRoute = {
   subtitle: 'Information about your projects',
   isMenu: true,
   role: RoleTypes.USER,
-  element: ProjectsLazy,
+  element: ProjectsPage,
   parrent: null,
   rule: /^\/project$/,
   icon: AccountTreeIcon,
@@ -110,7 +111,7 @@ export const projectItemRoute = {
   subtitle: 'Project Information',
   isMenu: false,
   role: RoleTypes.USER,
-  element: ProjectLazy,
+  element: ProjectPage,
   parrent: null,
   rule: /^\/project\/.{25}$/,
   icon: AccountTreeIcon,
@@ -122,7 +123,7 @@ export const projectSettingsRoute = {
   subtitle: 'Adjust your project',
   isMenu: false,
   role: RoleTypes.USER,
-  element: ProjectSettingsLazy,
+  element: ProjectSettingsPage,
   parrent: null,
   rule: /^\/project\/settings\/.{25}$/,
   icon: AccountTreeIcon,
@@ -134,7 +135,7 @@ export const docsRoute = {
   subtitle: 'Start in just a few clicks',
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: DocsLazy,
+  element: DocsPage,
   parrent: null,
   rule: /^\/docs$/,
   icon: ImportContactsIcon,
@@ -146,7 +147,7 @@ export const planRoute = {
   subtitle: 'Please check a plan for you',
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: PlanLazy,
+  element: PlanPage,
   parrent: null,
   rule: /^\/plan$/,
   icon: AttachMoneyIcon,
