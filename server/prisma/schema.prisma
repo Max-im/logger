@@ -11,61 +11,72 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(cuid())
-  email       String        @unique
-  name        String        @default("Guest")
-  photo       String        @default("")
-  registred   DateTime      @default(now())
-  projects    UserProject[]
-  role        Role          @relation(fields: [roleId], references: [id])
-  roleId      Int
-  plan        Plan          @relation(fields: [planId], references: [id])
-  planId      Int
+  id        String        @id @default(cuid())
+  email     String        @unique
+  name      String        @default("Guest")
+  photo     String        @default("")
+  registred DateTime      @default(now())
+  projects  UserProject[]
+  role      Role          @relation(fields: [roleId], references: [id])
+  roleId    Int
+  plan      Plan          @relation(fields: [planId], references: [id])
+  planId    Int
 }
 
 model Project {
-  id          String        @id @default(cuid())
-  title       String
-  created     DateTime      @default(now())
-  logs        Log[]
-  users       UserProject[]
+  id           String         @id @default(cuid())
+  title        String
+  created      DateTime       @default(now())
+  logs         Log[]
+  users        UserProject[]
+  Notification Notification[]
 }
 
 model UserProject {
-  id          Int           @id @default(autoincrement())
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
-  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId   String
+  id        Int     @id @default(autoincrement())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
 }
 
 model Log {
-  id          Int         @id @default(autoincrement())
-  value       String
-  level       LogLevel
-  opened      Boolean     @default(false)
-  created     DateTime    @default(now())
-  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  deleteDate  DateTime
-  projectId   String
+  id         Int      @id @default(autoincrement())
+  value      String
+  level      LogLevel
+  opened     Boolean  @default(false)
+  created    DateTime @default(now())
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  deleteDate DateTime
+  projectId  String
+}
+
+model Notification {
+  id        Int               @id @default(autoincrement())
+  project   Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  level     LogLevel
+  type      NotificationTypes
+  projectId String
+
+  @@unique([projectId, level, type])
 }
 
 model Plan {
-  id            Int         @id @default(autoincrement())
-  name          PlanTypes   @unique 
-  projectsNum   Int
-  cost          Int
-  storingDays   Int
-  active        Boolean     @default(true)
-  users User[]
+  id          Int       @id @default(autoincrement())
+  name        PlanTypes @unique
+  projectsNum Int
+  cost        Int
+  storingDays Int
+  active      Boolean   @default(true)
+  users       User[]
 }
 
 model Role {
-  id                Int            @id @default(autoincrement())
-  type              RoleTypes      @unique @default(USER)
-  description       String
-  projectThreshold  Int            @default(3)
-  users             User[]
+  id               Int       @id @default(autoincrement())
+  type             RoleTypes @unique @default(USER)
+  description      String
+  projectThreshold Int       @default(3)
+  users            User[]
 }
 
 enum PlanTypes {
@@ -73,6 +84,11 @@ enum PlanTypes {
   BASIC
   STANDART
   VIP
+}
+
+enum NotificationTypes {
+  EMAIL
+  TELEGRAM
 }
 
 enum RoleTypes {
