@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-- [ ] notification
-- [ ] content
-- [ ] payment
-- [ ] cicd
-- [ ] deploy
-=======
 [x] protect routes
 [x] validate input data
 [x] projects
@@ -17,9 +10,10 @@
 [x] log page
 [x] jobs (clean logs)
 [x] lazy load
+[x] linter
 [ ] error boundary
-[ ] linter
 [ ] tests
+[ ] storybook
 [ ] clean up css
 [ ] client modules
 [ ] content
@@ -27,4 +21,3 @@
 [ ] payment
 [ ] cicd
 [ ] deploy
->>>>>>> 7381bc20548fbec89221674f7f4cd7b7ac1670a6
