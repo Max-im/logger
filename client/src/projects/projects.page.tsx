@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Typography, Divider, Chip, Box } from '@mui/material';
+import { Paper, Typography, Divider, Chip, Box, List, ListItem, ListItemText } from '@mui/material';
 import CreateProject from './projects.create';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { getProjectsAction } from './projects.actions';
@@ -30,18 +30,13 @@ const Projects = () => {
     <Box sx={{height: '100%', display: 'flex'}}>
       <Paper className="container" component="div" sx={{height: '100%', flexGrow: 1}}>
         <>
-        {Boolean(projects.length) && 
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Project</TableCell>
-                <TableCell align="right">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
+          {Boolean(projects.length) && 
+            <List>
+              <ListItem disablePadding>
+                <ListItemText primary="Projects list" />
+              </ListItem>
               {projects.map(project => <ProjectRow key={project.id} project={project} />)}
-            </TableBody>
-          </Table>
+          </List>
         }
         {Boolean(projects.length) || <Typography variant='subtitle1'>You dont have projects yet, please Create new</Typography>}
         </>

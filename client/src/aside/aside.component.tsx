@@ -33,7 +33,7 @@ const Aside: FC<IAsideProp> = ({ user, activeRoutes }) => {
     <Paper sx={{ height: '100%', flex: '0 0 22%', position: 'sticky', top: '16px'}}>
       <Box className="container" sx={{display: 'flex', flexDirection: 'column', height: '95vh' }}>
         <Box>
-          <Avatar alt={user.name} src={user.photo}  sx={{ width: 48, height: 48, m: '10px auto' }}  />
+          <Avatar alt={user.name} src={user.photo}  sx={{ width: 48, height: 48, m: '10px auto', border: `2px solid transparent`, borderColor: 'info.main' }}  />
           <Typography variant='subtitle1' sx={{ textAlign: 'center' }}>{user.name}</Typography>
         </Box>
         <Divider sx={{mt:1}} />
