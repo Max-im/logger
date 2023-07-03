@@ -26,6 +26,7 @@ export class NotificationEmailEntity extends NotificationEntity {
 
 
     notify(users: User[]) {
+        const params = users.map(user => user)
         try {
             for (const param of params) {
                 this.transporter.sendMail(param);
