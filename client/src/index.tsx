@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
+import ErrorBoundary from './error/errorBoundary';
 import { setupStore } from './store/store';
 
 import './styles/reset.scss';
@@ -12,8 +13,10 @@ const store = setupStore();
 
 root.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
+        <ErrorBoundary>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </ErrorBoundary>
     </Provider>,
 );
