@@ -1,5 +1,4 @@
 import UserPage from './user/user.page';
-import Home from './home/home.page';
 import Logout from './user/user.logout';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
@@ -13,10 +12,10 @@ import DocsPage from './documentation';
 import ProjectsPage from './projects';
 import ProjectPage from './project';
 import ProjectSettingsPage from './project-settings';
+import AboutPage from './about';
+import NotFoundPage from './notfound';
+import HomePage from './home';
 
-import HomeLazy from './home/home.lazy';
-import AboutLazy from './about/about.lazy';
-import NotFoundLazy from './notfound/notFound.lazy';
 import { RoleTypes } from './user/user.model';
 
 export interface IRouteData {
@@ -30,7 +29,7 @@ export interface IRouteData {
   rule: RegExp;
 }
 export interface IRoute extends IRouteData {
-  element: typeof Home;
+  element: typeof HomePage;
 }
 
 export const homeRoute = {
@@ -39,7 +38,7 @@ export const homeRoute = {
   subtitle: `Welcome to ${process.env.REACT_APP_NAME}`,
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: HomeLazy,
+  element: HomePage,
   parrent: null,
   rule: /^\/$/,
   icon: HomeIcon,
@@ -51,7 +50,7 @@ export const aboutRoute = {
   subtitle: `Information about ${process.env.REACT_APP_NAME} app`,
   isMenu: true,
   role: RoleTypes.GUEST,
-  element: AboutLazy,
+  element: AboutPage,
   parrent: null,
   rule: /^\/about$/,
   icon: InfoIcon,
@@ -159,7 +158,7 @@ export const notFounRoute = {
   subtitle: 'Ooops, the page is not found',
   isMenu: false,
   role: RoleTypes.GUEST,
-  element: NotFoundLazy,
+  element: NotFoundPage,
   parrent: null,
   rule: /^\/.*$/,
   icon: HomeIcon,

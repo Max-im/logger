@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Grid, Box, Paper, Button, Typography } from '@mui/material';
-import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import { initAction } from './home.actions';
-import HomePros from './home.pros.component';
-import HomeMain from './home.main.component';
-import { PlanWidget } from '../plan';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { PlanWidget } from '../../plan';
+import { initAction } from '../state/home.actions';
+import HomePros from '../components/home.pros.component';
+import HomeMain from '../components/home.main.component';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

@@ -8,6 +8,7 @@ import { routes } from './routes';
 import { RoleTypes } from './user/user.model';
 import Theme from './theme/theme.component';
 import { getPlansAction } from './plan';
+import { ErrorBoundary } from './errorBoundary';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,27 +22,31 @@ function App() {
   }, []);
 
   return (
-    <Theme>
-      <BrowserRouter>
-        <Box className="app" sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2}}>
-          <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex', position: 'relative'}} >
-            <Aside user={user} activeRoutes={activeRoutes}/>
-            <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
-              <Header />
-              <Box sx={{ flexGrow: 1}}>
-                <Suspense fallback={'loading'}>
-                  <Routes>
-                    {activeRoutes.map((route) => (
-                      <Route key={route.url} path={route.url} element={<route.element />} />
-                      ))}
-                  </Routes>
-                </Suspense>
-              </Box>
+      <Theme>
+        <BrowserRouter>
+          <Box className="app" sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2}}>
+            <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex', position: 'relative'}} >
+              <Aside user={user} activeRoutes={activeRoutes}/>
+              <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
+                <Header />
+              <Box sx={{ flexGrow: 1 }}>
+                
+                  <Suspense fallback={'loading'}>
+    <ErrorBoundary>
+                    <Routes>
+                      {activeRoutes.map((route) => (
+                        <Route key={route.url} path={route.url} element={<route.element />} />
+                        ))}
+                    </Routes>
+      </ErrorBoundary>
+                  </Suspense>
+
+                </Box>
+              </Container>
             </Container>
-          </Container>
-        </Box>
-      </BrowserRouter>
-    </Theme>
+          </Box>
+        </BrowserRouter>
+        </Theme>
   );
 }
 

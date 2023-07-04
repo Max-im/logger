@@ -1,6 +1,6 @@
-import { AppDispatch } from '../store/store';
-import api from '../services/http';
-import { DEFAULT_ERROR_TEXT, STATUS_URL } from '../constants';
+import { AppDispatch } from '../../store/store';
+import api from '../../services/http';
+import { DEFAULT_ERROR_TEXT, STATUS_URL } from '../../constants';
 import { HomeState, homeSlice } from './home.slice'
 
 type cb = (msg: string) => void;
