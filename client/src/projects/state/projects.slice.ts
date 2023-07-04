@@ -11,7 +11,7 @@ const initialState: ProjectState = {
     projects: [],
     ids: {},
     currentProject: null,
-}
+};
 
 export const projectSlice = createSlice({
     name: 'project',
@@ -29,7 +29,7 @@ export const projectSlice = createSlice({
             state.projects.push(action.payload);
         },
         delete(state, action: PayloadAction<string>) {
-            state.projects = state.projects.filter(project => project.id !== action.payload);
+            state.projects = state.projects.filter((project) => project.id !== action.payload);
         },
         setCurrent(state, action: PayloadAction<IProject>) {
             state.currentProject = action.payload;
@@ -37,7 +37,7 @@ export const projectSlice = createSlice({
         clearCurrent(state) {
             state.currentProject = null;
         },
-    }
-})
+    },
+});
 
 export default projectSlice.reducer;

@@ -7,7 +7,7 @@ interface PlanState {
 
 const initialState: PlanState = {
     plans: [],
-}
+};
 
 export const plantSlice = createSlice({
     name: 'plan',
@@ -16,7 +16,7 @@ export const plantSlice = createSlice({
         get(state, action: PayloadAction<IPlan[]>) {
             state.plans = action.payload;
         },
-    }
-})
+    },
+});
 
 export default plantSlice.reducer;

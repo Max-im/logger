@@ -2,9 +2,9 @@ import { AppDispatch } from '../../store/store';
 import api from '../../services/http';
 import { PROJECT_URL, DEFAULT_ERROR_TEXT } from '../../constants';
 import { ICreateProjectResponse, IProject } from '../model/projects.model';
-import { projectSlice } from './projects.slice'
-// import { logSlice } from '../log/log.slice';
+import { projectSlice } from './projects.slice';
 
+// eslint-disable-next-line no-unused-vars
 type cb = (msg: string) => void;
 
 export const createProjectAction = (title: string, cb: cb) => async (dispatch: AppDispatch) => {
@@ -46,9 +46,4 @@ export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dis
         const message = err.message || DEFAULT_ERROR_TEXT;
         cb(message);
     }
-};
-
-export const clearCurrentObject = () => (dispatch: AppDispatch) => {
-    // dispatch(logSlice.actions.clearLogs());
-    // dispatch(logSlice.actions.selectAll(false));
 };

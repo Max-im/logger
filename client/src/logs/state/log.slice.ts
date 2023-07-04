@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILevels, ILog } from '../model/log.model';
 
+/* eslint-disable */
 interface LogState {
     logs: { [id: string]: ILog };
     selected: { [id: string]: boolean };
     info: { [level in ILevels]?: number };
     selectAll: boolean;
 }
+/* eslint-enable */
 
 const initialState: LogState = {
     logs: {},
     selected: {},
     info: {},
-    selectAll: false
+    selectAll: false,
 };
 
 export const logSlice = createSlice({
@@ -27,6 +29,7 @@ export const logSlice = createSlice({
                 }
             }
         },
+        // eslint-disable-next-line no-unused-vars
         addInfo(state, action: PayloadAction<{ info: { [key in ILevels]?: number } }>) {
             state.info = action.payload.info;
         },
@@ -55,15 +58,14 @@ export const logSlice = createSlice({
             state.selected = {};
         },
         delete(state, action: PayloadAction<{ logIds: string[] }>) {
-            action.payload.logIds.forEach(id => {
+            action.payload.logIds.forEach((id) => {
                 const log = state.logs[id];
                 state.info[log.level]! -= 1;
                 delete state.logs[id];
             });
             state.selected = {};
-
         },
-    }
-})
+    },
+});
 
 export default logSlice.reducer;

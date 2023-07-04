@@ -1,51 +1,49 @@
 import { createTheme } from '@mui/material/styles';
-import { deepOrange, lightBlue, blueGrey } from '@mui/material/colors';
+import { deepOrange, lightBlue } from '@mui/material/colors';
 
 const fontFamily = ['Source Sans Pro', 'Roboto', 'sans-serif'].join(',');
 
 export const darkTheme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 300,
-      sm: 678,
-      md: 920,
-      lg: 1024,
-      xl: 1200,
-    }
-  },
-  palette: {
-    mode: 'dark',
-    background: {
-      default: '#151A2D',
-      paper: '#222A3F',
+    breakpoints: {
+        values: {
+            xs: 300,
+            sm: 678,
+            md: 920,
+            lg: 1024,
+            xl: 1200,
+        },
     },
-    text: {
-      primary: "#FFF"
+    palette: {
+        mode: 'dark',
+        background: {
+            default: '#151A2D',
+            paper: '#222A3F',
+        },
+        text: {
+            primary: '#FFF',
+        },
+        primary: {
+            main: '#4ECDAC',
+            light: '#13babd',
+            dark: '#0d8587',
+            contrastText: '#fff',
+        },
+        secondary: lightBlue,
+        info: {
+            main: 'rgba(255,255,255,.16)',
+        },
+        error: deepOrange,
     },
-    primary: {
-      main: '#4ECDAC',
-      light: '#13babd',
-      dark: '#0d8587',
-      contrastText: '#fff'
+    typography: {
+        fontFamily,
+        fontSize: 12,
+        h1: { fontSize: '2.2rem', fontFamily }, // title
+        h3: { fontSize: '0.8rem', fontFamily },
+        body1: { fontFamily, letterSpacing: 0.8, fontSize: '12px' }, // subtitle
+        body2: { fontFamily, letterSpacing: 0.9 },
+        subtitle1: { letterSpacing: 1.3, fontFamily, fontSize: '1.2rem' },
     },
-    secondary: lightBlue,
-    info: {
-      main: 'rgba(255,255,255,.16)'
-    },
-    error: deepOrange
-  },
-  typography: {
-    fontFamily,
-    fontSize: 12,
-    h1: { fontSize: "2.2rem", fontFamily }, // title
-    h3: { fontSize: "0.8rem", fontFamily },
-    body1: { fontFamily, letterSpacing: 0.8, fontSize: '12px' }, // subtitle
-    body2: { fontFamily, letterSpacing: 0.9 },
-    subtitle1: { letterSpacing: 1.3, fontFamily, fontSize: "1.2rem" }
-  }
 });
-
-
 
 // export const theme = {
 //   grey: {

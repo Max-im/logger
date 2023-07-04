@@ -33,5 +33,10 @@ module.exports = {
     'max-len': ['error', { ignoreComments: true, code: 120 }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
+    'no-param-reassign': 'off',
+    'no-restricted-syntax': 'off',
+    'guard-for-in': 'off',
+    'no-console': 'off',
+    'react/jsx-props-no-spreading': 'off'
   },
 };

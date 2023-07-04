@@ -1,12 +1,7 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react';
 
-const Documentation: FC = () => {
-  useEffect(() => { 
-    throw new Error('wowowow')
-  },[])
-  return (
+const Documentation: FC = () => (
     <div>Documentation</div>
-  )
-}
+);
 
 export default Documentation;

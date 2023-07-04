@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 // @ts-ignore
 export default function useScroll(parentRef, childRef, callback) {
@@ -8,8 +8,8 @@ export default function useScroll(parentRef, childRef, callback) {
         const options = {
             root: parentRef.current,
             rootMargin: '0px',
-            threshold: 0
-        }
+            threshold: 0,
+        };
 
         // @ts-ignore
         observer.current = new IntersectionObserver(([target]) => {
@@ -19,14 +19,14 @@ export default function useScroll(parentRef, childRef, callback) {
         }, options);
 
         // @ts-ignore
-        observer.current.observe(childRef.current)
+        observer.current.observe(childRef.current);
 
-        return function () {
+        return function onCancel() {
             if (childRef.current) {
-              // @ts-ignore
-              observer.current.unobserve(childRef.current)
+                // @ts-ignore
+                // eslint-disable-next-line
+                observer.current.unobserve(childRef.current);
             }
         };
-    }, [callback, childRef])
-};
-
+    }, [callback, childRef, parentRef]);
+}

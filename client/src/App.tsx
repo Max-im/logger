@@ -8,46 +8,53 @@ import { routes } from './routes';
 import { RoleTypes } from './user/user.model';
 import Theme from './theme/theme.component';
 import { getPlansAction } from './plan';
-import { ErrorBoundary } from './errorBoundary';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector(store => store.userReducer);
+    const dispatch = useAppDispatch();
+    const { user } = useAppSelector((store) => store.userReducer);
 
-  const userRole = user ? user.role : RoleTypes.GUEST; 
-  const activeRoutes = routes.filter(route => userRole >= route.role);
+    const userRole = user ? user.role : RoleTypes.GUEST;
+    const activeRoutes = routes.filter((route) => userRole >= route.role);
 
-  useEffect(() => {
-    dispatch(getPlansAction());
-  }, []);
+    useEffect(() => {
+        dispatch(getPlansAction());
+    }, [dispatch]);
 
-  return (
-      <Theme>
-        <BrowserRouter>
-          <Box className="app" sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2}}>
-            <Container maxWidth="lg" sx={{height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex', position: 'relative'}} >
-              <Aside user={user} activeRoutes={activeRoutes}/>
-              <Container sx={{display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important'}}>
-                <Header />
-              <Box sx={{ flexGrow: 1 }}>
-                
-                  <Suspense fallback={'loading'}>
-    <ErrorBoundary>
-                    <Routes>
-                      {activeRoutes.map((route) => (
-                        <Route key={route.url} path={route.url} element={<route.element />} />
-                        ))}
-                    </Routes>
-      </ErrorBoundary>
-                  </Suspense>
+    const largeStyles = {
+        height: '100%', pl: '0px !important', pr: '0px !important', display: 'flex', position: 'relative',
+    };
 
+    const innterWrap = {
+        display: 'flex', flexDirection: 'column', width: '100%', pr: '0px !important', pb: '0px !important',
+    };
+
+    const appStyles = {
+        display: 'flex', flexDirection: 'column', minHeight: '100vh', p: 2,
+    };
+
+    return (
+        <Theme>
+            <BrowserRouter>
+                <Box className="app" sx={appStyles}>
+                    <Container maxWidth="lg" sx={largeStyles}>
+                        <Aside user={user} activeRoutes={activeRoutes} />
+                        <Container sx={innterWrap}>
+                            <Header />
+                            <Box sx={{ flexGrow: 1 }}>
+                                <Suspense fallback="loading">
+                                    <Routes>
+                                        {activeRoutes.map((route) => (
+                                            <Route key={route.url} path={route.url} element={<route.element />} />
+                                        ))}
+                                    </Routes>
+                                </Suspense>
+                            </Box>
+                        </Container>
+                    </Container>
                 </Box>
-              </Container>
-            </Container>
-          </Box>
-        </BrowserRouter>
+            </BrowserRouter>
         </Theme>
-  );
+    );
 }
 
 export default App;

@@ -20,8 +20,8 @@ export const homeSlice = createSlice({
             state.loaded = true;
             state.projects = action.payload.projects;
             state.users = action.payload.users;
-        }    
-    }
-})
+        },
+    },
+});
 
 export default homeSlice.reducer;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import jwtDecode from 'jwt-decode';
 import { IUser, RoleTypes } from '../user/user.model';
 import { setAuthHeader } from '../services/http';
-import jwtDecode from 'jwt-decode';
 import { AUTH_LOCAL_VAR } from '../constants';
 
 const defaultUser: IUser = {
@@ -10,8 +10,8 @@ const defaultUser: IUser = {
     photo: '',
     email: '',
     role: RoleTypes.GUEST,
-    planId: 1
-}
+    planId: 1,
+};
 interface UserState {
     user: IUser;
     authorized: boolean;
@@ -20,7 +20,7 @@ interface UserState {
 const initialState: UserState = {
     user: defaultUser,
     authorized: false,
-}
+};
 
 try {
     const token = localStorage.getItem(AUTH_LOCAL_VAR);
@@ -30,10 +30,9 @@ try {
         initialState.authorized = true;
         setAuthHeader(token);
     }
-} catch(err) {
+} catch (err) {
     localStorage.removeItem(AUTH_LOCAL_VAR);
     setAuthHeader(null);
-    console.error(err);
 }
 
 export const userSlice = createSlice({
@@ -48,7 +47,7 @@ export const userSlice = createSlice({
             state.user = defaultUser;
             state.authorized = false;
         },
-    }
-})
+    },
+});
 
 export default userSlice.reducer;
