@@ -28,24 +28,23 @@ const Projects = () => {
         dispatch(getProjectsAction(onError));
     }, [dispatch]);
 
+    const content = projects.length ? (
+        <List>
+            <ListItem disablePadding>
+                <ListItemText primary="Projects list" />
+            </ListItem>
+            {projects.map((project) => <ProjectRow key={project.id} project={project} />)}
+        </List>
+    ) : (
+        <Typography variant="subtitle1">
+            You dont have projects yet, please Create new
+        </Typography>
+    );
+
     return (
         <Box sx={{ height: '100%', display: 'flex' }}>
             <Paper className="container" component="div" sx={{ height: '100%', flexGrow: 1 }}>
-                <>
-                    {Boolean(projects.length)
-            && (
-                <List>
-                    <ListItem disablePadding>
-                        <ListItemText primary="Projects list" />
-                    </ListItem>
-                    {projects.map((project) => <ProjectRow key={project.id} project={project} />)}
-                </List>
-            )}
-                    {
-                        Boolean(projects.length)
-                        || <Typography variant="subtitle1">You dont have projects yet, please Create new</Typography>
-                    }
-                </>
+                {content}
             </Paper>
             <Box sx={{ p: 1 }} />
             <Paper className="container" sx={{ height: '100%', flex: '0 0 30%' }}>
@@ -67,6 +66,7 @@ const Projects = () => {
                             <>
                                 <Typography sx={{ mb: 2 }} variant="subtitle2">
                                     You have access to
+                                    {' '}
                                     <Chip label={projectsThreshold} size="small" color="secondary" />
                                     {' '}
                                     projects within the scope of your current plan.

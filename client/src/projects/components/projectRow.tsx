@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-    ListItem, ListItemButton, ListItemText, Typography, Box, Divider,
+    ListItem, ListItemButton, ListItemText, Typography, Box, Divider, Button,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../hooks/redux';
 import { projectsRoute } from '../../routes';
 import { IProject } from '../model/projects.model';
 import { deleteProjectAction } from '../state/projects.actions';
+import { ProjectKey } from '../../project';
 
 interface IProjectRowProps {
     project: IProject
@@ -41,18 +42,20 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
         fontSize: 10, opacity: 0.7, display: 'flex', alignItems: 'center', '&:hover': { color: 'secondary.main' },
     };
 
+    const primaryStyles = {
+        color: 'text.primary', fontSize: 18, position: 'relative', top: 10,
+    };
+
     return (
         <Link to={`${projectsRoute.url}/${project.id}`}>
             <ListItem disablePadding sx={listItemStyles}>
                 <ListItemButton sx={{ position: 'relative' }}>
                     <ListItemText
                         primary={(
-                            <Typography sx={{
-                                color: 'text.primary', fontSize: 18, position: 'relative', top: 10,
-                            }}
-                            >
-                                {project.title}
-                            </Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography sx={primaryStyles}>{project.title}</Typography>
+                                <ProjectKey id={project.id} />
+                            </Box>
                         )}
                         secondary={(
                             <Box

@@ -72,7 +72,7 @@ export default function ProjectPage() {
                                         <Typography color="text.primary">Project Settings</Typography>
                                     </Button>
                                 </Link>
-                                <ProjectKey />
+                                <ProjectKey id={currentProject.id} />
                                 <DeleteLogsWidget />
                             </Box>
                         </Box>

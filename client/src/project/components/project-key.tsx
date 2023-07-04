@@ -3,14 +3,13 @@ import {
     Alert, Box, Button, Snackbar, Tooltip, Typography,
 } from '@mui/material';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { useAppSelector } from '../../hooks/redux';
 
-const ProjectKey: FC = () => {
+const ProjectKey: FC<{id: string}> = ({ id }) => {
     const [showMsg, setShowMsg] = useState<boolean>(false);
-    const { currentProject } = useAppSelector((state) => state.projectReducer);
 
-    const onKeyClick = () => {
-        navigator.clipboard.writeText(currentProject!.id);
+    const onKeyClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(id);
         setShowMsg(true);
     };
 
@@ -20,16 +19,13 @@ const ProjectKey: FC = () => {
 
     return (
         <>
-            {currentProject
-            && (
-                <Box>
-                    <Tooltip title="Click to Copy">
-                        <Button startIcon={<VpnKeyIcon />} onClick={onKeyClick}>
-                            <Typography color="text.primary">{currentProject.id}</Typography>
-                        </Button>
-                    </Tooltip>
-                </Box>
-            )}
+            <Box>
+                <Tooltip title="Click to Copy">
+                    <Button startIcon={<VpnKeyIcon />} onClick={onKeyClick}>
+                        <Typography color="text.primary">{id}</Typography>
+                    </Button>
+                </Tooltip>
+            </Box>
             <Snackbar
                 open={showMsg}
                 autoHideDuration={3000}
