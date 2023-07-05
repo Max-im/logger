@@ -49,12 +49,14 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     return (
         <Link to={`${projectsRoute.url}/${project.id}`}>
             <ListItem disablePadding sx={listItemStyles}>
-                <ListItemButton sx={{ position: 'relative' }}>
+                <ListItemButton>
                     <ListItemText
                         primary={(
                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <Typography sx={primaryStyles}>{project.title}</Typography>
-                                <ProjectKey id={project.id} />
+                                <Box sx={{ transform: 'scale(0.8)', left: 20, position: 'relative' }}>
+                                    <ProjectKey id={project.id} />
+                                </Box>
                             </Box>
                         )}
                         secondary={(

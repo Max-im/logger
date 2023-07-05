@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import {
     Alert, Box, Button, Snackbar, Tooltip, Typography,
 } from '@mui/material';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 const ProjectKey: FC<{id: string}> = ({ id }) => {
     const [showMsg, setShowMsg] = useState<boolean>(false);
