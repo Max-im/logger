@@ -8,8 +8,9 @@ import registredUserHook from './modules/hooks/registredUser.hook';
 import logRoutes from './modules/log/log.route';
 import { userSchemas } from './modules/user/user.auth.schema';
 import { projectSchemas } from './modules/project/project.schema';
-import { LOG_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
+import { LOG_URL, NOTIFICATION_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
 import planRoutes from './modules/plan/plan.route';
+import notificationRoutes from './modules/notification/notification.route';
 import './jobs';
 
 declare module 'fastify' {
@@ -41,6 +42,7 @@ function serverBuilder() {
   server.register(projectRoutes, { prefix: PROJECT_URL });
   server.register(logRoutes, { prefix: LOG_URL });
   server.register(planRoutes, { prefix: PLAN_URL });
+  server.register(notificationRoutes, { prefix: NOTIFICATION_URL });
 
   return server;
 }

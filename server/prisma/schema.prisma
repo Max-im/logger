@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id        String        @id @default(cuid())
-  email     String        @unique
-  name      String        @default("Guest")
-  photo     String        @default("")
-  registred DateTime      @default(now())
-  projects  UserProject[]
-  role      Role          @relation(fields: [roleId], references: [id])
-  roleId    Int
-  plan      Plan          @relation(fields: [planId], references: [id])
-  planId    Int
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String         @default("Guest")
+  photo         String         @default("")
+  registred     DateTime       @default(now())
+  projects      UserProject[]
+  role          Role           @relation(fields: [roleId], references: [id])
+  roleId        Int
+  plan          Plan           @relation(fields: [planId], references: [id])
+  planId        Int
+  notifications Notification[]
 }
 
 model Project {
@@ -52,13 +53,15 @@ model Log {
 }
 
 model Notification {
-  id        Int               @id @default(autoincrement())
-  project   Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  level     LogLevel
-  type      NotificationTypes
+  id        Int                   @id @default(autoincrement())
+  project   Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  provider  NotificationProviders @default(EMAIL)
+  logLevel  LogLevel
 
-  @@unique([projectId, level, type])
+  @@unique([projectId, userId, logLevel, provider])
 }
 
 model Plan {
@@ -86,9 +89,8 @@ enum PlanTypes {
   VIP
 }
 
-enum NotificationTypes {
+enum NotificationProviders {
   EMAIL
-  TELEGRAM
 }
 
 enum RoleTypes {

@@ -73,6 +73,7 @@ class LogController {
 
   async create(request: FastifyRequest<{ Body: CreateProjectInput; }>, reply: FastifyReply) {
     try {
+      // TODO: implement
       // const { title } = request.body;
 
       // const project = await ProjectEntity.create(request.user.id, title);

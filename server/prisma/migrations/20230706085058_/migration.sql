@@ -2,6 +2,9 @@
 CREATE TYPE "PlanTypes" AS ENUM ('FREE', 'BASIC', 'STANDART', 'VIP');
 
 -- CreateEnum
+CREATE TYPE "NotificationProviders" AS ENUM ('EMAIL');
+
+-- CreateEnum
 CREATE TYPE "RoleTypes" AS ENUM ('USER', 'ADMIN');
 
 -- CreateEnum
@@ -52,6 +55,17 @@ CREATE TABLE "Log" (
 );
 
 -- CreateTable
+CREATE TABLE "Notification" (
+    "id" SERIAL NOT NULL,
+    "projectId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "level" "LogLevel" NOT NULL,
+    "provider" "NotificationProviders" NOT NULL,
+
+    CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Plan" (
     "id" SERIAL NOT NULL,
     "name" "PlanTypes" NOT NULL,
@@ -77,6 +91,9 @@ CREATE TABLE "Role" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Notification_projectId_level_provider_userId_key" ON "Notification"("projectId", "level", "provider", "userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Plan_name_key" ON "Plan"("name");
 
 -- CreateIndex
@@ -96,3 +113,9 @@ ALTER TABLE "UserProject" ADD CONSTRAINT "UserProject_projectId_fkey" FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE "Log" ADD CONSTRAINT "Log_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
