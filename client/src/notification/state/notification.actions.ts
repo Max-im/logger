@@ -27,20 +27,9 @@ export const createNotificationAction = (projectId: string, level: string, cb: c
     }
 };
 
-interface IDleleteNotificationParams {
-    id: number;
-    projectId: string;
-    cb: cb
-}
-
-export const deleteNotificationAction = (params: IDleleteNotificationParams) => async (dispatch: AppDispatch) => {
-    const {
-        id, projectId, cb,
-    } = params;
-
+export const deleteNotificationAction = (id: number, projectId: string, cb: cb) => async (dispatch: AppDispatch) => {
     try {
         await api.delete(`${GET_NOTIFICATIONS_URL}/${projectId}/${id}`);
-        console.log(id, 'aaaaaaaaaaaaaaaaaaaaaaaaaa');
         dispatch(notificationSlice.actions.onDelete(id));
     } catch (err) {
         const message = err.message || DEFAULT_ERROR_TEXT;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-    Box, List, ListItemButton, ListSubheader, ListItemIcon, ListItemText, Collapse, Switch,
+    Box, List, ListItemButton, ListSubheader, ListItemIcon, ListItemText, Collapse, Switch, Divider,
 } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -42,12 +42,7 @@ const NotificationSettings = () => {
             if (!val) {
                 onError('Please try again');
             } else {
-                const params = {
-                    id: val.id,
-                    projectId: projectId!,
-                    cb: onError,
-                };
-                dispatch(deleteNotificationAction(params));
+                dispatch(deleteNotificationAction(val.id, projectId!, onError));
             }
         }
     };
@@ -83,6 +78,7 @@ const NotificationSettings = () => {
                             </ListItemButton>
                         </List>
                     </Collapse>
+                    <Divider />
                 </Box>
             ))}
         </List>

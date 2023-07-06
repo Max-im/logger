@@ -1,6 +1,6 @@
 import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
     Badge, Box, IconButton, Switch, Typography,
 } from '@mui/material';
@@ -12,11 +12,9 @@ import { changeTheme } from '../theme/theme.actions';
 function Header() {
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const param = useParams();
     const { light } = useAppSelector((state) => state.themeReducer);
 
     const route = routes.find((route) => location.pathname.match(route.rule));
-    console.log(param);
 
     const onChangeTheme = (val: boolean) => {
         dispatch(changeTheme(val));
