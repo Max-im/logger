@@ -5,6 +5,7 @@ import { homeReducer } from '../home';
 import { projectReducer } from '../projects';
 import { logReducer } from '../logs';
 import { planReducer } from '../plan';
+import { notificationReducer } from '../notification';
 
 const rootReducer = combineReducers({
     homeReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     projectReducer,
     logReducer,
     planReducer,
+    notificationReducer,
 });
 
 export const setupStore = () => configureStore({

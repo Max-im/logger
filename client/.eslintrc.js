@@ -37,6 +37,8 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'guard-for-in': 'off',
     'no-console': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'arrow-body-style': 'off',
+    'object-curly-newline': 'off'
   },
 };

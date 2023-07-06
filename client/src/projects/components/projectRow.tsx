@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-    ListItem, ListItemButton, ListItemText, Typography, Box, Divider, Button,
+    ListItem, ListItemButton, ListItemText, Typography, Box, Divider,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
