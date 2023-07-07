@@ -12,8 +12,10 @@
 - [x] lazy load
 - [x] linter
 - [x] client modules
-- [ ] notification
-- [ ] error boundary
+- [x] notification
+- [x] error boundary
+- [ ] sender
+- [ ] error handling
 - [ ] tests
 - [ ] storybook
 - [ ] clean up css

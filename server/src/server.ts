@@ -12,6 +12,7 @@ import { LOG_URL, NOTIFICATION_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL 
 import planRoutes from './modules/plan/plan.route';
 import notificationRoutes from './modules/notification/notification.route';
 import './jobs';
+import senderRoutes from './modules/sender/sender.route';
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -43,6 +44,7 @@ function serverBuilder() {
   server.register(logRoutes, { prefix: LOG_URL });
   server.register(planRoutes, { prefix: PLAN_URL });
   server.register(notificationRoutes, { prefix: NOTIFICATION_URL });
+  server.register(senderRoutes, { prefix: 'api/v1/send' });
 
   return server;
 }

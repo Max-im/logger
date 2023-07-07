@@ -25,12 +25,12 @@ model User {
 }
 
 model Project {
-  id           String         @id @default(cuid())
-  title        String
-  created      DateTime       @default(now())
-  logs         Log[]
-  users        UserProject[]
-  Notification Notification[]
+  id            String         @id @default(cuid())
+  title         String
+  created       DateTime       @default(now())
+  logs          Log[]
+  users         UserProject[]
+  notifications Notification[]
 }
 
 model UserProject {
