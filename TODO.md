@@ -14,7 +14,7 @@
 - [x] client modules
 - [x] notification
 - [x] error boundary
-- [ ] sender
+- [x] sender
 - [ ] error handling
 - [ ] tests
 - [ ] storybook
