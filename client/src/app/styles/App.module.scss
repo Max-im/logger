@@ -1,0 +1,22 @@
+.app__wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.app__container {
+  height: 100%;
+
+  display: flex !important;
+  position: relative;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 16px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
