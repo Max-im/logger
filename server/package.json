@@ -22,7 +22,7 @@
     "jsonwebtoken": "^9.0.0",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.3",
-    "nodemailer-sendinblue-transport": "^2.0.1",
+    "nodemailer-sendgrid": "^1.0.3",
     "pg": "^8.11.0",
     "zod": "^3.21.4"
   },

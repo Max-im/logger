@@ -1,25 +1,26 @@
 import nodemailer from 'nodemailer';
-// @ts-ignore
-import Transport from 'nodemailer-sendinblue-transport';
+import nodemailerSendgrid from 'nodemailer-sendgrid';
 import { SenderEntity } from './sender.entity';
 import { SenderParam } from './sender.param';
 
 export class SenderEmailEntity extends SenderEntity {
-    private transporter = nodemailer.createTransport(
-        new Transport({ apiKey: <string>process.env.EMAIL_SENDER_KEY })
+    private transport = nodemailer.createTransport(
+        nodemailerSendgrid({
+            apiKey: <string>process.env.EMAIL_SENDER_KEY
+        })
     );
 
     constructor(private params: SenderParam[]) {
         super();
     }
 
-    notify() {
-        // try {
-        for (const param of this.params) {
-            this.transporter.sendMail(param);
+    async notify() {
+        try {
+            for (const param of this.params) {
+                await this.transport.sendMail(param);
+            }
+        } catch (err) {
+            console.log(err)
         }
-        // } catch (err) {
-        //     console.log(err);
-        // }
     }
 }

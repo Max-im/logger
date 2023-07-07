@@ -11,6 +11,6 @@ export class SenderEmailParam extends SenderParam {
 
     this.to = userData.email;
     this.subject = userData.notification.logLevel;
-    this.html = userData.payload;
+    this.html = `<p>${userData.payload}</p>`;
   }
 }
