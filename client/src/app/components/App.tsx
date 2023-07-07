@@ -8,6 +8,7 @@ import { routes } from '../../routes';
 import { RoleTypes } from '../../user/user.model';
 import Theme from '../../theme/theme.component';
 import { getPlansAction } from '../../plan';
+import { Spinner } from '../../shared/ui/Spinner';
 import styles from '../styles/App.module.scss';
 
 function App() {
@@ -29,8 +30,8 @@ function App() {
                         <Aside user={user} activeRoutes={activeRoutes} />
                         <Container className={styles.app__main}>
                             <Header />
-                            <Box sx={{ flexGrow: 1 }}>
-                                <Suspense fallback="loading">
+                            <Box flexGrow={1}>
+                                <Suspense fallback={<Spinner />}>
                                     <Routes>
                                         {activeRoutes.map((route) => (
                                             <Route key={route.url} path={route.url} element={<route.element />} />
