@@ -1,14 +1,14 @@
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
-import Header from '../../header/header.component';
-import Aside from '../../aside/aside.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { routes } from '../../routes';
 import { RoleTypes } from '../../user/user.model';
-import Theme from '../../theme/theme.component';
 import { getPlansAction } from '../../plan';
 import { Spinner } from '../../shared/ui/Spinner';
+import Header from '../../header/header.component';
+import Aside from '../../aside/aside.component';
+import Theme from '../../theme/theme.component';
 import styles from '../styles/App.module.scss';
 
 function App() {
