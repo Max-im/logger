@@ -14,7 +14,9 @@
     "editor.tabSize": 2,
     "[typescript]": {
         "editor.formatOnSave": true,
-        "editor.formatOnPaste": true
+        "editor.formatOnPaste": true,
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false
     },
     "[markdown]": {
         "editor.formatOnSave": true,
