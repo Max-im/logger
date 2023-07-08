@@ -1,0 +1,12 @@
+.log__main {
+  height: calc(100vh - 92px);
+  flex: 1 1 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.log__info {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+}
