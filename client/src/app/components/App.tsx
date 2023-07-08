@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { routes } from '../../routes';
 import { RoleTypes } from '../../user/user.model';
 import { getPlansAction } from '../../plan';
+import { Aside } from '../../aside';
 import { Spinner } from '../../shared/ui/Spinner';
 import Header from '../../header/header.component';
-import Aside from '../../aside/aside.component';
 import Theme from '../../theme/theme.component';
 import styles from '../styles/App.module.scss';
 

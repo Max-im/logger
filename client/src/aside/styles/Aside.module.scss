@@ -1,0 +1,17 @@
+.aside__wrapper {
+  height: 100%;
+  flex: 0 0 22%;
+  position: sticky;
+  top: 16px;
+}
+
+.aside__container {
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+}
+
+.aside__divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

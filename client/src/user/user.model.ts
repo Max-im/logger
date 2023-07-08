@@ -1,11 +1,10 @@
+/* eslint-disable */
 export enum RoleTypes {
-  // eslint-disable-next-line
   GUEST = 0,
-  // eslint-disable-next-line
   USER = 1,
-  // eslint-disable-next-line
   ADMIN = 2
 }
+/* eslint-enable */
 
 export interface IUser {
   id: string;
