@@ -47,10 +47,8 @@ const LogsDiagramWidget = () => {
     }, [memoInfo]);
 
     const data = {
-        // labels: ['Fatal', 'Error', 'Warning', 'Debug', 'Info'],
         datasets: [
             {
-            // label: '# of Votes',
                 data: levels,
                 backgroundColor: [
                     LevelColors.FATAL.bg,

@@ -10,7 +10,7 @@ import ProjectFilter from '../components/project.filter';
 import ProjectKey from '../components/project-key';
 import { getCurrentProjectAction } from '../state/project.actions';
 import {
-    DeleteLogsWidget, LogTable, LogsDiagramWidget, clearLogsAction,
+    DeleteLogsWidget, LogsTable, LogsDiagramWidget, clearLogsAction,
 } from '../../logs';
 
 export default function ProjectPage() {
@@ -51,7 +51,7 @@ export default function ProjectPage() {
                     <Paper className="container" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="subtitle1">{currentProject.title}</Typography>
                         <Divider sx={{ mb: 2 }} />
-                        <LogTable projectId={projectId!} />
+                        <LogsTable projectId={projectId!} />
                     </Paper>
                     <Box sx={{ mr: 2 }} />
                     <Paper className="container" sx={containerStyles}>

@@ -1,0 +1,24 @@
+.log__row {
+  cursor: pointer;
+
+  &:last-child tr,
+  &:last-child th {
+    border: 0;
+  }
+
+  &_active {
+    background: rgba(255, 255, 255, .24);
+  }
+}
+
+.log__text {
+  font-weight: bold;
+
+  &_opened {
+    color: gray;
+  }
+}
+
+.log__nopadding {
+  padding: 0
+}

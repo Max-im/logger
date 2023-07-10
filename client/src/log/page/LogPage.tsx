@@ -40,7 +40,7 @@ const LogPage: FC = () => {
                 <Divider sx={{ mb: 2, mt: 2 }} />
                 {log && (
                     <Box display="flex" flexDirection="column" flex={2}>
-                        <Label level={log.level} />
+                        <Label level={log.level} size="medium" />
                         <Typography component="p">{new Date(log.created).toDateString()}</Typography>
                         <Box flexGrow={1} />
                         <LogControl log={log} />

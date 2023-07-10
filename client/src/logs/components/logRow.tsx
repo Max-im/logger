@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-    TableRow, TableCell, Checkbox, Typography, Chip,
-} from '@mui/material';
-import { ILog } from '../model/log.model';
-import { selectAction } from '../state/log.actions';
+import { TableRow, TableCell, Checkbox, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { LevelColors } from '../../logs';
+import { selectAction } from '../state/log.actions';
+import { ILog } from '../model/log.model';
+import Label from '../../shared/ui/Label';
+import styles from '../styles/LogRow.module.scss';
 
 interface ILogProps {
   log: ILog;
@@ -27,35 +26,22 @@ const LogRow: FC<ILogProps> = ({ log }) => {
     };
 
     const isSelected = Boolean(selected[log.id]);
-    const selectedCommon = {
-        '&:last-child tr, &:last-child th': { border: 0 }, cursor: 'pointer', '&:hover': { bgcolor: 'info.main' },
-    };
-    const selectStyle = isSelected
-        ? { background: 'rgba(255, 255, 255, .24)', ...selectedCommon }
-        : selectedCommon;
-    const labelBg = log.opened ? {} : { background: LevelColors[log.level].bg };
+    const selectStyle = isSelected ? styles.log__row_active : styles.log__row;
+    const openedClass = log.opened ? styles.log__text_opened : styles.log__text;
 
     return (
-        <TableRow sx={selectStyle}>
+        <TableRow className={selectStyle} sx={{ '&:hover': { bgcolor: 'info.main' } }}>
             <TableCell align="left">
-                <Checkbox size="small" sx={{ p: 0 }} checked={isSelected} onChange={handleChange} />
+                <Checkbox size="small" className={styles.log__nopadding} checked={isSelected} onChange={handleChange} />
             </TableCell>
-            <TableCell onClick={onOpen} scope="row" sx={{ p: 0 }}>
-                {/* @ts-ignore */}
-                <Chip
-                    variant="outlined"
-                    label={log.level}
-                    size="small"
-                    sx={{ ...labelBg, border: `1px solid ${LevelColors[log.level].color}` }}
-                />
+            <TableCell onClick={onOpen} scope="row" className={styles.log__nopadding}>
+                <Label level={log.level} />
             </TableCell>
             <TableCell onClick={onOpen} align="right">
-                <Typography sx={log.opened ? { color: 'gray' } : { fontWeight: 'bold' }}>
-                    {log.value}
-                </Typography>
+                <Typography className={openedClass}>{log.value}</Typography>
             </TableCell>
             <TableCell onClick={onOpen} align="right">
-                <Typography sx={log.opened ? { color: 'gray' } : { fontWeight: 'bold' }}>
+                <Typography className={openedClass}>
                     {log.created.toDateString().replace(/^.\w+\s/, '')}
                 </Typography>
             </TableCell>
