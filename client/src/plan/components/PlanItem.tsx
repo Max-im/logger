@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { IPlan } from '../model/plan.model';
+import styles from '../styles/PlanItem.module.scss';
 
 interface IPlanItemProps {
     plan: IPlan;
@@ -17,42 +18,38 @@ const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
         bgcolor,
         border: '3px solid',
         borderColor: 'info.dark',
-        m: 1,
-        p: 2,
-        width: '100%',
-        borderRadius: '10px',
-        textAlign: 'center',
     };
 
     return (
-        <ListItem sx={{ flex: '25%', p: 0 }}>
+        <ListItem className={styles.plan__item}>
             <Box
                 color="primary"
+                className={styles.plan__inner}
                 sx={planWrapperStyles}
                 component="span"
             >
                 <Chip
-                    sx={{ fontSize: 22, mb: 3, p: 1 }}
+                    className={styles.plan__label}
                     component="p"
                     color="secondary"
                     variant="outlined"
                     label={plan.name}
                 />
-                <Typography sx={{ fontSize: 24, mt: 3 }}>
+                <Typography className={styles.plan__block}>
                     <AttachMoneyIcon />
                     {plan.cost}
                 </Typography>
                 <Typography component="span">Month fee</Typography>
 
-                <Typography sx={{ fontSize: 24, mt: 3 }}>{plan.projectsNum}</Typography>
+                <Typography className={styles.plan__block}>{plan.projectsNum}</Typography>
                 <Typography component="span">Projects available</Typography>
 
-                <Box sx={{ mb: 3, mt: 3 }}>
-                    <Typography sx={{ fontSize: 24 }}>{plan.storingDays}</Typography>
+                <Box>
+                    <Typography className={styles.plan__block}>{plan.storingDays}</Typography>
                     <Typography component="span">Logs store days</Typography>
                 </Box>
 
-                <Box sx={{ mt: 3 }}>
+                <Box className={styles.plan__block}>
                     {isActive
                         ? <Button variant="outlined" disabled>Current Plan</Button>
                         : <Button variant="contained">Activate Now</Button>}

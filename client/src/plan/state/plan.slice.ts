@@ -3,10 +3,12 @@ import { IPlan } from '../model/plan.model';
 
 interface PlanState {
     plans: IPlan[];
+    loaded: boolean;
 }
 
 const initialState: PlanState = {
     plans: [],
+    loaded: false,
 };
 
 export const plantSlice = createSlice({
@@ -15,6 +17,7 @@ export const plantSlice = createSlice({
     reducers: {
         get(state, action: PayloadAction<IPlan[]>) {
             state.plans = action.payload;
+            state.loaded = true;
         },
     },
 });
