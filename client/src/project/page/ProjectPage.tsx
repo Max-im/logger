@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-    Paper, Typography, Divider, Box, Button,
-} from '@mui/material';
+import { Paper, Typography, Divider, Box, Button } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { projectsRoute } from '../../routes';
 import ProjectFilter from '../components/project.filter';
 import ProjectKey from '../components/project-key';
 import { getCurrentProjectAction } from '../state/project.actions';
-import {
-    DeleteLogsWidget, LogsTable, LogsDiagramWidget, clearLogsAction,
-} from '../../logs';
+import { DeleteLogsWidget, LogsTable, LogsDiagramWidget, clearLogsAction } from '../../logs';
+import styles from '../styles/ProjectPage.module.scss';
 
 export default function ProjectPage() {
     const dispatch = useAppDispatch();
     const { projectId } = useParams();
-
     const { currentProject } = useAppSelector((state) => state.projectReducer);
 
     const onError = (msg: string) => {
@@ -31,36 +27,23 @@ export default function ProjectPage() {
         };
     }, [dispatch, projectId]);
 
-    const containerStyles = {
-        flex: '0 0 30%',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'sticky',
-        height: 'calc(95vh - 60px)',
-        top: '16px',
-    };
-
-    const secondarStyles = {
-        maxWidth: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%',
-    };
-
     return (
         <Box>
             {currentProject && (
-                <Box sx={{ minHeight: 'calc(100vh - 92px)', display: 'flex' }}>
-                    <Paper className="container" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Box className={styles.project__wrapper}>
+                    <Paper className={`container ${styles.project__main}`}>
                         <Typography variant="subtitle1">{currentProject.title}</Typography>
-                        <Divider sx={{ mb: 2 }} />
+                        <Divider className={styles.project__divider} />
                         <LogsTable projectId={projectId!} />
                     </Paper>
-                    <Box sx={{ mr: 2 }} />
-                    <Paper className="container" sx={containerStyles}>
+                    <Box mr={2} />
+                    <Paper className={`container ${styles.project__aside}`}>
                         <Box>
                             <Typography variant="subtitle1">Project Info</Typography>
-                            <Divider sx={{ mb: 2 }} />
+                            <Divider className={styles.project__divider} />
                         </Box>
 
-                        <Box sx={secondarStyles}>
+                        <Box className={styles.project__asideContent}>
                             <Box>
                                 <LogsDiagramWidget />
                                 <ProjectFilter />

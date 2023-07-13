@@ -1,0 +1,31 @@
+.project__wrapper {
+  display: flex;
+  min-height: calc(100vh - 92px);
+}
+
+.project__main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project__aside {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  height: calc(95vh - 60px);
+  top: 16px;
+}
+
+.project__divider {
+  margin-bottom: 16px;
+}
+
+.project__asideContent {
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
