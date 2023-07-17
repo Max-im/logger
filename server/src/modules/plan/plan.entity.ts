@@ -37,7 +37,7 @@ export class PlanEntity implements Plan {
 
     static async onGetById(id: number) {
         const planItem = await PlanRepo.getById(id);
-        if (!planItem) throw ErrorNotFound();
+        if (!planItem) throw new ErrorNotFound('Unavailable plan');
         return new PlanEntity(planItem);
     }
 }
