@@ -12,6 +12,7 @@ export const PROJECT_URL = '/api/v1/project';
 export const STATUS_URL = '/api/v1/status/stat';
 export const GET_LOGS_URL = '/api/v1/log';
 export const GET_PLAN_URL = '/api/v1/plan';
+export const GET_PAYMENT_URL = '/api/v1/payment';
 export const GET_NOTIFICATIONS_URL = '/api/v1/notification';
 
 export const GET_PRICE_URL = '/price';
