@@ -4,25 +4,13 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { IPlan } from '../../plan/model/plan.model';
 import { GET_PAYMENT_URL } from '../../constants';
 import api from '../../services/http';
+import styles from '../styles/PaymentWidget.module.scss';
 
 interface IPaymentModalProps {
   open: boolean;
   handleClose: () => void;
   plan: IPlan
 }
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    textAlign: 'center',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
 interface IPayParams {
     data: string;
@@ -43,33 +31,33 @@ const PaymentWidget: FC<IPaymentModalProps> = ({ open, handleClose, plan }) => {
 
     return (
         <Modal open={open} onClose={handleClose}>
-            <Box sx={style}>
+            <Box className={styles.payment__container} sx={{ bgcolor: 'background.paper' }}>
                 {payForm && (
                     <>
-                        <Typography variant="h4" pb={2}>Pay a Month</Typography>
+                        <Typography variant="h4" pb={4}>Buy Plan</Typography>
                         <Chip
                             component="p"
                             color="secondary"
                             variant="outlined"
                             label={plan.name}
                         />
-                        <Typography>plan</Typography>
-                        <Typography pb={4}>
-                            for
+                        <Typography variant="body2" pt={4} pb={1} className={styles.payment__text}>for</Typography>
+                        <Typography variant="body2" pb={1} className={styles.payment__price}>
                             <AttachMoneyIcon />
                             {plan.cost}
                         </Typography>
+                        <Typography variant="body2" pb={4} className={styles.payment__text}>in a month</Typography>
                         <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
                             <input type="hidden" name="data" value={payForm!.data} />
                             <input type="hidden" name="signature" value={payForm!.signature} />
                             <input
+                                className={styles.payment__button}
                                 type="image"
                                 src="//static.liqpay.ua/buttons/p1en.radius.png"
                                 alt="img"
                                 name="btn_text"
                             />
                         </form>
-                        <Typography variant="body2" pt={2}>Powered by LiqPay</Typography>
                     </>
                 )}
             </Box>
