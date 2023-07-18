@@ -16,7 +16,7 @@
 - [x] error boundary
 - [x] sender
 - [x] payment
-- [ ] clean up css
+- [x] clean up css
 - [ ] error handling
 - [ ] tests
 - [ ] storybook
