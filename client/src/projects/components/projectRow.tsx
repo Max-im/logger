@@ -10,6 +10,7 @@ import { projectsRoute } from '../../routes';
 import { IProject } from '../model/projects.model';
 import { deleteProjectAction } from '../state/projects.actions';
 import { ProjectKey } from '../../project';
+import styles from '../styles/ProjectRow.module.scss';
 
 interface IProjectRowProps {
     project: IProject
@@ -33,57 +34,43 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
         navigate(`${projectsRoute.url}/settings/${id}`);
     };
 
-    const listItemStyles = {
-        '&:hover .project__control': { visibility: 'visible' },
-        '&:hover .project__controlWrap': { top: 7, opacity: 1 },
-    };
-
-    const controlItemStyles = {
-        fontSize: 10, opacity: 0.7, display: 'flex', alignItems: 'center', '&:hover': { color: 'secondary.main' },
-    };
-
-    const primaryStyles = {
-        color: 'text.primary', fontSize: 18, position: 'relative', top: 10,
-    };
-
     return (
         <Link to={`${projectsRoute.url}/${project.id}`}>
-            <ListItem disablePadding sx={listItemStyles}>
+            <ListItem disablePadding className={styles.row__item}>
                 <ListItemButton>
                     <ListItemText
                         primary={(
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography sx={primaryStyles}>{project.title}</Typography>
-                                <Box sx={{ transform: 'scale(0.8)', left: 20, position: 'relative' }}>
+                            <Box className={styles.row__titleWrap}>
+                                <Typography
+                                    color="text.primary"
+                                    className={styles.row__title}
+                                >
+                                    {project.title}
+                                </Typography>
+                                <Box className={styles.row__key}>
                                     <ProjectKey id={project.id} />
                                 </Box>
                             </Box>
                         )}
                         secondary={(
-                            <Box
-                                className="project__controlWrap"
-                                sx={{
-                                    display: 'flex', position: 'absolute', top: 0, transition: '0.5s', opacity: 0,
-                                }}
-                            >
-                                <Box className="project__control" sx={{ visibility: 'hidden', display: 'flex' }}>
-                                    <Typography
-                                        component="span"
-                                        sx={controlItemStyles}
-                                        onClick={(e) => onDelete(e, project.id)}
-                                    >
-                                        Delete
-                                        <DeleteIcon sx={{ ml: 0.5, fontSize: 14 }} />
-                                    </Typography>
-                                    <Typography
-                                        component="span"
-                                        sx={{ ml: 2, ...controlItemStyles }}
-                                        onClick={(e) => onSettings(e, project.id)}
-                                    >
-                                        Settings
-                                        <SettingsIcon sx={{ ml: 0.5, fontSize: 14 }} />
-                                    </Typography>
-                                </Box>
+                            <Box className={styles.row__control}>
+                                <Typography
+                                    className={styles.row__controlItem}
+                                    sx={{ '&:hover': { color: 'secondary.main' } }}
+                                    onClick={(e) => onDelete(e, project.id)}
+                                >
+                                    Delete
+                                    <DeleteIcon className={styles.row__controlIcon} />
+                                </Typography>
+                                <Typography
+                                    ml={2}
+                                    sx={{ '&:hover': { color: 'secondary.main' } }}
+                                    className={styles.row__controlItem}
+                                    onClick={(e) => onSettings(e, project.id)}
+                                >
+                                    Settings
+                                    <SettingsIcon className={styles.row__controlIcon} />
+                                </Typography>
                             </Box>
                         )}
                     />

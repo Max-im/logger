@@ -1,0 +1,19 @@
+.projects__wrapper {
+  display: flex;
+  height: calc(100vh - 92px);
+}
+
+.projects__main {
+  height: 100%;
+  flex-grow: 1;
+}
+
+.projects__aside {
+  height: 100%;
+  flex: 0 0 30%;
+}
+
+.projects__divider {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
