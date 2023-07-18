@@ -1,39 +1,18 @@
 import React, { FC, useState } from 'react';
-import {
-    ListItem, Box, Typography, Chip, Button, Modal,
-} from '@mui/material';
+import { ListItem, Box, Typography, Button, Chip } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { IPlan } from '../model/plan.model';
 import styles from '../styles/PlanItem.module.scss';
-import api from '../../services/http';
-import { GET_PAYMENT_URL } from '../../constants';
+import { PaymentWidget } from '../../payment';
 
 interface IPlanItemProps {
     plan: IPlan;
     activePlanId: number;
+    authorized: boolean;
 }
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    textAlign: 'center',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-interface IPayParams {
-    data: string;
-    signature: string;
-}
-
-const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
+const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId, authorized }) => {
     const [open, setOpen] = useState(false);
-    const [payForm, setPayForm] = useState<IPayParams | null>(null);
     const isActive = plan.id === activePlanId;
     const bgcolor = isActive ? 'info.main' : '';
     const planWrapperStyles = {
@@ -43,16 +22,23 @@ const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
     };
 
     const onOpenCharge = async () => {
-        const result = await api.get(`${GET_PAYMENT_URL}/${plan.id}`);
-        console.log(result.data);
         setOpen(true);
-        setPayForm(result.data);
     };
 
     const handleClose = () => {
         setOpen(false);
-        setPayForm(null);
     };
+
+    const showAuthModal = () => {
+        console.log('Please login first');
+    };
+
+    let button = <Button variant="outlined" disabled>Current Plan</Button>;
+    if (!isActive && authorized) {
+        button = <Button variant="contained" onClick={onOpenCharge}>Activate Now</Button>;
+    } else if (!isActive && !authorized) {
+        button = <Button variant="contained" onClick={showAuthModal}>Activate Now</Button>;
+    }
 
     return (
         <>
@@ -85,46 +71,12 @@ const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
                     </Box>
 
                     <Box className={styles.plan__block}>
-                        {isActive
-                            ? <Button variant="outlined" disabled>Current Plan</Button>
-                            : <Button variant="contained" onClick={onOpenCharge}>Activate Now</Button>}
+                        { button }
                     </Box>
                 </Box>
             </ListItem>
 
-            <Modal open={open} onClose={handleClose}>
-                <Box sx={style}>
-                    {payForm && (
-                        <>
-                            <Typography variant="h4" pb={2}>Pay a Month</Typography>
-                            <Chip
-                                className={styles.plan__label}
-                                component="p"
-                                color="secondary"
-                                variant="outlined"
-                                label={plan.name}
-                            />
-                            <Typography className={styles.plan__block}>plan</Typography>
-                            <Typography pb={4} className={styles.plan__block}>
-                                for
-                                <AttachMoneyIcon />
-                                {plan.cost}
-                            </Typography>
-                            <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
-                                <input type="hidden" name="data" value={payForm!.data} />
-                                <input type="hidden" name="signature" value={payForm!.signature} />
-                                <input
-                                    type="image"
-                                    src="//static.liqpay.ua/buttons/p1en.radius.png"
-                                    alt="img"
-                                    name="btn_text"
-                                />
-                            </form>
-                            <Typography variant="body2" pt={2}>Powered by LiqPay</Typography>
-                        </>
-                    )}
-                </Box>
-            </Modal>
+            {open && <PaymentWidget open={open} handleClose={handleClose} plan={plan} />}
         </>
     );
 };

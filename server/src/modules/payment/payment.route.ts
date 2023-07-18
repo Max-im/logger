@@ -5,6 +5,7 @@ async function paymentRoutes(server: FastifyInstance) {
     const onRequest = { onRequest: [server.registredUser] };
 
     server.get('/:planId', onRequest, paymentController.onGetParams);
+    server.post('/', paymentController.onCallback);
 }
 
 export default paymentRoutes;

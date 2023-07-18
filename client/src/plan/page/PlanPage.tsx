@@ -6,7 +6,7 @@ import styles from '../styles/PlanPage.module.scss';
 
 const PlanPage = () => {
     const { plans, loaded } = useAppSelector((state) => state.planReducer);
-    const { user } = useAppSelector((state) => state.userReducer);
+    const { user, authorized } = useAppSelector((state) => state.userReducer);
 
     return (
         <Paper className={`container ${styles.plan__wrapper}`}>
@@ -22,7 +22,14 @@ const PlanPage = () => {
                 <Box flexGrow={1} display="flex" flexDirection="column">
                     { loaded && (
                         <List className={styles.plan__list}>
-                            {plans.map((plan) => <PlanItem key={plan.id} plan={plan} activePlanId={user.planId} />)}
+                            {plans.map((plan) => (
+                                <PlanItem
+                                    key={plan.id}
+                                    plan={plan}
+                                    activePlanId={user.planId}
+                                    authorized={authorized}
+                                />
+                            ))}
                         </List>
                     )}
                 </Box>

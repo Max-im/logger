@@ -6,6 +6,7 @@ export class LiqPayService {
     private version = '3';
     private publicKey = process.env.LIQPAY_PUBLIC_KEY;
     private privateKey = process.env.LIQPAY_PRIVATE_KEY;
+    private resultUrl = process.env.LIQPAY_CLIENT_REDIRECT;
 
     getPayParams(amount: number, description: string) {
         const params = {
@@ -16,7 +17,9 @@ export class LiqPayService {
             action: 'pay',
             amount,
             description,
-            result_url: process.env.LIQPAY_CLIENT_REDIRECT
+            result_url: this.resultUrl,
+            // server_url: ''
+
         };
 
         const data = Buffer.from(JSON.stringify(params)).toString('base64');
@@ -25,7 +28,7 @@ export class LiqPayService {
         return { data, signature };
     }
 
-    getSignature(str: string) {
+    private getSignature(str: string) {
         const sha1 = crypto.createHash('sha1');
         sha1.update(str);
         return sha1.digest('base64');

@@ -15,6 +15,15 @@ class PaymentController {
             return reply.code(code).send(err);
         }
     }
+    async onCallback(request: FastifyRequest, reply: FastifyReply): Promise<any> {
+        try {
+            console.log(request.body);
+            return request.body;
+        } catch (err) {
+            const code = err.code || 500;
+            return reply.code(code).send(err);
+        }
+    }
 }
 
 export const paymentController = new PaymentController();
