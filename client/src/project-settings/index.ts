@@ -1,5 +1,5 @@
 import { lazy } from 'react';
 
-const ProjectSettingsPage = lazy(() => import('./page/project-settings.page'));
+const ProjectSettingsPage = lazy(() => import('./page/ProjectSettings'));
 
 export default ProjectSettingsPage;

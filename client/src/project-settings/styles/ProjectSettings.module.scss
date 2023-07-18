@@ -1,0 +1,11 @@
+.settings__wrapper {
+  height: calc(100vh - 92px);
+  display: flex;
+  flex-direction: column;
+}
+
+.settings__container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}

@@ -16,10 +16,10 @@
 - [x] error boundary
 - [x] sender
 - [x] payment
+- [ ] clean up css
 - [ ] error handling
 - [ ] tests
 - [ ] storybook
-- [ ] clean up css
 - [ ] content
 - [ ] cicd
 - [ ] deploy
