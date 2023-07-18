@@ -2,9 +2,9 @@ import React, { FC, ReactNode } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import { darkTheme } from './theme.dark';
-import { lightTheme } from './theme.light';
-import { useAppSelector } from '../hooks/redux';
+import { darkTheme } from '../variants/theme.dark';
+import { lightTheme } from '../variants/theme.light';
+import { useAppSelector } from '../../hooks/redux';
 
 interface ITheme {
     children: ReactNode

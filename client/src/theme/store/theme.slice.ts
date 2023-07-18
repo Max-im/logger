@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { THEME_LOCAL_VAR } from '../constants';
+import { THEME_LOCAL_VAR } from '../../constants';
 
 export const defaultLightTheme = true;
 

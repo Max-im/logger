@@ -1,5 +1,5 @@
-import { THEME_LOCAL_VAR } from '../constants';
-import { AppDispatch } from '../store/store';
+import { THEME_LOCAL_VAR } from '../../constants';
+import { AppDispatch } from '../../store/store';
 import { themeSlice } from './theme.slice';
 
 export const changeTheme = (isLight: boolean) => (dispatch: AppDispatch) => {

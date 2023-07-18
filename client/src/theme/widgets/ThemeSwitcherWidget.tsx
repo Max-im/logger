@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { changeTheme } from '../theme.actions';
+import { changeTheme } from '../store/theme.actions';
 
 const ThemeSwitcherWidget = () => {
     const dispatch = useAppDispatch();
