@@ -4,7 +4,7 @@ import { paymentController } from './payment.controller';
 async function paymentRoutes(server: FastifyInstance) {
     const onRequest = { onRequest: [server.registredUser] };
 
-    server.get('/:planId', onRequest, paymentController.onGetForm);
+    server.get('/:planId', onRequest, paymentController.onGetParams);
 }
 
 export default paymentRoutes;

@@ -15,11 +15,11 @@
 - [x] notification
 - [x] error boundary
 - [x] sender
+- [x] payment
 - [ ] error handling
 - [ ] tests
 - [ ] storybook
 - [ ] clean up css
 - [ ] content
-- [ ] payment
 - [ ] cicd
 - [ ] deploy

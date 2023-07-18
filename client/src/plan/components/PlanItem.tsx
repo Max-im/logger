@@ -26,9 +26,14 @@ const style = {
     p: 4,
 };
 
+interface IPayParams {
+    data: string;
+    signature: string;
+}
+
 const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
     const [open, setOpen] = useState(false);
-    const [payForm, setPayForm] = useState<any>(null);
+    const [payForm, setPayForm] = useState<IPayParams | null>(null);
     const isActive = plan.id === activePlanId;
     const bgcolor = isActive ? 'info.main' : '';
     const planWrapperStyles = {
@@ -39,6 +44,7 @@ const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
 
     const onOpenCharge = async () => {
         const result = await api.get(`${GET_PAYMENT_URL}/${plan.id}`);
+        console.log(result.data);
         setOpen(true);
         setPayForm(result.data);
     };
@@ -88,22 +94,35 @@ const PlanItem: FC<IPlanItemProps> = ({ plan, activePlanId }) => {
 
             <Modal open={open} onClose={handleClose}>
                 <Box sx={style}>
-                    <Typography variant="h4" pb={2}>Pay a Month</Typography>
-                    <Chip
-                        className={styles.plan__label}
-                        component="p"
-                        color="secondary"
-                        variant="outlined"
-                        label={plan.name}
-                    />
-                    <Typography className={styles.plan__block}>plan</Typography>
-                    <Typography pb={4} className={styles.plan__block}>
-                        for
-                        <AttachMoneyIcon />
-                        {plan.cost}
-                    </Typography>
-                    <Box dangerouslySetInnerHTML={{ __html: payForm }} />
-                    <Typography variant="body2" pt={2}>Powered by LiqPay</Typography>
+                    {payForm && (
+                        <>
+                            <Typography variant="h4" pb={2}>Pay a Month</Typography>
+                            <Chip
+                                className={styles.plan__label}
+                                component="p"
+                                color="secondary"
+                                variant="outlined"
+                                label={plan.name}
+                            />
+                            <Typography className={styles.plan__block}>plan</Typography>
+                            <Typography pb={4} className={styles.plan__block}>
+                                for
+                                <AttachMoneyIcon />
+                                {plan.cost}
+                            </Typography>
+                            <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
+                                <input type="hidden" name="data" value={payForm!.data} />
+                                <input type="hidden" name="signature" value={payForm!.signature} />
+                                <input
+                                    type="image"
+                                    src="//static.liqpay.ua/buttons/p1en.radius.png"
+                                    alt="img"
+                                    name="btn_text"
+                                />
+                            </form>
+                            <Typography variant="body2" pt={2}>Powered by LiqPay</Typography>
+                        </>
+                    )}
                 </Box>
             </Modal>
         </>
