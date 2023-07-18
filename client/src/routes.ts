@@ -4,7 +4,7 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
-import Logout from './user/user.logout';
+import { Logout, RoleTypes } from './user';
 import LogPage from './log';
 import PlanPage from './plan';
 import DocsPage from './documentation';
@@ -14,8 +14,6 @@ import ProjectSettingsPage from './project-settings';
 import AboutPage from './about';
 import NotFoundPage from './notfound';
 import HomePage from './home';
-
-import { RoleTypes } from './user/user.model';
 
 // eslint-disable-next-line no-use-before-define
 export interface IRoute extends IRouteData {

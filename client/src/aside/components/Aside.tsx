@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { Box, Paper, Divider } from '@mui/material';
-import { IUser } from '../../user/user.model';
 import { IRouteData } from '../../routes';
 import AsideMenu from './AsideMenu';
-import { AuthWidget, AvatarWidget, UserDataWidget } from '../../user';
+import { AuthWidget, AvatarWidget, UserDataWidget, IUser } from '../../user';
 import styles from '../styles/Aside.module.scss';
 
 interface IAsideProp {

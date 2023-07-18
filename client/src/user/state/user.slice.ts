@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
-import { IUser, RoleTypes } from '../user/user.model';
-import { setAuthHeader } from '../services/http';
-import { AUTH_LOCAL_VAR } from '../constants';
+import { IUser, RoleTypes } from '../model/user.model';
+import { setAuthHeader } from '../../services/http';
+import { AUTH_LOCAL_VAR } from '../../constants';
 
 const defaultUser: IUser = {
     id: '',

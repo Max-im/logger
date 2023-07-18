@@ -1,10 +1,10 @@
 import jwtDecode from 'jwt-decode';
 import { CredentialResponse } from '@react-oauth/google';
-import { AppDispatch } from '../store/store';
-import { IUserAuth } from '../user/user.model';
-import { userSlice } from './user.slice';
-import api, { setAuthHeader } from '../services/http';
-import { AUTH_LOCAL_VAR, DEFAULT_ERROR_TEXT, USER_LOGIN_URL } from '../constants';
+import { AppDispatch } from '../../store/store';
+import { IUserAuth } from '../model/user.model';
+import { userSlice } from '../state/user.slice';
+import api, { setAuthHeader } from '../../services/http';
+import { AUTH_LOCAL_VAR, DEFAULT_ERROR_TEXT, USER_LOGIN_URL } from '../../constants';
 
 interface ICredentials {
     name: string;

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { routes } from '../../routes';
-import { RoleTypes } from '../../user/user.model';
+import { RoleTypes } from '../../user';
 import { getPlansAction } from '../../plan';
 import { Aside } from '../../aside';
 import { Spinner } from '../../shared/ui/Spinner';

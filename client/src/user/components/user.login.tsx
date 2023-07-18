@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
-import { useAppDispatch } from '../hooks/redux';
-import { loginAction } from './user.actions';
+import { useAppDispatch } from '../../hooks/redux';
+import { loginAction } from '../state/user.actions';
 
 function UserLogin() {
     const dispatch = useAppDispatch();

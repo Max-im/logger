@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { logoutRoute } from '../../routes';
 import { useAppSelector } from '../../hooks/redux';
-import UserLogin from '../user.login';
+import UserLogin from '../components/user.login';
 
 const AuthWidget: FC = () => {
     const navigate = useNavigate();

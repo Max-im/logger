@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Box, Avatar, Typography } from '@mui/material';
-import { IUser } from '../user.model';
+import { IUser } from '../model/user.model';
 import styles from '../styles/AvatarWidget.module.scss';
 
 const AvatarWidget: FC<{ user: IUser }> = ({ user }) => {

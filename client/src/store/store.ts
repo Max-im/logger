@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from '../user/user.slice';
+import { userReducer } from '../user';
 import { themeReducer } from '../theme';
 import { homeReducer } from '../home';
 import { projectReducer } from '../projects';

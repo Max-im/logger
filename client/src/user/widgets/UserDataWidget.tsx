@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Chip, Typography, Box } from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import { IUser, RoleTypes } from '../../user/user.model';
+import { IUser, RoleTypes } from '../model/user.model';
 import { useAppSelector } from '../../hooks/redux';
 
 const UserDataWidget: FC<{user: IUser}> = ({ user }) => {

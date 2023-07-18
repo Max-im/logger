@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
-import { logoutAction } from './user.actions';
-import { useAppDispatch } from '../hooks/redux';
-import { homeRoute } from '../routes';
+import { logoutAction } from '../state/user.actions';
+import { useAppDispatch } from '../../hooks/redux';
+import { homeRoute } from '../../routes';
 
 export default function Logout() {
     const dispatch = useAppDispatch();
