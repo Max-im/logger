@@ -41,7 +41,14 @@ function serverBuilder() {
 
     server.register(require('@fastify/static'), {
         root: path.join(__dirname, 'build'),
+        wildcard: false,
     });
+
+    server.get('/*', function (req, reply) {
+        // @ts-ignore
+        reply.sendFile('index.html');
+    });
+
     server.register(jwt, { secret: <string>process.env.SECRET_OR_KEY });
     server.register(cors, {});
     server.register(statusRoutes, { prefix: STATUS_URL });
