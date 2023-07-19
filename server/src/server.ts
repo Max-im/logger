@@ -1,3 +1,4 @@
+import path from 'node:path';
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
@@ -37,6 +38,10 @@ function serverBuilder() {
         server.addSchema(schema);
     }
 
+
+    server.register(require('@fastify/static'), {
+        root: path.join(__dirname, 'build'),
+    });
     server.register(jwt, { secret: <string>process.env.SECRET_OR_KEY });
     server.register(cors, {});
     server.register(statusRoutes, { prefix: STATUS_URL });

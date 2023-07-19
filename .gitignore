@@ -1,4 +1,5 @@
 node_modules
 server/config
 client/build
+server/src/build
 .env
