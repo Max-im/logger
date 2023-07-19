@@ -1,6 +1,6 @@
 .projects__wrapper {
   display: flex;
-  height: calc(100vh - 92px);
+  height: calc(100vh - var(--main-top-margin));
 }
 
 .projects__main {

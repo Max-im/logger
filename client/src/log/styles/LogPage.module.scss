@@ -1,5 +1,5 @@
 .log__main {
-  height: calc(100vh - 92px);
+  height: calc(100vh - var(--main-top-margin));
   flex: 1 1 70%;
   display: flex;
   flex-direction: column;

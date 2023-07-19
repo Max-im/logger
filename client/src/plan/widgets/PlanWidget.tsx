@@ -6,35 +6,26 @@ import {
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { planRoute } from '../../routes';
 import { useAppSelector } from '../../hooks/redux';
+import styles from '../styles/PlanWidget.module.scss';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 const PlanWidget = () => {
-    const { plans } = useAppSelector((state) => state.planReducer);
+    const { plans, error } = useAppSelector((state) => state.planReducer);
 
     return (
         <>
-            <Typography
-                variant="h3"
-                sx={{ fontSize: 18, fontWeight: 'bold' }}
-                color="secondary"
-            >
-                Check out Plans
-            </Typography>
-
+            <Typography variant="h3" className={styles.title} color="secondary">Check out Plans</Typography>
+            <ErrBanner error={error} />
             {Boolean(plans.length)
             && (
-                <Link to={planRoute.url} style={{ textDecoration: 'none' }}>
-                    <List sx={{ width: '100%' }}>
+                <Link to={planRoute.url} className={styles.link}>
+                    <List className={styles.list}>
                         {plans.map((plan) => (
-                            <ListItem sx={{ p: 0, m: 0 }} key={plan.id}>
-                                <ListItemIcon key={plan.id}>
-                                    <Avatar sx={{ width: 30, height: 30, bgcolor: 'primary.main' }}>
-                                        <AttachMoneyIcon sx={{ fontSize: 11 }} />
-                                        <Typography
-                                            variant="h3"
-                                            sx={{
-                                                fontSize: 16, fontWeight: 'bold', position: 'relative', left: -3,
-                                            }}
-                                        >
+                            <ListItem className={styles.item} key={plan.id}>
+                                <ListItemIcon>
+                                    <Avatar sx={{ bgcolor: 'primary.main' }} className={styles.icon__wrapper}>
+                                        <AttachMoneyIcon className={styles.icon} />
+                                        <Typography variant="h3" className={styles.text}>
                                             {plan.cost}
                                         </Typography>
                                     </Avatar>

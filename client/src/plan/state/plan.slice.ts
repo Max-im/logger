@@ -4,11 +4,13 @@ import { IPlan } from '../model/plan.model';
 interface PlanState {
     plans: IPlan[];
     loaded: boolean;
+    error: string | null;
 }
 
 const initialState: PlanState = {
     plans: [],
     loaded: false,
+    error: null,
 };
 
 export const plantSlice = createSlice({
@@ -18,6 +20,11 @@ export const plantSlice = createSlice({
         get(state, action: PayloadAction<IPlan[]>) {
             state.plans = action.payload;
             state.loaded = true;
+        },
+        onError(state, action: PayloadAction<string>) {
+            state.plans = [];
+            state.loaded = false;
+            state.error = action.payload;
         },
     },
 });

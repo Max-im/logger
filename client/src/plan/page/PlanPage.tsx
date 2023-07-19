@@ -1,11 +1,12 @@
 import React from 'react';
-import { Paper, List, Box, Typography } from '@mui/material';
+import { Paper, List, Box, Typography, Alert } from '@mui/material';
 import PlanItem from '../components/PlanItem';
 import { useAppSelector } from '../../hooks/redux';
 import styles from '../styles/PlanPage.module.scss';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 const PlanPage = () => {
-    const { plans, loaded } = useAppSelector((state) => state.planReducer);
+    const { plans, loaded, error } = useAppSelector((state) => state.planReducer);
     const { user, authorized } = useAppSelector((state) => state.userReducer);
 
     return (
@@ -18,9 +19,9 @@ const PlanPage = () => {
                 We offer flexible plans designed to meet your unique needs.
                 Select one of our plans today and take control of your experience.
             </Typography>
-            <Box flexGrow={1} display="flex">
-                <Box flexGrow={1} display="flex" flexDirection="column">
-                    { loaded && (
+            { loaded && (
+                <Box flexGrow={1} display="flex">
+                    <Box flexGrow={1} display="flex" flexDirection="column">
                         <List className={styles.plan__list}>
                             {plans.map((plan) => (
                                 <PlanItem
@@ -31,9 +32,10 @@ const PlanPage = () => {
                                 />
                             ))}
                         </List>
-                    )}
+                    </Box>
                 </Box>
-            </Box>
+            )}
+            <ErrBanner error={error} />
         </Paper>
     );
 };

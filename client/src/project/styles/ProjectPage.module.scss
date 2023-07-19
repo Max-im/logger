@@ -1,6 +1,6 @@
 .project__wrapper {
   display: flex;
-  min-height: calc(100vh - 92px);
+  min-height: calc(100vh - var(--main-top-margin));
 }
 
 .project__main {
