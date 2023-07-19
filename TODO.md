@@ -18,6 +18,7 @@
 - [x] payment
 - [x] clean up css
 - [ ] error handling
+- [ ] create log item
 - [ ] tests
 - [ ] storybook
 - [ ] content
