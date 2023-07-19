@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-    ListItem, ListItemButton, ListItemText, Typography, Box, Divider,
+    ListItem, ListItemButton, ListItemText, Typography, Box, Divider, Snackbar, Alert,
 } from '@mui/material';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useAppDispatch } from '../../hooks/redux';
 import { projectsRoute } from '../../routes';
 import { IProject } from '../model/projects.model';
 import { deleteProjectAction } from '../state/projects.actions';
-import { ProjectKey } from '../../project';
 import styles from '../styles/ProjectRow.module.scss';
 
 interface IProjectRowProps {
@@ -19,6 +19,7 @@ interface IProjectRowProps {
 const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const [showCopyMsg, setShowCopyMsg] = useState(false);
 
     const onError = (msg: string) => {
         console.log(msg);
@@ -34,6 +35,18 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
         navigate(`${projectsRoute.url}/settings/${id}`);
     };
 
+    const onCopyKey = (e: React.MouseEvent<HTMLElement>, id: string) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(id);
+        setShowCopyMsg(true);
+    };
+
+    const onHideCopyMsg = () => {
+        setShowCopyMsg(false);
+    };
+
+    const btnHoverStyle = { '&:hover': { color: 'secondary.main' } };
+
     return (
         <Link to={`${projectsRoute.url}/${project.id}`}>
             <ListItem disablePadding className={styles.row__item}>
@@ -41,35 +54,36 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
                     <ListItemText
                         primary={(
                             <Box className={styles.row__titleWrap}>
-                                <Typography
-                                    color="text.primary"
-                                    className={styles.row__title}
-                                >
+                                <Typography color="text.primary" className={styles.row__title}>
                                     {project.title}
                                 </Typography>
-                                <Box className={styles.row__key}>
-                                    <ProjectKey id={project.id} />
-                                </Box>
                             </Box>
                         )}
                         secondary={(
                             <Box className={styles.row__control}>
                                 <Typography
+                                    sx={btnHoverStyle}
                                     className={styles.row__controlItem}
-                                    sx={{ '&:hover': { color: 'secondary.main' } }}
                                     onClick={(e) => onDelete(e, project.id)}
                                 >
                                     Delete
                                     <DeleteIcon className={styles.row__controlIcon} />
                                 </Typography>
                                 <Typography
-                                    ml={2}
-                                    sx={{ '&:hover': { color: 'secondary.main' } }}
+                                    sx={btnHoverStyle}
                                     className={styles.row__controlItem}
                                     onClick={(e) => onSettings(e, project.id)}
                                 >
                                     Settings
                                     <SettingsIcon className={styles.row__controlIcon} />
+                                </Typography>
+                                <Typography
+                                    sx={btnHoverStyle}
+                                    className={styles.row__controlItem}
+                                    onClick={(e) => onCopyKey(e, project.id)}
+                                >
+                                    Copy Key
+                                    <VpnKeyIcon className={styles.row__controlIcon} />
                                 </Typography>
                             </Box>
                         )}
@@ -77,6 +91,16 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
                 </ListItemButton>
             </ListItem>
             <Divider />
+            <Snackbar
+                open={showCopyMsg}
+                autoHideDuration={3000}
+                onClose={onHideCopyMsg}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            >
+                <Alert severity="success" sx={{ width: '100%' }}>
+                    Id copied
+                </Alert>
+            </Snackbar>
         </Link>
     );
 };
