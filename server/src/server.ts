@@ -1,5 +1,5 @@
 import path from 'node:path';
-import Fastify from 'fastify';
+import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
 import userRoutes from './modules/user/user.route';
@@ -31,7 +31,7 @@ declare module '@fastify/jwt' {
 }
 
 function serverBuilder() {
-    const server = Fastify();
+    const server = Fastify({ logger: true });
 
     server.decorate('registredUser', registredUserHook);
     for (const schema of [...userSchemas, ...projectSchemas]) {
@@ -44,7 +44,7 @@ function serverBuilder() {
         wildcard: false,
     });
 
-    server.get('/*', function (req, reply) {
+    server.get('/*', function (request: FastifyRequest, reply: FastifyReply) {
         // @ts-ignore
         reply.sendFile('index.html');
     });
