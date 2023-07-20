@@ -4,6 +4,7 @@ import { PROJECT_URL, DEFAULT_ERROR_TEXT } from '../../constants';
 import { ICreateProjectResponse, IProject } from '../model/projects.model';
 import { projectSlice } from './projects.slice';
 import { clearLogsAction } from '../../logs';
+import { apiErrorHandler } from '../../shared/errorHandler';
 
 // eslint-disable-next-line no-unused-vars
 type cb = (msg: string) => void;
@@ -18,13 +19,13 @@ export const createProjectAction = (title: string, cb: cb) => async (dispatch: A
     }
 };
 
-export const getProjectsAction = (cb: cb) => async (dispatch: AppDispatch) => {
+export const getProjectsAction = () => async (dispatch: AppDispatch) => {
     try {
         const response = await api.get<{ projects: IProject[] }>(PROJECT_URL);
         dispatch(projectSlice.actions.add(response.data.projects));
     } catch (err) {
-        const message = err.message || DEFAULT_ERROR_TEXT;
-        cb(message);
+        const message = apiErrorHandler(err);
+        dispatch(projectSlice.actions.onError(message));
     }
 };
 

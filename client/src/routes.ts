@@ -34,7 +34,7 @@ export interface IRouteData {
 export const homeRoute = {
     url: '/',
     title: 'Home',
-    subtitle: `Welcome to ${process.env.REACT_APP_NAME}`,
+    subtitle: `Welcome to ${process.env.REACT_APP_NAME || 'App'}`,
     isMenu: true,
     role: RoleTypes.GUEST,
     element: HomePage,

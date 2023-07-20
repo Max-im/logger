@@ -6,10 +6,11 @@ import { getProjectsAction } from '../state/projects.actions';
 import styles from '../styles/ProjectsPage.module.scss';
 import ProjectsList from '../components/ProjectsList';
 import ProjectsLimitInfo from '../components/ProjectsLimitInfo';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 const ProjectsPage = () => {
     const dispatch = useAppDispatch();
-    const { projects } = useAppSelector((state) => state.projectReducer);
+    const { projects, error } = useAppSelector((state) => state.projectReducer);
     const { user } = useAppSelector((state) => state.userReducer);
     const { plans } = useAppSelector((state) => state.planReducer);
 
@@ -18,25 +19,26 @@ const ProjectsPage = () => {
         projectsThreshold = plans.find((plan) => plan.id === user.planId)!.projectsNum;
     }
 
-    const onError = (msg: string) => {
-        console.log(msg);
-    };
-
     useEffect(() => {
-        dispatch(getProjectsAction(onError));
+        dispatch(getProjectsAction());
     }, [dispatch]);
 
     return (
         <Box className={styles.projects__wrapper}>
             <Paper className={`container ${styles.projects__main}`} component="div">
                 <ProjectsList projects={projects} />
+                <ErrBanner error={error} />
             </Paper>
             <Box p={1} />
             <Paper className={`container ${styles.projects__aside}`}>
-                <Typography variant="subtitle1">Projects Info</Typography>
-                <Divider className={styles.projects__divider} />
-                <ProjectsLimitInfo projectsThreshold={projectsThreshold} current={projects.length} />
-                { projects.length < projectsThreshold && <CreateProject /> }
+                {!error && (
+                    <>
+                        <Typography variant="subtitle1">Projects Info</Typography>
+                        <Divider className={styles.projects__divider} />
+                        <ProjectsLimitInfo projectsThreshold={projectsThreshold} current={projects.length} />
+                        { projects.length < projectsThreshold && <CreateProject /> }
+                    </>
+                )}
             </Paper>
         </Box>
     );
