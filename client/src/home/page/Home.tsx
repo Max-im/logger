@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Box } from '@mui/material';
 import { useAppDispatch } from '../../hooks/redux';
 import { initAction } from '../state/home.actions';
-import HomePros from '../components/home.pros.component';
+import HomePros from '../components/HomePros';
 import HomeMain from '../components/HomeMain';
 import HomeBottom from '../components/HomeBottom';
 import styles from '../styles/Home.module.scss';
