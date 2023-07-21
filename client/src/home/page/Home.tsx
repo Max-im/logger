@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { useAppDispatch } from '../../hooks/redux';
 import { initAction } from '../state/home.actions';
 import HomePros from '../components/home.pros.component';
-import HomeMain from '../components/home.main.component';
+import HomeMain from '../components/HomeMain';
 import HomeBottom from '../components/HomeBottom';
 import styles from '../styles/Home.module.scss';
 
