@@ -9,18 +9,15 @@ import ProjectKey from '../components/project-key';
 import { getCurrentProjectAction } from '../state/project.actions';
 import { DeleteLogsWidget, LogsTable, LogsDiagramWidget, clearLogsAction } from '../../logs';
 import styles from '../styles/ProjectPage.module.scss';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 export default function ProjectPage() {
     const dispatch = useAppDispatch();
     const { projectId } = useParams();
-    const { currentProject } = useAppSelector((state) => state.projectReducer);
-
-    const onError = (msg: string) => {
-        console.log(msg);
-    };
+    const { currentProject, error } = useAppSelector((state) => state.projectReducer);
 
     useEffect(() => {
-        dispatch(getCurrentProjectAction(projectId!, onError));
+        dispatch(getCurrentProjectAction(projectId!));
 
         return function onCancel() {
             dispatch(clearLogsAction());
@@ -29,39 +26,46 @@ export default function ProjectPage() {
 
     return (
         <Box>
-            {currentProject && (
-                <Box className={styles.project__wrapper}>
-                    <Paper className={`container ${styles.project__main}`}>
-                        <Typography variant="subtitle1">{currentProject.title}</Typography>
-                        <Divider className={styles.project__divider} />
-                        <LogsTable projectId={projectId!} />
-                    </Paper>
-                    <Box mr={2} />
-                    <Paper className={`container ${styles.project__aside}`}>
-                        <Box>
-                            <Typography variant="subtitle1">Project Info</Typography>
+            <Box className={styles.project__wrapper}>
+                <Paper className={`container ${styles.project__main}`}>
+                    {currentProject && (
+                        <>
+                            <Typography variant="subtitle1">{currentProject.title}</Typography>
                             <Divider className={styles.project__divider} />
-                        </Box>
+                            <LogsTable projectId={projectId!} />
+                        </>
+                    )}
+                    <ErrBanner error={error} />
+                </Paper>
+                <Box mr={2} />
+                <Paper className={`container ${styles.project__aside}`}>
+                    {currentProject && (
+                        <Box>
+                            <Box>
+                                <Typography variant="subtitle1">Project Info</Typography>
+                                <Divider className={styles.project__divider} />
+                            </Box>
 
-                        <Box className={styles.project__asideContent}>
-                            <Box>
-                                <LogsDiagramWidget />
-                                <ProjectFilter />
-                            </Box>
-                            <Box flexGrow={1} />
-                            <Box>
-                                <Link to={`${projectsRoute.url}/settings/${currentProject.id}`}>
-                                    <Button sx={{ mt: 2 }} startIcon={<SettingsIcon />}>
-                                        <Typography color="text.primary">Project Settings</Typography>
-                                    </Button>
-                                </Link>
-                                <ProjectKey id={currentProject.id} />
-                                <DeleteLogsWidget />
+                            <Box className={styles.project__asideContent}>
+                                <Box>
+                                    <LogsDiagramWidget />
+                                    <ProjectFilter />
+                                </Box>
+                                <Box flexGrow={1} />
+                                <Box>
+                                    <Link to={`${projectsRoute.url}/settings/${currentProject.id}`}>
+                                        <Button sx={{ mt: 2 }} startIcon={<SettingsIcon />}>
+                                            <Typography color="text.primary">Project Settings</Typography>
+                                        </Button>
+                                    </Link>
+                                    <ProjectKey id={currentProject.id} />
+                                    <DeleteLogsWidget />
+                                </Box>
                             </Box>
                         </Box>
-                    </Paper>
-                </Box>
-            )}
+                    )}
+                </Paper>
+            </Box>
         </Box>
     );
 }

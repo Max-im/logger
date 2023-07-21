@@ -9,11 +9,10 @@
     display: flex;
     top: 5px;
   }
+}
 
-  // &:hover>.project__controlWrap {
-  //   top: 7;
-  //   opacity: 1;
-  // }
+.link {
+  position: relative;
 }
 
 .row__titleWrap {
@@ -58,4 +57,10 @@
 .row__controlIcon {
   margin-left: 3px;
   font-size: 14px;
+}
+
+.modal {
+  position: absolute;
+  bottom: 0px !important;
+  right: 0px !important;
 }

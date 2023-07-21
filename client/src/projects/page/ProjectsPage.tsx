@@ -26,7 +26,7 @@ const ProjectsPage = () => {
     return (
         <Box className={styles.projects__wrapper}>
             <Paper className={`container ${styles.projects__main}`} component="div">
-                <ProjectsList projects={projects} />
+                {!error && <ProjectsList projects={projects} />}
                 <ErrBanner error={error} />
             </Paper>
             <Box p={1} />

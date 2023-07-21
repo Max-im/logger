@@ -5,12 +5,14 @@ interface ProjectState {
     projects: IProject[];
     ids: { [key: string]: true };
     currentProject: IProject | null;
+    error: null | string;
 }
 
 const initialState: ProjectState = {
     projects: [],
     ids: {},
     currentProject: null,
+    error: null,
 };
 
 export const projectSlice = createSlice({
@@ -36,6 +38,9 @@ export const projectSlice = createSlice({
         },
         clearCurrent(state) {
             state.currentProject = null;
+        },
+        onError(state, action: PayloadAction<string>) {
+            state.error = action.payload;
         },
     },
 });

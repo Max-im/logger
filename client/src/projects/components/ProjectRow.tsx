@@ -48,7 +48,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     const btnHoverStyle = { '&:hover': { color: 'secondary.main' } };
 
     return (
-        <Link to={`${projectsRoute.url}/${project.id}`}>
+        <Link to={`${projectsRoute.url}/${project.id}`} className={styles.link}>
             <ListItem disablePadding className={styles.row__item}>
                 <ListItemButton>
                     <ListItemText
@@ -95,9 +95,10 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
                 open={showCopyMsg}
                 autoHideDuration={3000}
                 onClose={onHideCopyMsg}
+                className={styles.modal}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
-                <Alert severity="success" sx={{ width: '100%' }}>
+                <Alert severity="success">
                     Id copied
                 </Alert>
             </Snackbar>

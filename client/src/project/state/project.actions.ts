@@ -29,12 +29,12 @@ export const deleteProjectAction = (id: string, cb: cb) => async (dispatch: AppD
     }
 };
 
-export const getCurrentProjectAction = (projectId: string, cb: cb) => async (dispatch: AppDispatch) => {
+export const getCurrentProjectAction = (projectId: string) => async (dispatch: AppDispatch) => {
     try {
         const response = await api.get<{ project: IProject }>(`${PROJECT_URL}/${projectId}`);
         dispatch(projectSlice.actions.setCurrent(response.data.project));
     } catch (err) {
-        const message = err.message || DEFAULT_ERROR_TEXT;
-        cb(message);
+        const message = apiErrorHandler(err);
+        dispatch(projectSlice.actions.onError(message));
     }
 };
