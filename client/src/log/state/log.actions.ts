@@ -1,15 +1,16 @@
 import { GET_LOGS_URL } from '../../constants';
 import { ILog } from '../../logs';
 import api from '../../services/http';
+import { apiErrorHandler } from '../../shared/errorHandler';
 
 // eslint-disable-next-line
-type cb = (err: undefined | string, value: undefined | ILog) => void;
+type cb = (err: null | string, value: null | ILog) => void;
 
 export const getLogDataAction = async (projectId: string, logId: string, cb: cb) => {
     try {
         const response = await api.get<{ log: ILog }>(`${GET_LOGS_URL}/${projectId}/log/${logId}`);
-        cb(undefined, response.data.log);
+        cb(null, response.data.log);
     } catch (err) {
-        cb(err.message, undefined);
+        cb(apiErrorHandler(err), null);
     }
 };

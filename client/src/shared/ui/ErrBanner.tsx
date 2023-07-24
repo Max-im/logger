@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Box, Alert } from '@mui/material';
 
-const ErrBanner: FC<{ error: string | null }> = ({ error }) => {
+const ErrBanner: FC<{ error: string | null}> = ({ error }) => {
     return (
         <Box>
             {

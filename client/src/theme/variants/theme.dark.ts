@@ -43,15 +43,15 @@ export const darkTheme = createTheme({
         body2: { fontFamily, letterSpacing: 0.9 },
         subtitle1: { letterSpacing: 1.3, fontFamily, fontSize: '1.2rem' },
     },
-    components: {
-        MuiTableCell: {
-            styleOverrides: {
-                root: {
-                    padding: '0px',
-                },
-            },
-        },
-    },
+    // components: {
+    //     MuiTableCell: {
+    //         styleOverrides: {
+    //             root: {
+    //                 padding: '0px',
+    //             },
+    //         },
+    //     },
+    // },
 });
 
 // export const theme = {

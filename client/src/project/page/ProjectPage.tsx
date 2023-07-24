@@ -40,7 +40,7 @@ export default function ProjectPage() {
                 <Box mr={2} />
                 <Paper className={`container ${styles.project__aside}`}>
                     {currentProject && (
-                        <Box>
+                        <>
                             <Box>
                                 <Typography variant="subtitle1">Project Info</Typography>
                                 <Divider className={styles.project__divider} />
@@ -62,7 +62,7 @@ export default function ProjectPage() {
                                     <DeleteLogsWidget />
                                 </Box>
                             </Box>
-                        </Box>
+                        </>
                     )}
                 </Paper>
             </Box>

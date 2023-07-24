@@ -43,7 +43,7 @@ const LogsTable: FC<ILogTableProps> = ({ projectId }) => {
     const intersected = useScroll(document, childRef, getLogs);
 
     return (
-        <Table>
+        <Table size="small">
             <LogsHeader />
             <TableBody>
                 {arr.map((log) => <LogRow key={log.id} log={log} />)}
