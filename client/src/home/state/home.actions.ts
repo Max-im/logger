@@ -9,7 +9,6 @@ export const initAction = () => async (dispatch: AppDispatch) => {
         const response = await api.get<Omit<HomeState, 'loaded'>>(STATUS_URL);
         dispatch(homeSlice.actions.init(response.data));
     } catch (err) {
-        const message = apiErrorHandler(err);
-        dispatch(homeSlice.actions.onError(message));
+        dispatch(homeSlice.actions.onError(apiErrorHandler(err)));
     }
 };

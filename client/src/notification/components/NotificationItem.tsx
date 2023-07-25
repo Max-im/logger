@@ -9,9 +9,9 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { LevelColors, ILevels } from '../../logs';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { createNotificationAction, deleteNotificationAction } from '../state/notification.actions';
-import styles from '../styles/NotificationItem.module.scss';
 import ErrBanner from '../../shared/ui/ErrBanner';
 import { DEFAULT_ERROR_TEXT } from '../../constants';
+import styles from '../styles/NotificationItem.module.scss';
 
 const NotificationItem: FC<{level: ILevels}> = ({ level }) => {
     const dispatch = useAppDispatch();

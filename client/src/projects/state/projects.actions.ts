@@ -7,15 +7,15 @@ import { clearLogsAction } from '../../logs';
 import { apiErrorHandler } from '../../shared/errorHandler';
 
 // eslint-disable-next-line no-unused-vars
-type cb = (msg: string) => void;
+type cb = (msg?: string) => void;
 
 export const createProjectAction = (title: string, cb: cb) => async (dispatch: AppDispatch) => {
     try {
         const response = await api.post<ICreateProjectResponse>(PROJECT_URL, { title });
         dispatch(projectSlice.actions.add([response.data.project]));
+        cb();
     } catch (err) {
-        const message = err.message || DEFAULT_ERROR_TEXT;
-        cb(message);
+        cb(apiErrorHandler(err));
     }
 };
 

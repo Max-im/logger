@@ -3,11 +3,13 @@ import { Button, Modal, Box, Typography, TextField } from '@mui/material';
 import { useAppDispatch } from '../../hooks/redux';
 import { createProjectAction } from '../state/projects.actions';
 import styles from '../styles/CreateProject.module.scss';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 export default function CreateProject() {
     const dispatch = useAppDispatch();
     const [open, setOpen] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
+    const [error, setError] = useState<null | string>(null);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -15,15 +17,17 @@ export default function CreateProject() {
         setTitle(e.target.value);
     };
 
-    const onError = (errMsg: string) => {
-        console.log(errMsg);
+    const onHandle = (err?: string) => {
+        if (err) setError(err);
+        else {
+            setTitle('');
+            handleClose();
+        }
     };
 
     const onCreateProject = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createProjectAction(title, onError));
-        setTitle('');
-        handleClose();
+        dispatch(createProjectAction(title, onHandle));
     };
 
     return (
@@ -39,6 +43,7 @@ export default function CreateProject() {
                         </Box>
                         <Button type="submit" variant="contained">Create Project</Button>
                     </form>
+                    <ErrBanner error={error} />
                 </Box>
             </Modal>
         </>

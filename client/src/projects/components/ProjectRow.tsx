@@ -11,6 +11,7 @@ import { projectsRoute } from '../../routes';
 import { IProject } from '../model/projects.model';
 import { deleteProjectAction } from '../state/projects.actions';
 import styles from '../styles/ProjectRow.module.scss';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 interface IProjectRowProps {
     project: IProject
@@ -20,9 +21,10 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [showCopyMsg, setShowCopyMsg] = useState(false);
+    const [error, setError] = useState<null | string>(null);
 
-    const onError = (msg: string) => {
-        console.log(msg);
+    const onError = (msg?: string) => {
+        if (msg) setError(msg);
     };
 
     const onDelete = (e: React.MouseEvent<HTMLElement>, id: string) => {
@@ -89,6 +91,7 @@ const ProjectRow: FC<IProjectRowProps> = ({ project }) => {
                         )}
                     />
                 </ListItemButton>
+                <ErrBanner error={error} />
             </ListItem>
             <Divider />
             <Snackbar
