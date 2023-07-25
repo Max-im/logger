@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Typography, Button } from '@mui/material';
+import { donateRoute } from '../../routes';
 
 const DonateWidget = () => (
     <>
@@ -15,17 +17,13 @@ const DonateWidget = () => (
             Your contribution helps us continue delivering quality services.
         </Typography>
 
-        <a
-            href="https://www.patreon.com/max_im"
-            target="_blank"
-            rel="noreferrer"
-        >
+        <Link to={donateRoute.url}>
             <Button variant="outlined" sx={{ width: '100%' }}>
                 <span role="img" aria-label="folded hands">🙏</span>
                 {' '}
                 Donate
             </Button>
-        </a>
+        </Link>
 
         <Typography sx={{ mt: 2 }}>
             Join us on this amazing journey. Thank you!

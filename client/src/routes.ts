@@ -14,6 +14,7 @@ import ProjectSettingsPage from './project-settings';
 import AboutPage from './about';
 import NotFoundPage from './notfound';
 import HomePage from './home';
+import DonatePage from './donate';
 
 // eslint-disable-next-line no-use-before-define
 export interface IRoute extends IRouteData {
@@ -139,6 +140,18 @@ export const planRoute = {
     icon: AttachMoneyIcon,
 };
 
+export const donateRoute = {
+    url: '/support-us',
+    title: 'Support Us',
+    subtitle: 'We appreciate all your support',
+    isMenu: false,
+    role: RoleTypes.GUEST,
+    element: DonatePage,
+    parrent: null,
+    rule: /^\/support-us$/,
+    icon: HomeIcon,
+};
+
 export const notFounRoute = {
     url: '*',
     title: 'Not Found',
@@ -161,5 +174,6 @@ export const routes = [
     planRoute,
     logPageRoute,
     projectSettingsRoute,
+    donateRoute,
     notFounRoute,
 ];

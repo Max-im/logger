@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Grid, Paper } from '@mui/material';
 import { useAppSelector } from '../../hooks/redux';
 import { PlanWidget } from '../../plan';
-import DonateWidget from '../widgets/DonateWidget';
+import { DonateWidget } from '../../donate';
 import ErrBanner from '../../shared/ui/ErrBanner';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
