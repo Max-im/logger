@@ -4,11 +4,13 @@ import { INotification } from '../model/notification.model';
 interface NotificationState {
     active: INotification[];
     init: boolean;
+    error: null | string;
 }
 
 const initialState: NotificationState = {
     active: [],
     init: false,
+    error: null,
 };
 
 export const notificationSlice = createSlice({
@@ -24,6 +26,9 @@ export const notificationSlice = createSlice({
         },
         onDelete(state, action: PayloadAction<number>) {
             state.active = state.active.filter((notification) => notification.id !== action.payload);
+        },
+        onError(state, action: PayloadAction<string>) {
+            state.error = action.payload;
         },
     },
 });

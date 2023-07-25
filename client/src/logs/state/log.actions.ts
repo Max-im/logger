@@ -3,6 +3,7 @@ import api from '../../services/http';
 import { DEFAULT_ERROR_TEXT, GET_LOGS_URL } from '../../constants';
 import { ILevels, ILog } from '../model/log.model';
 import { logSlice } from './log.slice';
+import { apiErrorHandler } from '../../shared/errorHandler';
 
 // eslint-disable-next-line no-unused-vars
 type cb = (msg: string) => void;
@@ -10,13 +11,10 @@ interface IGetLogsAction {
     projectId: string;
     skip: number;
     filterVal: string | null;
-    cb: cb
 }
 
 export const getLogsAction = (params: IGetLogsAction) => async (dispatch: AppDispatch) => {
-    const {
-        projectId, skip, filterVal, cb,
-    } = params;
+    const { projectId, skip, filterVal } = params;
     const step = 20;
     const filter = filterVal ? `&filter=${filterVal}` : '';
     type IGetLogs = { logs: ILog[] };
@@ -25,8 +23,7 @@ export const getLogsAction = (params: IGetLogsAction) => async (dispatch: AppDis
         const response = await api.get<IGetLogs>(`${GET_LOGS_URL}/${projectId}?take=${step}&skip=${skip}${filter}`);
         dispatch(logSlice.actions.get(response.data.logs));
     } catch (err) {
-        const message = err.message || DEFAULT_ERROR_TEXT;
-        cb(message);
+        dispatch(logSlice.actions.onError(apiErrorHandler(err)));
     }
 };
 

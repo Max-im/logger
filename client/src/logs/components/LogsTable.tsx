@@ -6,6 +6,7 @@ import useScroll from '../../hooks/useScroll';
 import useQuery from '../../hooks/useQuery';
 import LogRow from './LogRow';
 import LogsHeader from './LogsHeader';
+import ErrBanner from '../../shared/ui/ErrBanner';
 
 interface ILogTableProps {
   projectId: string
@@ -14,7 +15,7 @@ interface ILogTableProps {
 const LogsTable: FC<ILogTableProps> = ({ projectId }) => {
     const dispatch = useAppDispatch();
     const query = useQuery();
-    const { logs } = useAppSelector((store) => store.logReducer);
+    const { logs, error } = useAppSelector((store) => store.logReducer);
     const childRef = useRef();
 
     const arr = [];
@@ -24,16 +25,11 @@ const LogsTable: FC<ILogTableProps> = ({ projectId }) => {
     }
     arr.sort((a, b) => Number(b.id) - Number(a.id));
 
-    const onError = (msg: string) => {
-        console.log(msg);
-    };
-
     function getLogs() {
         const params = {
             projectId,
             skip: Object.keys(logs).length,
             filterVal: query.get('filter'),
-            cb: onError,
 
         };
         dispatch(getLogsAction(params));
@@ -43,13 +39,16 @@ const LogsTable: FC<ILogTableProps> = ({ projectId }) => {
     const intersected = useScroll(document, childRef, getLogs);
 
     return (
-        <Table size="small">
-            <LogsHeader />
-            <TableBody>
-                {arr.map((log) => <LogRow key={log.id} log={log} />)}
-                <Box component="tr" ref={childRef} height={1} />
-            </TableBody>
-        </Table>
+        <>
+            <ErrBanner error={error} />
+            <Table size="small">
+                <LogsHeader />
+                <TableBody>
+                    {arr.map((log) => <LogRow key={log.id} log={log} />)}
+                    <Box component="tr" ref={childRef} height={1} />
+                </TableBody>
+            </Table>
+        </>
     );
 };
 

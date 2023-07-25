@@ -10,7 +10,8 @@ import { LevelColors, ILevels } from '../../logs';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { createNotificationAction, deleteNotificationAction } from '../state/notification.actions';
 import styles from '../styles/NotificationItem.module.scss';
-import { INotification } from '../model/notification.model';
+import ErrBanner from '../../shared/ui/ErrBanner';
+import { DEFAULT_ERROR_TEXT } from '../../constants';
 
 const NotificationItem: FC<{level: ILevels}> = ({ level }) => {
     const dispatch = useAppDispatch();
@@ -20,9 +21,10 @@ const NotificationItem: FC<{level: ILevels}> = ({ level }) => {
     const initialState: { [key: string]: boolean } = {};
     levels.forEach((level) => { initialState[level] = true; });
     const [collapse, setCollapse] = useState<{ [key: string]: boolean }>(initialState);
+    const [error, setError] = useState<null | string>(null);
 
     const onError = (msg: string) => {
-        console.log(msg);
+        setError(msg);
     };
 
     const onCollapse = (level: string) => {
@@ -36,7 +38,7 @@ const NotificationItem: FC<{level: ILevels}> = ({ level }) => {
         } else {
             const val = active.find((notification) => notification.logLevel === level);
             if (!val) {
-                onError('Please try again');
+                onError(DEFAULT_ERROR_TEXT);
             } else {
                 dispatch(deleteNotificationAction(val.id, projectId!, onError));
             }
@@ -69,6 +71,7 @@ const NotificationItem: FC<{level: ILevels}> = ({ level }) => {
                     </ListItemButton>
                 </List>
             </Collapse>
+            <ErrBanner error={error} />
             <Divider />
         </Box>
     );

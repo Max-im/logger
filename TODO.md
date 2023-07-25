@@ -17,7 +17,7 @@
 - [x] sender
 - [x] payment
 - [x] clean up css
-- [ ] error handling
+- [x] error handling
 - [ ] create log item
 - [ ] tests
 - [ ] storybook

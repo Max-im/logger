@@ -7,6 +7,7 @@ interface LogState {
     selected: { [id: string]: boolean };
     info: { [level in ILevels]?: number };
     selectAll: boolean;
+    error: null | string;
 }
 /* eslint-enable */
 
@@ -15,6 +16,7 @@ const initialState: LogState = {
     selected: {},
     info: {},
     selectAll: false,
+    error: null,
 };
 
 export const logSlice = createSlice({
@@ -64,6 +66,9 @@ export const logSlice = createSlice({
                 delete state.logs[id];
             });
             state.selected = {};
+        },
+        onError(state, action: PayloadAction<string>) {
+            state.error = action.payload;
         },
     },
 });
