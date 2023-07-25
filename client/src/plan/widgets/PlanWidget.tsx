@@ -6,8 +6,8 @@ import {
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { planRoute } from '../../routes';
 import { useAppSelector } from '../../hooks/redux';
-import styles from '../styles/PlanWidget.module.scss';
 import ErrBanner from '../../shared/ui/ErrBanner';
+import styles from '../styles/PlanWidget.module.scss';
 
 const PlanWidget = () => {
     const { plans, error } = useAppSelector((state) => state.planReducer);

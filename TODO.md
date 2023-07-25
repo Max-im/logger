@@ -18,9 +18,9 @@
 - [x] payment
 - [x] clean up css
 - [x] error handling
+- [x] content
 - [ ] create log item
 - [ ] tests
 - [ ] storybook
-- [ ] content
 - [ ] cicd
 - [ ] deploy

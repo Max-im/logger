@@ -119,7 +119,7 @@ export const docsRoute = {
     url: '/docs',
     title: 'Documentation',
     subtitle: 'Start in just a few clicks',
-    isMenu: true,
+    isMenu: false,
     role: RoleTypes.GUEST,
     element: DocsPage,
     parrent: null,
