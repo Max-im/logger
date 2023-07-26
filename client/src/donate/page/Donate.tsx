@@ -8,10 +8,8 @@ const Donate: FC = () => (
     <Paper className={`container ${styles.container}`}>
         <Typography mb={2} variant="h5">Select Convinient variant</Typography>
         <Box className={styles.list}>
-            <DonateCard amount={1} />
-            <DonateCard amount={5} />
-            <DonateCard amount={10} />
             <DonatePatreon />
+            <DonateCard />
         </Box>
     </Paper>
 );

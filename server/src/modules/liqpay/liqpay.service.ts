@@ -9,13 +9,13 @@ export class LiqPayService {
     private resultUrl = process.env.LIQPAY_CLIENT_REDIRECT;
     private serverUrl = process.env.LIQPAY_SERVER_REDIRECT;
 
-    getPayParams(amount: number, description: string) {
+    getPayParams(amount: number, description: string, action: string = 'pay') {
         const params = {
             public_key: this.publicKey,
             version: this.version,
             language: this.language,
             currency: this.currency,
-            action: 'pay',
+            action: action,
             amount,
             description,
             result_url: this.resultUrl,

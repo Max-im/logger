@@ -9,12 +9,13 @@ import registredUserHook from './modules/hooks/registredUser.hook';
 import logRoutes from './modules/log/log.route';
 import { userSchemas } from './modules/user/user.auth.schema';
 import { projectSchemas } from './modules/project/project.schema';
-import { LOG_URL, NOTIFICATION_URL, PAYMENT_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
+import { DONATE_URL, LOG_URL, NOTIFICATION_URL, PAYMENT_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
 import planRoutes from './modules/plan/plan.route';
 import notificationRoutes from './modules/notification/notification.route';
-import './jobs';
 import senderRoutes from './modules/sender/sender.route';
 import paymentRoutes from './modules/payment/payment.route';
+import donateRoutes from './modules/donate/donate.route';
+import './jobs';
 
 declare module 'fastify' {
     export interface FastifyInstance {
@@ -58,6 +59,7 @@ function serverBuilder() {
     server.register(planRoutes, { prefix: PLAN_URL });
     server.register(notificationRoutes, { prefix: NOTIFICATION_URL });
     server.register(paymentRoutes, { prefix: PAYMENT_URL });
+    server.register(donateRoutes, { prefix: DONATE_URL });
     server.register(senderRoutes, { prefix: 'api/v1/send' });
 
     return server;

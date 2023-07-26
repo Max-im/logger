@@ -16,15 +16,17 @@
 
 .tile {
   width: 30%;
-  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
-  margin-bottom: 30px;
 }
 
 .icon {
-  margin: 40px auto;
+  margin: 30px auto;
   width: 50%;
 
   &__el {
@@ -33,5 +35,6 @@
 }
 
 .btn {
-  width: 100%
+  width: 100%;
+  margin-top: 20px;
 }

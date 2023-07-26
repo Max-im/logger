@@ -14,9 +14,4 @@ export const GET_LOGS_URL = '/api/v1/log';
 export const GET_PLAN_URL = '/api/v1/plan';
 export const GET_PAYMENT_URL = '/api/v1/payment';
 export const GET_NOTIFICATIONS_URL = '/api/v1/notification';
-
-export const GET_PRICE_URL = '/price';
-export const MESSAGE_URL = '/message';
-export const SEARCH_URL = '/verifier';
-export const SEARCH_FINAL_URL = '/verifier/final';
-export const PLACE_ORDER_URL = '/order';
+export const GET_DONATE_URL = '/api/v1/donate';
