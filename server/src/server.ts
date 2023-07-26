@@ -9,7 +9,9 @@ import registredUserHook from './modules/hooks/registredUser.hook';
 import logRoutes from './modules/log/log.route';
 import { userSchemas } from './modules/user/user.auth.schema';
 import { projectSchemas } from './modules/project/project.schema';
-import { DONATE_URL, LOG_URL, NOTIFICATION_URL, PAYMENT_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL } from './util/urls';
+import {
+    DONATE_URL, LOG_URL, NOTIFICATION_URL, PAYMENT_URL, PLAN_URL, PROJECT_URL, STATUS_URL, USER_URL
+} from './util/urls';
 import planRoutes from './modules/plan/plan.route';
 import notificationRoutes from './modules/notification/notification.route';
 import senderRoutes from './modules/sender/sender.route';
@@ -31,21 +33,21 @@ declare module '@fastify/jwt' {
     }
 }
 
-function serverBuilder() {
-    const server = Fastify({ logger: true });
+function serverBuilder(options: { [key: string]: any } = {}) {
+    const logger = options.logger || true;
+    const server = Fastify({ logger });
 
     server.decorate('registredUser', registredUserHook);
     for (const schema of [...userSchemas, ...projectSchemas]) {
         server.addSchema(schema);
     }
 
-
     server.register(require('@fastify/static'), {
         root: path.join(__dirname, 'build'),
         wildcard: false,
     });
 
-    server.get('/*', function (request: FastifyRequest, reply: FastifyReply) {
+    server.get('/*', (request: FastifyRequest, reply: FastifyReply) => {
         // @ts-ignore
         reply.sendFile('index.html');
     });

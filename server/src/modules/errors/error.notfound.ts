@@ -1,8 +1,8 @@
 export class ErrorNotFound extends Error {
-  statusCode: number;
+    statusCode: number;
 
-  constructor(msg: string) {
-    super(msg);
-    this.statusCode = 404;
-  }
+    constructor(msg: string) {
+        super(msg);
+        this.statusCode = 404;
+    }
 }

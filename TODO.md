@@ -20,6 +20,9 @@
 - [x] error handling
 - [x] content
 - [ ] create log item
+- [ ] style log page
+- [ ] style log list
+- [ ] Thanks page
 - [ ] tests
 - [ ] storybook
 - [ ] cicd

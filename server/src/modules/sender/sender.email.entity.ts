@@ -20,7 +20,7 @@ export class SenderEmailEntity extends SenderEntity {
                 await this.transport.sendMail(param);
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     }
 }

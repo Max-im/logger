@@ -2,28 +2,28 @@ import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
 const core = {
-  email: z
-    .string({
-      required_error: 'Email is required',
-      invalid_type_error: 'Invalid Email',
-    })
-    .email(),
-  name: z.string(),
-  photo: z.string(),
+    email: z
+        .string({
+            required_error: 'Email is required',
+            invalid_type_error: 'Invalid Email',
+        })
+        .email(),
+    name: z.string(),
+    photo: z.string(),
 };
 
 const authSchema = z.object({
-  ...core,
+    ...core,
 });
 
 const authResponseSchema = z.object({
-  user: z.object({
-    id: z.string(),
-    ...core,
-    roleId: z.number(),
-    planId: z.number()
-  }),
-  token: z.string(),
+    user: z.object({
+        id: z.string(),
+        ...core,
+        roleId: z.number(),
+        planId: z.number()
+    }),
+    token: z.string(),
 });
 
 export type CreateUserInput = z.infer<typeof authSchema>;

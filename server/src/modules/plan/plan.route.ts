@@ -3,7 +3,7 @@ import { planController } from './plan.controller';
 
 
 async function planRoutes(server: FastifyInstance) {
-  server.get('/', planController.getActivePlans);
+    server.get('/', planController.getActivePlans);
 }
 
 export default planRoutes;
