@@ -45,6 +45,7 @@ const LogsTable: FC<ILogTableProps> = ({ projectId }) => {
                 <LogsHeader />
                 <TableBody>
                     {arr.map((log) => <LogRow key={log.id} log={log} />)}
+
                     <Box component="tr" ref={childRef} height={1} />
                 </TableBody>
             </Table>

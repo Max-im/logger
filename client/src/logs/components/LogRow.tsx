@@ -27,10 +27,11 @@ const LogRow: FC<ILogProps> = ({ log }) => {
 
     const isSelected = Boolean(selected[log.id]);
     const selectStyle = isSelected ? styles.log__row_active : styles.log__row;
-    const openedClass = log.opened ? styles.log__text_opened : styles.log__text;
+    const openedTextClass = log.opened ? styles.log__text_opened : styles.log__text;
+    const openedClass = log.opened ? styles.log__row_opened : '';
 
     return (
-        <TableRow className={selectStyle} sx={{ '&:hover': { bgcolor: 'info.main' } }}>
+        <TableRow className={`${selectStyle} ${openedClass}`} sx={{ '&:hover': { bgcolor: 'info.main' } }}>
             <TableCell align="left">
                 <Checkbox size="small" className={styles.log__nopadding} checked={isSelected} onChange={handleChange} />
             </TableCell>
@@ -38,10 +39,10 @@ const LogRow: FC<ILogProps> = ({ log }) => {
                 <Label level={log.level} />
             </TableCell>
             <TableCell onClick={onOpen} align="right">
-                <Typography className={openedClass}>{log.value}</Typography>
+                <Typography className={openedTextClass}>{log.value}</Typography>
             </TableCell>
             <TableCell onClick={onOpen} align="right">
-                <Typography className={openedClass}>
+                <Typography className={openedTextClass}>
                     {log.created.toDateString().replace(/^.\w+\s/, '')}
                 </Typography>
             </TableCell>

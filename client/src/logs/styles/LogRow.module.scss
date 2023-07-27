@@ -9,7 +9,12 @@
   &_active {
     background: rgba(255, 255, 255, .24);
   }
+
+  &_opened {
+    opacity: 0.7;
+  }
 }
+
 
 .log__text {
   font-weight: bold;
