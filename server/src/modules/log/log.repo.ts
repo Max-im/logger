@@ -63,6 +63,22 @@ export class LogRepo {
         }
     }
 
+    static async create(projectId: string, value: string, level: LogLevel, deleteDate: Date) {
+        try {
+            return await prisma.log.create({
+                data: {
+                    // @ts-ignore
+                    level,
+                    value,
+                    project: { connect: { id: projectId } },
+                    deleteDate
+                }
+            });
+        } catch (err) {
+            throw new ErrorDatabase(err);
+        }
+    }
+
     static async deleteLogs(ids: number[]) {
         try {
             return await prisma.log.deleteMany({
