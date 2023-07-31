@@ -48,4 +48,7 @@ export class LogEntity implements Log {
         return LogRepo.getLogItem(logIdStr);
     }
 
+    static async createLogItem(projectId: string, value: string, level: LogLevel, deleteDate: Date) {
+        return LogRepo.create(projectId, value, level, deleteDate);
+    }
 }

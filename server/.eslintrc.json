@@ -26,7 +26,7 @@
       "error",
       4
     ],
-    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "linebreak-style": [
       "error",

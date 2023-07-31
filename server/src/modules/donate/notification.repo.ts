@@ -1,4 +1,3 @@
-import { LogLevel, NotificationProviders } from '@prisma/client';
 import { prisma } from '../../util/db';
 import { ErrorDatabase } from '../errors/error.database';
 

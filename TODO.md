@@ -19,10 +19,9 @@
 - [x] clean up css
 - [x] error handling
 - [x] content
-- [ ] create log item
-- [ ] style log page
-- [ ] style log list
-- [ ] Thanks page
+- [x] create log item
+- [x] style log page
+- [ ] log control
 - [ ] tests
 - [ ] storybook
 - [ ] cicd

@@ -1,10 +1,13 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { LogLevel, Notification } from '@prisma/client';
+import { Notification } from '@prisma/client';
 import { ProjectEntity } from '../project/project.entity';
 import { NotificationEntity } from './notification.entity';
 
 class NotificationController {
-    async onGet(request: FastifyRequest<{ Params: { projectId: string }; }>, reply: FastifyReply): Promise<{ notifications: Notification[] }> {
+    async onGet(
+        request: FastifyRequest<{ Params: { projectId: string }; }>,
+        reply: FastifyReply
+    ): Promise<{ notifications: Notification[] }> {
         try {
             const projectId = request.params.projectId;
             await ProjectEntity.hasAccess(request.user.id, projectId);
@@ -17,7 +20,10 @@ class NotificationController {
         }
     }
 
-    async onCreate(request: FastifyRequest<{ Body: { level: string, projectId: string } }>, reply: FastifyReply): Promise<{ notification: Notification }> {
+    async onCreate(
+        request: FastifyRequest<{ Body: { level: string, projectId: string } }>,
+        reply: FastifyReply
+    ): Promise<{ notification: Notification }> {
         try {
             const { projectId, level } = request.body;
 
@@ -32,7 +38,10 @@ class NotificationController {
         }
     }
 
-    async onDelete(request: FastifyRequest<{ Params: { projectId: string, notificationId: string }; }>, reply: FastifyReply): Promise<void> {
+    async onDelete(
+        request: FastifyRequest<{ Params: { projectId: string, notificationId: string }; }>,
+        reply: FastifyReply
+    ): Promise<void> {
         try {
             const { notificationId, projectId } = request.params;
             await ProjectEntity.hasAccess(request.user.id, projectId);

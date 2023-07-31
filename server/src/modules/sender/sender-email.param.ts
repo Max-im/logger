@@ -6,6 +6,7 @@ export class SenderEmailParam extends SenderParam {
     subject: string;
     html: string;
 
+    // eslint-disable-next-line
     constructor(userData: any) {
         super();
 

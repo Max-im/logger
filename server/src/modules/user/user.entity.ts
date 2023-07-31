@@ -1,4 +1,4 @@
-import { PlanTypes, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { UserRepo } from './user.repo';
 import { AuthCode, IAuth } from './user.types';
 

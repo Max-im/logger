@@ -20,7 +20,9 @@ class UserController {
             const { photo, email, name } = request.body;
 
             const { statusCode, user } = await UserEntity.auth({ photo, email, name });
-            const token = await reply.jwtSign({ id: user.id, name: user.name, photo: user.photo, role: user.roleId, planId: user.planId });
+            const token = await reply.jwtSign({
+                id: user.id, name: user.name, photo: user.photo, role: user.roleId, planId: user.planId
+            });
 
             return reply.code(statusCode).send({ user, token });
         } catch (err) {

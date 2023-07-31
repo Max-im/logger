@@ -1,3 +1,4 @@
 export abstract class SenderEntity {
-  abstract notify(params: any): void;
+    // eslint-disable-next-line
+    abstract notify(params: any): void;
 }

@@ -2,6 +2,7 @@ import path from 'node:path';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
+import fastifyStatic from '@fastify/static';
 import userRoutes from './modules/user/user.route';
 import statusRoutes from './modules/status/status.route';
 import projectRoutes from './modules/project/project.route';
@@ -21,6 +22,7 @@ import './jobs';
 
 declare module 'fastify' {
     export interface FastifyInstance {
+        // eslint-disable-next-line
         registredUser: any;
     }
 }
@@ -33,6 +35,7 @@ declare module '@fastify/jwt' {
     }
 }
 
+// eslint-disable-next-line
 function serverBuilder(options: { [key: string]: any } = {}) {
     const logger = options.logger || true;
     const server = Fastify({ logger });
@@ -42,7 +45,7 @@ function serverBuilder(options: { [key: string]: any } = {}) {
         server.addSchema(schema);
     }
 
-    server.register(require('@fastify/static'), {
+    server.register(fastifyStatic, {
         root: path.join(__dirname, 'build'),
         wildcard: false,
     });

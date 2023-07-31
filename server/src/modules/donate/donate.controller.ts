@@ -2,7 +2,10 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { LiqPayService } from '../liqpay/liqpay.service';
 
 class DonateController {
-    async onGetParams(request: FastifyRequest<{ Params: { amount: string }; }>, reply: FastifyReply): Promise<any> {
+    async onGetParams(
+        request: FastifyRequest<{ Params: { amount: string }; }>,
+        reply: FastifyReply
+    ): Promise<{ data: string; signature: string }> {
         try {
             const amount = Number(request.params.amount);
             const liqPayService = new LiqPayService();
@@ -14,6 +17,8 @@ class DonateController {
             return reply.code(code).send(err);
         }
     }
+
+    // eslint-disable-next-line
     async onCallback(request: FastifyRequest, reply: FastifyReply): Promise<any> {
         try {
             return request.body;

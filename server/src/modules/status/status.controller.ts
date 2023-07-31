@@ -3,11 +3,11 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { StatusRepo } from './status.repo';
 
 class StatusController {
-    getStatus(request: FastifyRequest, reply: FastifyReply) {
+    getStatus() {
         return { staus: 'up' };
     }
 
-    async getInfo(request: FastifyRequest, reply: FastifyReply) {
+    async getInfo(_: FastifyRequest, reply: FastifyReply) {
         try {
             const data = {
                 status: 'up',
@@ -15,7 +15,7 @@ class StatusController {
                 node: {
                     version: process.version,
                     memoryUsage:
-            Math.round(process.memoryUsage().rss / 1024 / 1024) + 'M',
+                        Math.round(process.memoryUsage().rss / 1024 / 1024) + 'M',
                     uptime: process.uptime(),
                 },
                 system: {
@@ -31,7 +31,7 @@ class StatusController {
         }
     }
 
-    async getStat(request: FastifyRequest, reply: FastifyReply) {
+    async getStat(_: FastifyRequest, reply: FastifyReply) {
         try {
             const projects = await StatusRepo.getProjectCount();
             const users = await StatusRepo.getUsersCount();

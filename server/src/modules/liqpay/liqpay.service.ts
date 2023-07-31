@@ -11,15 +11,17 @@ export class LiqPayService {
 
     getPayParams(amount: number, description: string, action = 'pay') {
         const params = {
+            /* eslint-disable */
             public_key: this.publicKey,
+            result_url: this.resultUrl,
+            server_url: this.serverUrl,
+            /* eslint-enable */
             version: this.version,
             language: this.language,
             currency: this.currency,
             action,
             amount,
             description,
-            result_url: this.resultUrl,
-            server_url: this.serverUrl
 
         };
 

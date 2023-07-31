@@ -1,5 +1,6 @@
-import { PrismaClient, RoleTypes, Log, LogLevel, PlanTypes } from '@prisma/client';
+import { PrismaClient, Log, LogLevel } from '@prisma/client';
 
+/* eslint-disable */
 const prisma = new PrismaClient();
 
 // @ts-ignore

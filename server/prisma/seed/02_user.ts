@@ -1,6 +1,7 @@
-import { PrismaClient, RoleTypes, Log, LogLevel, PlanTypes } from '@prisma/client';
+import { PrismaClient, RoleTypes, PlanTypes } from '@prisma/client';
 import { createId } from '@paralleldrive/cuid2';
 
+/* eslint-disable */
 const prisma = new PrismaClient();
 
 const userId = createId();
@@ -19,7 +20,7 @@ export async function seedUsers() {
     const adminRole = await prisma.role.findUnique({ where: { type: RoleTypes.ADMIN } });
 
     await prisma.user.upsert({
-    // @ts-ignore
+        // @ts-ignore
         where: { email },
         update: {},
         create: {
