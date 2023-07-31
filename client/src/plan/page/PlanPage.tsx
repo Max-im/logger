@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, List, Box, Typography, Alert } from '@mui/material';
+import { Paper, List, Box, Typography } from '@mui/material';
 import PlanItem from '../components/PlanItem';
 import { useAppSelector } from '../../hooks/redux';
 import styles from '../styles/PlanPage.module.scss';

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper,
-} from '@mui/material';
+import { Typography, Paper } from '@mui/material';
 
 function About() {
     const appName = process.env.REACT_APP_NAME;
