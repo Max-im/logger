@@ -17,7 +17,6 @@ describe('status requests', () => {
             .send()
             .expect(200);
 
-        console.log(response.body, '============================');
         expect(response.body).toEqual({ staus: 'up' });
     });
 });

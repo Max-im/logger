@@ -14,7 +14,10 @@ class ProjectController {
         }
     }
 
-    async getUserProject(request: FastifyRequest<{ Params: { id: string }; }>, reply: FastifyReply): Promise<{ project: Project }> {
+    async getUserProject(
+        request: FastifyRequest<{ Params: { id: string }; }>,
+        reply: FastifyReply
+    ): Promise<{ project: Project }> {
         try {
             const project = await ProjectEntity.findUserProjectById(request.user.id, request.params.id);
 
@@ -25,7 +28,10 @@ class ProjectController {
         }
     }
 
-    async create(request: FastifyRequest<{ Body: CreateProjectInput; }>, reply: FastifyReply): Promise<{ project: Project }> {
+    async create(
+        request: FastifyRequest<{ Body: CreateProjectInput; }>,
+        reply: FastifyReply
+    ): Promise<{ project: Project }> {
         try {
             const { title } = request.body;
 
@@ -37,7 +43,10 @@ class ProjectController {
         }
     }
 
-    async delete(request: FastifyRequest<{ Params: { id: string }; }>, reply: FastifyReply): Promise<{ project: Project }> {
+    async delete(
+        request: FastifyRequest<{ Params: { id: string }; }>,
+        reply: FastifyReply
+    ): Promise<{ project: Project }> {
         try {
             await ProjectEntity.delete(request.user.id, request.params.id);
             return reply.code(200).send();

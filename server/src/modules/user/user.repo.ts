@@ -2,6 +2,7 @@ import { PlanTypes, Prisma, RoleTypes } from '@prisma/client';
 import { prisma } from '../../util/db';
 import { ErrorUserNotFound } from '../errors/error.usernotfound';
 import { IAuth } from './user.types';
+import { ErrorDatabase } from '../errors/error.database';
 
 export class UserRepo {
     static async findById(id: string) {
@@ -16,7 +17,11 @@ export class UserRepo {
     }
 
     static async findByEmail(email: string) {
-        return await prisma.user.findUnique({ where: { email }, include: { role: true, plan: true } });
+        try {
+            return await prisma.user.findUnique({ where: { email }, include: { role: true, plan: true } });
+        } catch (err) {
+            throw new ErrorDatabase(err.message);
+        }
     }
 
     static async create({ email, name, photo }: IAuth) {
@@ -30,7 +35,7 @@ export class UserRepo {
                 include: { role: true, plan: true }
             });
         } catch (err) {
-            throw err;
+            throw new ErrorDatabase(err.message);
         }
     }
 }

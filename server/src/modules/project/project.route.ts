@@ -2,7 +2,9 @@ import { FastifyInstance } from 'fastify';
 import { projectController } from './project.controller';
 import { $ref } from './project.schema';
 
-const schema = { schema: { body: $ref('createProjectSchema'), response: { 200: $ref('createProjectResponseSchema') } } };
+const schema = {
+    schema: { body: $ref('createProjectSchema'), response: { 200: $ref('createProjectResponseSchema') } }
+};
 
 async function projectRoutes(server: FastifyInstance) {
     const onRequest = { onRequest: [server.registredUser] };

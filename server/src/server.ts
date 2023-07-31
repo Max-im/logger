@@ -2,6 +2,7 @@ import path from 'node:path';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
+import fastifyStatic from '@fastify/static';
 import userRoutes from './modules/user/user.route';
 import statusRoutes from './modules/status/status.route';
 import projectRoutes from './modules/project/project.route';
@@ -42,7 +43,7 @@ function serverBuilder(options: { [key: string]: any } = {}) {
         server.addSchema(schema);
     }
 
-    server.register(require('@fastify/static'), {
+    server.register(fastifyStatic, {
         root: path.join(__dirname, 'build'),
         wildcard: false,
     });

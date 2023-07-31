@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
+/* eslint-disable */
 const core = {
     email: z
         .string({
@@ -11,6 +12,7 @@ const core = {
     name: z.string(),
     photo: z.string(),
 };
+/* eslint-enable */
 
 const authSchema = z.object({
     ...core,
@@ -28,4 +30,6 @@ const authResponseSchema = z.object({
 
 export type CreateUserInput = z.infer<typeof authSchema>;
 
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({ authSchema, authResponseSchema }, { $id: 'UserSchema' });
+export const {
+    schemas: userSchemas, $ref
+} = buildJsonSchemas({ authSchema, authResponseSchema }, { $id: 'UserSchema' });
