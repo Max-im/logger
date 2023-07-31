@@ -22,7 +22,6 @@
 - [x] create log item
 - [x] style log page
 - [ ] log control
-- [ ] Thanks page
 - [ ] tests
 - [ ] storybook
 - [ ] cicd
