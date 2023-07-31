@@ -49,6 +49,10 @@ jobs:
 
       - name: Run tests
         run: cd ./server && npm run test:ci
+        env:
+          NODE_ENV: test
+          PORT: 5000
+          SECRET_OR_KEY: test_secret
 
   building:
     runs-on: ubuntu-latest
