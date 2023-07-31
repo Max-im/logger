@@ -40,6 +40,7 @@ class LogController {
     async getInfo(
         request: FastifyRequest<{ Params: { projectId: string }; }>,
         reply: FastifyReply
+        // eslint-disable-next-line
     ): Promise<{ info: any }> {
         try {
             await ProjectEntity.hasAccess(request.user.id, request.params.projectId);

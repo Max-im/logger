@@ -22,6 +22,7 @@ import './jobs';
 
 declare module 'fastify' {
     export interface FastifyInstance {
+        // eslint-disable-next-line
         registredUser: any;
     }
 }
@@ -34,6 +35,7 @@ declare module '@fastify/jwt' {
     }
 }
 
+// eslint-disable-next-line
 function serverBuilder(options: { [key: string]: any } = {}) {
     const logger = options.logger || true;
     const server = Fastify({ logger });

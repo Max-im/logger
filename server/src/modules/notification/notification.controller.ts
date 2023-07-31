@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { LogLevel, Notification } from '@prisma/client';
+import { Notification } from '@prisma/client';
 import { ProjectEntity } from '../project/project.entity';
 import { NotificationEntity } from './notification.entity';
 
