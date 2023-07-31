@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Paper, Box, Typography, Divider, Table, TableBody, TableRow, TableCell } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Paper, Box, Typography, Divider, Button } from '@mui/material';
+import UndoIcon from '@mui/icons-material/Undo';
 import { useAppDispatch } from '../../hooks/redux';
 import { readLogAction, ILog } from '../../logs';
 import styles from '../styles/LogPage.module.scss';
@@ -8,10 +9,12 @@ import Label from '../../shared/ui/Label';
 import LogControl from '../components/LogControl';
 import { getLogDataAction } from '../state/log.actions';
 import ErrBanner from '../../shared/ui/ErrBanner';
-import { getYear } from '../util/dateFormater';
+import LogDate from '../components/LogDate';
+import { projectsRoute } from '../../routes';
 
 const LogPage: FC = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [log, setLog] = useState<null | ILog>(null);
     const [error, setError] = useState<null | string>(null);
     const { projectId, logId } = useParams();
@@ -21,12 +24,14 @@ const LogPage: FC = () => {
         else setError(err);
     };
 
+    const onStepBack = () => {
+        navigate(`${projectsRoute.url}/${projectId}`);
+    };
+
     useEffect(() => {
         getLogDataAction(projectId!, logId!, onHandle);
         dispatch(readLogAction(projectId!, logId!));
     }, [dispatch, projectId, logId]);
-
-    const date = log && new Date(log.created);
 
     return (
         <Box display="flex">
@@ -48,23 +53,16 @@ const LogPage: FC = () => {
                 <Divider className={styles.divider} />
                 {log && (
                     <Box display="flex" flexDirection="column" flex={2}>
+                        <Button
+                            variant="outlined"
+                            startIcon={<UndoIcon />}
+                            onClick={onStepBack}
+                            sx={{ mb: 2 }}
+                        >
+                            Back to Project
+                        </Button>
                         <Label level={log.level} size="medium" />
-                        <Table size="small" sx={{ mt: 2 }}>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell align="left">Year</TableCell>
-                                    <TableCell align="right">{getYear(date!)}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="left">Month</TableCell>
-                                    <TableCell align="right">{date!.getMonth()}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="left">Day</TableCell>
-                                    <TableCell align="right">{date!.getDate()}</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
+                        <LogDate log={log} />
                         <Box flexGrow={1} />
                         <LogControl log={log} />
                     </Box>

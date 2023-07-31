@@ -98,8 +98,10 @@ class LogController {
             const project = await ProjectEntity.findUserProjectById(userId, projectId);
 
             if (!project) throw new ErrorForbiden();
+
             const user = await UserEntity.findById(userId);
             const currentPlan = await PlanEntity.onGetById(user.planId);
+
             const deleteDate = new Date();
             deleteDate.setDate(deleteDate.getDate() + currentPlan.storingDays);
 

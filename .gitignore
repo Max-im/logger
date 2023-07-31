@@ -3,3 +3,4 @@ server/config
 client/build
 server/src/build
 .env
+package
