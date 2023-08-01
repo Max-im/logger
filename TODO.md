@@ -24,5 +24,6 @@
 - [ ] log control
 - [ ] tests
 - [ ] storybook
+- [ ] swagger
 - [x] cicd
 - [x] deploy
