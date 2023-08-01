@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "tsnd --respawn --transpile-only --exit-child src/app.ts",
     "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
