@@ -67,6 +67,9 @@ jobs:
         with:
           node-version: "14.x"
 
+      - name: Build server
+        run: cd ./server && npm install && tsc
+      
       - name: Install dependencies
         run: cd ./client && npm install
 
@@ -74,7 +77,7 @@ jobs:
         run: cd ./client && npm run build
 
       - name: Copy
-        run: cd ./client && cp -r build/ ../server/src
+        run: cd ./client && cp -r build/ ../server/dist
 
   deploy:
     needs: [testing, building]
