@@ -55,6 +55,7 @@ jobs:
           SECRET_OR_KEY: test_secret
 
   building:
+    needs: [testing]
     runs-on: ubuntu-latest
 
     steps:
@@ -74,3 +75,14 @@ jobs:
 
       - name: Copy
         run: cd ./client && cp -r build/ ../server/src
+
+  deploy:
+    needs: [testing, building]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
