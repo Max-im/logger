@@ -12,6 +12,9 @@
     "test": "cross-env NODE_ENV=test jest",
     "test:ci": "npm run -s lint && jest"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
