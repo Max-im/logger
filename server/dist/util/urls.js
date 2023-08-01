@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DONATE_URL = exports.PAYMENT_URL = exports.NOTIFICATION_URL = exports.PLAN_URL = exports.LOG_URL = exports.PROJECT_URL = exports.USER_URL = exports.STATUS_URL = void 0;
+exports.STATUS_URL = 'api/v1/status';
+exports.USER_URL = 'api/v1/user';
+exports.PROJECT_URL = 'api/v1/project';
+exports.LOG_URL = 'api/v1/log';
+exports.PLAN_URL = 'api/v1/plan';
+exports.NOTIFICATION_URL = 'api/v1/notification';
+exports.PAYMENT_URL = 'api/v1/payment';
+exports.DONATE_URL = 'api/v1/donate';

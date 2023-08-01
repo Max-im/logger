@@ -54,7 +54,7 @@ jobs:
           PORT: 5000
           SECRET_OR_KEY: test_secret
 
-  building:
+  deploy:
     needs: [testing]
     runs-on: ubuntu-latest
 
@@ -67,17 +67,17 @@ jobs:
         with:
           node-version: "14.x"
 
-      - name: Build server
-        run: cd ./server && npm install && tsc
+      # - name: Build server
+      #   run: cd ./server && npm install && tsc
       
-      - name: Install dependencies
-        run: cd ./client && npm install
+      # - name: Install dependencies
+      #   run: cd ./client && npm install
 
-      - name: Build
-        run: cd ./client && npm run build
+      # - name: Build
+      #   run: cd ./client && npm run build
 
-      - name: Copy
-        run: cd ./client && cp -r build/ ../server/dist
+      # - name: Copy
+      #   run: cd ./client && cp -r build/ ../server/dist
 
       - name: Deploy
         uses: johnbeynon/render-deploy-action@v0.0.8
