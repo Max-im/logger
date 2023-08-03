@@ -1,17 +1,22 @@
-FROM node:alpine
+FROM node:12-alpine as base
 
 WORKDIR /usr/app
 
-COPY ./server/package.json .
-COPY ./server/package-lock.json .
-COPY ./server/prisma .
+ARG NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
+EXPOSE 5000
 
-RUN npm install\
-    && npm install typescript -g
+# App and dev dependencies
+COPY ["package.json", "package-lock.json", "prisma", "./"]
 
-COPY ./server .
+RUN npm install
 
-RUN touch ./.env
+# App source
+COPY . .
 
-RUN tsc
+# Build step for production
+FROM base
+
+RUN npm install typescript
+
 CMD ["node", "./dist/app.js"]
