@@ -7,7 +7,7 @@ ENV NODE_ENV=$NODE_ENV
 EXPOSE 5000
 
 # App and dev dependencies
-COPY ["package.json", "package-lock.json", "prisma", "./"]
+COPY ["./server/package.json", "./server/package-lock.json", "./server/prisma", "./server/"]
 
 RUN npm install
 
