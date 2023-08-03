@@ -11,8 +11,7 @@ RUN npm install\
 
 COPY ./server .
 
-RUN touch ./server/.env
+RUN touch ./.env
 
 RUN tsc
-
 CMD ["node", "./dist/app.js"]
