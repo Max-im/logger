@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+
+# Exclude build artifacts (only copy the 'dist' folder from server)
+/build
+/dist/server
+/dist/build
