@@ -3,11 +3,11 @@ FROM node:14 AS client-builder
 
 WORKDIR /usr/app/client
 
-COPY ../client/package*.json ./
+COPY ./client/package*.json ./
 
 RUN npm install
 
-COPY ../client ./
+COPY ./client ./
 
 RUN npm run build
 
@@ -16,7 +16,7 @@ FROM node:14 AS server-builder
 
 WORKDIR /usr/app
 
-COPY ./package*.json ./
+COPY ./server/package*.json ./
 
 RUN npm install
 
