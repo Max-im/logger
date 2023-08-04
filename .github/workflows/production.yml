@@ -20,7 +20,7 @@ jobs:
           node-version: 14
 
       - name: Install client dependencies
-        working-directory: ./client
+        working-directory: client
         run: npm install
 
       # - name: Test client
@@ -28,15 +28,15 @@ jobs:
       #   run: npm test
 
       - name: Build client
-        working-directory: ./client
+        working-directory: client
         run: npm run build
 
       - name: Install server dependencies
-        working-directory: ./server
+        working-directory: server
         run: npm install
 
       - name: Server test
-        working-directory: ./server
+        working-directory: server
         run: npm run test:ci
         env:
           NODE_ENV: test
@@ -44,7 +44,7 @@ jobs:
           SECRET_OR_KEY: test_secret
 
       - name: Build server
-        working-directory: ./server
+        working-directory: server
         run: npm run build:prod
 
       - name: Copy client build to server
