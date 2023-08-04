@@ -9,9 +9,46 @@ on:
       - master
 
 jobs:
-  testing:
+  build_and_test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
+    steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install client dependencies
+        working-directory: ./client
+        run: npm install
+
+      # - name: Test client
+      #   working-directory: ./client
+      #   run: npm test
+
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
+
+      - name: Install server dependencies
+        working-directory: ./server
+        run: npm install
+
+      - name: Server test
+        working-directory: ./server
+        run: npm run test:ci
+        env:
+          NODE_ENV: test
+          PORT: 5000
+          SECRET_OR_KEY: test_secret
+
+      - name: Build server
+        working-directory: ./server
+        run: npm run build:prod
+
+      - name: Copy client build to server
+        run: cp -r ./client/build ./server/dist/build
 
     # services:
     #   postgres:
@@ -24,78 +61,39 @@ jobs:
     #       - 5432:5432
     #     options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14.x"
-
-      # - name: Install dependencies
-      #   run: cd ./server && npm install
-
-      # - name: Run database migrations
-      #   run: cd ./server && npm run migrate:up
-      #   env:
-      #     NODE_ENV: test
-      #     DB_NAME: test
-      #     DB_USER: postgres
-      #     DB_PASSWORD: postgres
-      #     DB_HOST: localhost
-      #     DB_PORT: 5432
-      #     DB_LOGGING: false
-
-      # - name: Run tests
-      #   run: cd ./server && npm run test:ci
-      #   env:
-      #     NODE_ENV: test
-      #     PORT: 5000
-      #     SECRET_OR_KEY: test_secret
-
   deploy:
-    needs: [testing]
+    name: Deploy to Render
+    needs: build_and_test
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      # - name: Use Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: "14.x"
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v1
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logger:latest ./server
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/logger:latest
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/logger:latest
 
-      # - name: Build server
-      #   run: cd ./server && npm install && tsc
-
-      # - name: Install dependencies
-      #   run: cd ./client && npm install
-
-      # - name: Build
-      #   run: cd ./client && npm run build
-
-      # - name: Copy
-      #   run: cd ./client && cp -r build/ ../server/dist
-
-      # - name: Deploy
-      #   uses: johnbeynon/render-deploy-action@v0.0.8
-      #   with:
-      #     service-id: ${{ secrets.SERVICE_ID }}
-      #     api-key: ${{ secrets.RENDER_API_KEY }}
+      - name: Deploy to Render
+        run: |
+          curl -XPOST "https://api.render.com/v1/services" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+                "name": "logger",
+                "type": "docker",
+                "env": ["NODE_ENV=production"],
+                "dockerOptions": {
+                    "image": "${{ secrets.DOCKERHUB_USERNAME }}/logger:latest"
+                },
+                "plan": "free",
+                "automaticDeploy": true
+              }'

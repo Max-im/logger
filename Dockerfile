@@ -11,6 +11,8 @@ COPY ["./server/package.json", "./server/package-lock.json", "./server/prisma", 
 
 RUN npm install
 
+RUN tsc
+
 # App source
 COPY . .
 
