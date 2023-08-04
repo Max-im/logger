@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts",
-    "build:prod": "rm -rf ./dist && tsc",
+    "build": "tsc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "cross-env NODE_ENV=test jest",

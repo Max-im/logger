@@ -1,5 +1,18 @@
-# === Stage 1: Build TypeScript code ===
-FROM node:14 AS builder
+# === Stage 1: Build the client ===
+FROM node:14 AS client-builder
+
+WORKDIR /usr/app/client
+
+COPY ../client/package*.json ./
+
+RUN npm install
+
+COPY ../client ./
+
+RUN npm run build
+
+# === Stage 2: Build the server and create the final Docker image ===
+FROM node:14 AS server-builder
 
 WORKDIR /usr/app
 
@@ -9,19 +22,22 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build:prod
+RUN npm run build
 
-# === Stage 2: Create the final Docker image ===
+# === Stage 3: Create the final Docker image ===
 FROM node:14
 
 WORKDIR /usr/app
 
-# Copy only the compiled 'dist' folder and package.json
-COPY --from=builder /usr/app/package.json /app/package-lock.json ./
-COPY --from=builder /usr/app/dist ./dist
+# Copy only the compiled 'dist' folder from server and 'build' folder from client
+COPY --from=client-builder /usr/app/client/build ./dist/build
+COPY --from=server-builder /usr/app/dist ./dist
+
+COPY ./package*.json ./
 
 RUN npm install --production
 
 EXPOSE 5000
 
+# Start the server
 CMD ["npm", "start"]
