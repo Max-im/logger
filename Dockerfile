@@ -20,7 +20,7 @@ COPY ./server/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./server .
 
 RUN npx prisma generate
 
