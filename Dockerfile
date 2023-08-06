@@ -12,7 +12,7 @@ COPY ./client ./
 RUN npm run build
 
 # === Stage 2: Build the server and create the final Docker image ===
-FROM node:14 AS server-builder
+FROM node:16 AS server-builder
 
 WORKDIR /usr/app
 
