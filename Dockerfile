@@ -35,6 +35,9 @@ WORKDIR /usr/app
 COPY --from=client-builder /usr/app/client/build ./dist/build
 COPY --from=server-builder /usr/app/dist ./dist
 
+# Set the environment variable to skip Prisma's postinstall script
+ENV PRISMA_SKIP_POSTINSTALL true
+
 COPY ./server/prisma ./prisma
 
 COPY ./server/package*.json ./
