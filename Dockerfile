@@ -35,11 +35,11 @@ WORKDIR /usr/app
 COPY --from=client-builder /usr/app/client/build ./dist/build
 COPY --from=server-builder /usr/app/dist ./dist
 
+COPY ./server/prisma ./prisma
+
 COPY ./server/package*.json ./
 
 RUN npm install --production
-
-COPY ./server/prisma/ ./prisma
 
 RUN npx prisma generate
 
