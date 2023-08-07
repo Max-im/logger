@@ -44,8 +44,18 @@ api/v1/user/auth | Free     | POST   | GoogleAPI response | {user, token}   | pr
 
 ### Plan
 
+URL          | Access | Method | Body | Response                                                                               | Description
+------------ | ------ | ------ | ---- | -------------------------------------------------------------------------------------- | -------------------------
+api/v1/plan/ | Free   | GET    | -    | { id: number, name: string, projectsNum: number, cost: number, storingDays: number }[] | current plans information
+
 ### Project
 
 ### Log
 
-## Documentation
+### Payment
+
+### Notification
+
+### Donate
+
+### Sender
