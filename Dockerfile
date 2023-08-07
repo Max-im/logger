@@ -35,7 +35,7 @@ WORKDIR /usr/app
 COPY --from=client-builder /usr/app/client/build ./dist/build
 COPY --from=server-builder /usr/app/dist ./dist
 
-COPY ./package*.json ./
+COPY ./server/package*.json ./
 
 RUN npm install --production
 
