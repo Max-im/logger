@@ -39,7 +39,7 @@ COPY ./server/package*.json ./
 
 RUN npm install --production
 
-COPY ./server/prisma/ .
+COPY ./server/prisma/ ./prisma
 
 RUN npx prisma generate
 
