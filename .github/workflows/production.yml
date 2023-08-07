@@ -54,7 +54,7 @@ jobs:
     #     options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
   publish:
-    name: Deploy to Render
+    name: Build Docker Image
     needs: testing
     runs-on: ubuntu-latest
 
@@ -73,9 +73,12 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/logger:latest
+
   deploy:
-    runs-on: ubuntu-latest
+    name: Deploy to Render
     needs: [testing, publish]
+    runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to Render
         uses: johnbeynon/render-deploy-action@v0.0.8

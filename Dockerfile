@@ -39,6 +39,8 @@ COPY ./server/package*.json ./
 
 RUN npm install --production
 
+COPY ./server/prisma/ .
+
 RUN npx prisma generate
 
 EXPOSE 5000
