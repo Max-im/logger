@@ -41,6 +41,8 @@ COPY ./server/package*.json ./
 
 RUN npm install --production
 
+RUN cp /etc/secrets/.env ./
+
 RUN npx prisma generate
 
 EXPOSE 5000
