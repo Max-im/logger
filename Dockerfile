@@ -32,16 +32,14 @@ FROM node:14
 WORKDIR /usr/app
 
 # Copy only the compiled 'dist' folder from server and 'build' folder from client
-COPY --from=client-builder /usr/app/client/build ./dist/build
 COPY --from=server-builder /usr/app/dist ./dist
+COPY --from=client-builder /usr/app/client/build ./dist/build
 
 COPY ./server/prisma ./prisma
 
 COPY ./server/package*.json ./
 
 RUN npm install --production
-
-RUN cp /etc/secrets/.env ./
 
 RUN npx prisma generate
 
