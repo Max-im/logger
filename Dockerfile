@@ -43,7 +43,7 @@ RUN npm install --production
 
 RUN npx prisma generate
 
-EXPOSE 5000 80
+EXPOSE 80
 
 # Start the server
 CMD ["npm", "start"]
